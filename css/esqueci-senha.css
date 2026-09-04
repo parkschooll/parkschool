@@ -1,0 +1,85 @@
+.main-bg {
+    background: linear-gradient(160deg, var(--bg-surface, #EEF2F7) 0%, #E4E9F1 55%, #E9EDF2 100%);
+}
+
+.senac-header {
+    background-color: var(--color-primary, #1D397D);
+}
+
+.esqueci-senha-wrapper {
+    background-color: var(--bg-surface, #ffffff);
+    border: 1px solid var(--color-gray-200, #E2E8F0);
+}
+
+.text-primary-custom {
+    color: var(--color-primary, #1D397D) !important;
+}
+
+.ds-text-secondary {
+    color: var(--color-gray-500, #64748B);
+}
+
+.ds-text-primary {
+    color: var(--color-primary, #1D397D);
+}
+
+.hover-primary:hover {
+    color: var(--color-primary, #1D397D) !important;
+}
+
+.tab-btn {
+    transition: background-color 0.2s, box-shadow 0.2s;
+    border: none;
+    font-size: 14px;
+}
+
+.tab-btn.active {
+    color: var(--color-primary, #1D397D) !important;
+}
+
+.ds-input-group .input-group-text {
+    background-color: transparent;
+    color: var(--color-gray-500, #64748B);
+    border-color: var(--color-gray-200, #E2E8F0);
+}
+
+.ds-input-group .form-control {
+    border-color: var(--color-gray-200, #E2E8F0);
+    font-size: 14px;
+}
+
+.ds-input-group .form-control:focus {
+    box-shadow: none;
+    border-color: var(--color-primary, #1D397D);
+}
+
+.ds-input-group:focus-within .input-group-text,
+.ds-input-group:focus-within .form-control {
+    border-color: var(--color-primary, #1D397D);
+}
+
+.ds-btn-primary {
+    background-color: var(--color-primary, #1D397D) !important;
+    color: #fff !important;
+    border: none;
+    transition: opacity 0.2s;
+}
+
+.ds-btn-primary:hover {
+    opacity: 0.92;
+}
+
+.ds-btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.code-input {
+    letter-spacing: 0.4em;
+    font-family: monospace;
+}
+
+.code-input::placeholder {
+    letter-spacing: normal;
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
