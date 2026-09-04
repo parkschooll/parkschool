@@ -1,26 +1,85 @@
+/* ==========================================
+   1. LAYOUT E ESTRUTURA
+   ========================================== */
+.form-container {
+    background-color: var(--bg-surface, #ffffff);
+}
+
+.login-wrapper {
+    max-width: 450px;
+    width: 100%;
+}
+
 .text-layer {
     background-color: rgba(0, 0, 0, 0.5); 
     z-index: 10;
 }
 
-.form-container {
-    background-color: var(--bg-surface);
-}
-
-.login-wrapper {
-    max-width: 450px;
-}
-
+/* ==========================================
+   2. TIPOGRAFIA DO CARROSSEL
+   ========================================== */
 .monitore-text {
-    color: var(--color-gray-200);
+    color: var(--color-gray-200, #E2E8F0);
     max-width: 80%;
 }
 
 .acesso-text {
-    color: var(--color-gray-200);
+    color: var(--color-gray-200, #E2E8F0);
 }
 
 .restrita-text {
-    color: var(--color-gray-200);
+    color: var(--color-gray-200, #E2E8F0);
     letter-spacing: 2px;
+}
+
+/* ==========================================
+   3. COMPONENTES DE FORMULÁRIO E TEXTOS GERAIS
+   ========================================== */
+.ds-text-secondary {
+    color: var(--text-secondary, #64748B);
+}
+
+.ds-text-primary {
+    color: var(--color-primary, #1D397D);
+    transition: color var(--transition-fast, 150ms);
+}
+
+.ds-text-primary:hover {
+    color: var(--color-primary-hover, #264CA6);
+}
+
+/* Campos de Input Customizados */
+.ds-input-group .input-group-text {
+    background-color: transparent;
+    color: var(--text-secondary, #64748B);
+    border-color: var(--border-color, #E2E8F0);
+}
+
+.ds-input-group .form-control {
+    border-color: var(--border-color, #E2E8F0);
+    font-size: var(--font-size-sm, 14px);
+}
+
+.ds-input-group .form-control:focus {
+    box-shadow: none;
+    border-color: var(--color-primary, #1D397D);
+}
+
+.ds-input-group:focus-within .input-group-text,
+.ds-input-group:focus-within .form-control {
+    border-color: var(--color-primary, #1D397D);
+}
+
+/* Botão Primário */
+.ds-btn-primary {
+    background-color: var(--color-primary, #1D397D);
+    color: var(--color-white, #ffffff);
+    border: none;
+    border-radius: var(--radius-md, 8px);
+    transition: opacity var(--transition-fast, 150ms), background-color var(--transition-fast, 150ms);
+}
+
+.ds-btn-primary:hover {
+    background-color: var(--color-primary-hover, #264CA6);
+    color: var(--color-white, #ffffff);
 }
