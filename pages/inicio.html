@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - Estacionamento Inteligente</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <!-- Font Awesome 6 CDN (Ícones) -->
+    <link href="https://cloudflare.com" rel="stylesheet">
+    <!-- Seus arquivos de estilo separados -->
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="container-fluid py-4 min-vh-100 d-flex flex-column">
+        <!-- Cabeçalho -->
+        <header class="text-center mb-4 pb-3 entry-header">
+            <h1 class="display-6 fw-bold">SISTEMA DE ORIENTAÇÃO DE VAGAS</h1>
+            <p class="text-muted mb-0">Monitor de Entrada Principal - Atualização em Tempo Real</p>
+        </header>
+
+        <!-- 1. Painel de Indicadores (Cards com Ícones) -->
+        <section class="row g-3 mb-4">
+            <div class="col-6 col-md-3">
+                <div
+                    class="card-indicador card-total h-100 p-3 shadow-sm d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="card-titulo">Vagas Livres (Total)</h3>
+                        <p id="total-livres" class="card-valor mb-0">0</p>
+                    </div>
+                    <i class="fa-solid fa-square-parking fa-2xl card-icone text-success"></i>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div
+                    class="card-indicador card-comum h-100 p-3 shadow-sm d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="card-titulo">Comuns Disponíveis</h3>
+                        <p id="comuns-livres" class="card-valor mb-0">0</p>
+                    </div>
+                    <i class="fa-solid fa-car fa-2xl card-icone icone-comum"></i>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div
+                    class="card-indicador card-privada h-100 p-3 shadow-sm d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="card-titulo">Privadas Disponíveis</h3>
+                        <p id="privadas-livres" class="card-valor mb-0">0</p>
+                    </div>
+                    <i class="fa-solid fa-id-card fa-2xl card-icone icone-privada"></i>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div
+                    class="card-indicador card-carga h-100 p-3 shadow-sm d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="card-titulo">Carga / Descarga</h3>
+                        <p id="carga-livres" class="card-valor mb-0">0</p>
+                    </div>
+                    <i class="fa-solid fa-truck-ramp-box fa-2xl card-icone text-warning"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Mapa Geométrico das Vagas -->
+        <main class="mapa-container p-4 shadow-md flex-grow-1 d-flex flex-column rounded">
+            <h2 class="h5 mb-4 mapa-titulo">Mapa Físico do Estacionamento</h2>
+            <div id="layout-estacionamento"
+                class="row g-4 row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 justify-content-center align-content-center flex-grow-1">
+                <!-- Vagas renderizadas dinamicamente pelo JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Script de Integração e Atualização -->
+    <script>
+        const URL_API = "http://localhost:3000/vaga/status-geral";
+
+        async function atualizarPainel() {
+            try {
+                const resposta = await fetch(URL_API);
+                const dadosVagas = await resposta.json();
+
+                const containerMapa = document.getElementById("layout-estacionamento");
+                containerMapa.innerHTML = "";
+
+                let totalLivres = 0, comunsLivres = 0, privadasLivres = 0, cargaLivres = 0;
+
+                for (const idVaga in dadosVagas) {
+                    const infoVaga = dadosVagas[idVaga];
+                    const status = infoVaga.status;
+                    const tipo = infoVaga.tipo;
+
+                    if (status === "Livre") {
+                        totalLivres++;
+                        if (tipo === "comum") comunsLivres++;
+                        if (tipo === "privada") privadasLivres++;
+                        if (tipo === "carga") cargaLivres++;
+                    }
+
+                    const col = document.createElement("div");
+                    col.className = "col d-flex justify-content-center";
+
+                    const elementoVaga = document.createElement("div");
+                    // Inserção da classe do status e do tipo para controle visual via CSS
+                    elementoVaga.className = `vaga w-100 text-center py-3 rounded-bottom fw-bold ${tipo} ${status.toLowerCase()}`;
+                    // Estrutura HTML interna da vaga incluindo o container do ícone dinâmico
+                    elementoVaga.innerHTML = `
+<div class="vaga-icone-container mb-1"></div>
+<div>${idVaga}</div>
+<small class="vaga-status-texto d-block fw-normal"></small>
+                    `;
+
+                    col.appendChild(elementoVaga);
+                    containerMapa.appendChild(col);
+                }
+
+                document.getElementById("total-livres").innerText = totalLivres;
+                document.getElementById("comuns-livres").innerText = comunsLivres;
+                document.getElementById("privadas-livres").innerText = privadasLivres;
+                document.getElementById("carga-livres").innerText = cargaLivres;
+
+            } catch (erro) {
+                console.error("Erro ao buscar dados do servidor:", erro);
+            }
+        }
+
+        atualizarPainel();
+        setInterval(atualizarPainel, 2000);
+    </script>
+</body>
+
+</html>
