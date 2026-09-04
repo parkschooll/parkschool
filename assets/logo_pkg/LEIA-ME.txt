@@ -1,0 +1,25 @@
+PACOTE DE LOGO — ÍCONE "ESTACIONAMENTO COM SENSORES"
+(sem o texto do nome, apenas o símbolo)
+
+Todas as imagens em formato WEBP (alta qualidade, sem perdas).
+
+PASTAS INCLUÍDAS:
+
+01_fundo_transparente        -> Ícone colorido original, fundo transparente (uso geral, sites, apps)
+02_fundo_branco               -> Ícone colorido sobre fundo branco
+03_fundo_escuro                -> Ícone colorido sobre fundo escuro (para apresentações/dark mode)
+04_pequeno_quadrado_transparente -> Versões quadradas pequenas (512, 256, 128, 64, 32 px) para redes sociais, favicon, apps
+05_monocromatica_azul          -> Versão em um único tom de azul (fundo transparente)
+06_monocromatica_dourada       -> Versão em um único tom de dourado (fundo transparente)
+07_preta                        -> Versão 100% preta, fundo transparente (impressão, carimbos)
+08_branca                       -> Versão 100% branca, fundo transparente (uso sobre fotos/fundos escuros)
+09_relevo_emboss                -> Efeito em relevo (gravação, texturas, plástico, metal)
+10_escala_de_cinza              -> Versão em tons de cinza
+11_contorno_linhas              -> Versão em contorno/linha fina (line art)
+
+TAMANHOS (em cada pasta, exceto a 04):
+- grande_2000   -> 2000px de largura (impressão / alta resolução)
+- medio_1000    -> 1000px de largura (uso geral)
+- pequeno_500   -> 500px de largura (web)
+- icone_200     -> 200px de largura (miniaturas)
+- favicon_64    -> 64px de largura (favicon/ícones pequenos)
