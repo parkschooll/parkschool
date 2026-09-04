@@ -1,3 +1,9 @@
+.logo-esqueci {
+    border: 2px solid rgb(255, 174, 0);
+    border-radius: 20px;
+    padding: 3px;
+}
+
 .main-bg {
     background: linear-gradient(160deg, var(--bg-surface, #EEF2F7) 0%, #E4E9F1 55%, #E9EDF2 100%);
 }
