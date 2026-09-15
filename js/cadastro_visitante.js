@@ -16,24 +16,29 @@ document.addEventListener("DOMContentLoaded", function () {
     dataVaga.min = `${ano}-${mes}-${dia}`;
 
 
-    // Formatação da placa
+   // Formatação da placa
     placa.addEventListener("input", function () {
 
-        let valor = placa.value.toUpperCase();
+    let valor = placa.value.toUpperCase();
 
-        // Remove caracteres que não sejam letras ou números
-        valor = valor.replace(/[^A-Z0-9]/g, "");
+    // Remove tudo que não seja letra ou número
+    valor = valor.replace(/[^A-Z0-9]/g, "");
 
-        // Limita a 7 caracteres
-        valor = valor.substring(0, 7);
+    // Limita a 7 caracteres
+    valor = valor.substring(0, 7);
 
-        // Formato antigo: ABC-1234
-        if (valor.length > 3) {
-            valor = valor.substring(0, 3) + "-" + valor.substring(3);
-        }
+    // Adiciona hífen somente para o modelo antigo
+    // ABC1234 -> ABC-1234
+    if (
+        valor.length === 7 &&
+        /^[A-Z]{3}[0-9]{4}$/.test(valor)
+    ) {
+        valor = valor.substring(0, 3) + "-" + valor.substring(3);
+    }
 
-        placa.value = valor;
+    placa.value = valor;
     });
+
 
 
     // Validação do formulário
@@ -72,14 +77,30 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        // Verifica placa
-        const placaRegex = /^[A-Z]{3}-[0-9]{4}$/;
+       // Validação da placa
+    const placaValor = placa.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
 
-        if (!placaRegex.test(placa.value)) {
-            alert("Digite uma placa válida. Exemplo: ABC-1234");
-            placa.focus();
-            return;
-        }
+    // Placa antiga: ABC1234
+    const placaAntiga = /^[A-Z]{3}[0-9]{4}$/;
+
+    // Placa Mercosul: ABC1D23
+    const placaMercosul = /^[A-Z]{3}[0-9][A-Z][0-9]{2}$/;
+
+    if (
+    !placaAntiga.test(placaValor) &&
+    !placaMercosul.test(placaValor)
+    ) {
+    alert(
+        "Digite uma placa válida.\n\n" +
+        "Exemplos:\n" +
+        "ABC-1234\n" +
+        "ABC1D23"
+    );
+
+    placa.focus();
+    return;
+}
+
 
 
         // Cria objeto com os dados
