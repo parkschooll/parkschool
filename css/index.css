@@ -1,0 +1,177 @@
+/* ===================================================
+   PALETA DE CORES PARKSCHOOL
+   =================================================== */
+:root {
+  --cor-azul-escuro: #1D397D;      /* Botões principais e Títulos */
+  --cor-azul-turquesa: #1C4966;    /* Header / Fundo de Seções */
+  --cor-azul-cinza: #64748B;       /* Texto secundário e Bordas */
+  --cor-cinza-botao: #B5B5B5;      /* Botões secundários e Intercalados */
+  --cor-cinza-claro: #e2dfdf;      /* Fundo de Cards e Formulários */
+}
+
+/* ===================================================
+   ESTILOS GERAIS DA PÁGINA
+   =================================================== */
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  color: #333333;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Header e footer ficam no tamanho natural deles */
+.senac-header,
+.footer-parkschool {
+  flex-shrink: 0;
+}
+
+/* O <main> ocupa todo o espaço restante entre header e footer */
+main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* evita que o flex item estoure o container */
+}
+
+/* ===================================================
+   HEADER E NAVBAR
+   =================================================== */
+.senac-header {
+  background-color: var(--cor-azul-turquesa);
+  border-bottom: 2px solid var(--cor-azul-escuro);
+}
+
+.senac-header .btn-primary {
+  background-color: var(--cor-azul-escuro);
+  border-color: var(--cor-azul-escuro);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.senac-header .btn-primary:hover {
+  background-color: var(--cor-azul-turquesa);
+  border-color: var(--cor-azul-turquesa);
+  transform: translateY(-1px);
+}
+
+/* ===================================================
+   MODAL CONFIGURAÇÕES
+   =================================================== */
+.modal-content {
+  background-color: var(--cor-azul-turquesa) !important;
+}
+
+.modal-header, .modal-footer {
+  border-color: var(--cor-azul-cinza) !important;
+}
+
+.modal .btn-secondary {
+  background-color: var(--cor-cinza-botao);
+  border-color: var(--cor-cinza-botao);
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.modal .btn-secondary:hover {
+  background-color: #9e9e9e;
+  border-color: #9e9e9e;
+}
+
+/* ===================================================
+   HERO CAROUSEL (Bootstrap 5 nativo)
+   =================================================== */
+.hero-carousel-wrapper,
+main > section.container-fluid {
+  position: relative;
+  flex: 1 1 auto;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: hidden;
+}
+
+.hero-carousel-wrapper .carousel,
+.hero-carousel-wrapper .carousel-inner,
+.hero-carousel-wrapper .carousel-item {
+  height: 100%;
+}
+
+.hero-carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Texto fixo por cima do carrossel, sem travar cliques nas setas/indicadores */
+.hero-text-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Garante que os controles do carrossel fiquem clicáveis acima do overlay de texto */
+.hero-carousel-wrapper .carousel-control-prev,
+.hero-carousel-wrapper .carousel-control-next,
+.hero-carousel-wrapper .carousel-indicators {
+  z-index: 3;
+  pointer-events: auto;
+}
+
+/* ===================================================
+   ESTILIZAÇÃO DO RODAPÉ (ESTILO RPCS3)
+   =================================================== */
+.footer-parkschool {
+  /* Gradiente moderno utilizando o Azul Turquesa e o Azul Escuro da paleta */
+  background: linear-gradient(135deg, var(--cor-azul-turquesa) 0%, var(--cor-azul-escuro) 100%);
+  color: #ffffff;
+}
+
+/* Títulos das colunas */
+.footer-title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+/* Links do rodapé */
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: var(--cor-cinza-claro);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+  transform: translateX(4px); /* Efeito suave de deslocamento ao passar o mouse */
+}
+
+/* Divisor horizontal */
+.footer-divider {
+  border-color: var(--cor-azul-cinza);
+}
+
+/* Pílulas estilo RPCS3 do rodapé inferior */
+.badge-pill-custom {
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 0.4rem 0.9rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(4px);
+  display: inline-flex;
+  align-items: center;
+}

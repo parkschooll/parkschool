@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tela Inicial - Parkschool</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <!-- ===================== HEADER / NAVBAR ===================== -->
+    <header class="senac-header">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container">
+
+                <a class="navbar-brand d-flex align-items-center me-4" href="#">
+                    <img src="../assets/logo_pkg/06_monocromatica_dourada/06_monocromatica_dourada_medio_1000.webp" width="50" height="50" class="logo-esqueci me-2" alt="Logo Senac">
+                    <span class="text-white fw-semibold fs-5">Estacionamento - Parkschool</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-medium px-3" href="#" id="btnSobre" data-bs-toggle="modal" data-bs-target="#modalSobre">Sobre</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-medium px-3" href="#" id="btnTermos" data-bs-toggle="modal" data-bs-target="#modalTermos">Termos & Privacidade</a>
+                        </li>
+
+                        <li class="nav-item my-2 my-lg-0">
+                            <a class="btn btn-primary px-3" href="/pages/login.html" role="button">Login/Cadastro</a>
+                        </li>
+
+                        <li class="nav-item d-none d-lg-block text-white-50 opacity-50 px-1">|</li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===================== MODAL "SOBRE O PARKSCHOOL" ===================== -->
+    <div class="modal fade" id="modalSobre" tabindex="-1" aria-labelledby="modalSobreLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header border-secondary">
+                    <h5 class="text-white modal-title fw-bold" id="modalSobreLabel">
+                        <i class="fa-solid fa-square-parking me-2 text-warning"></i>Sobre o Parkschool
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body fs-6 lh-base">
+                    <p class="text-white-50">
+                        O <strong>Parkschool</strong> é o aplicativo corporativo de gestão e controle de vagas do estacionamento. Nosso objetivo é garantir organização, segurança patrimonial e otimização do espaço em tempo real.
+                    </p>
+
+                    <hr class="border-secondary my-3">
+
+                    <h6 class="text-white fw-bold text-warning"><i class="fa-solid fa-users-gear me-2"></i>Perfis e Controle de Acesso</h6>
+                    <p class="text-white mb-2">O sistema opera com controle de acesso segregado para garantir o uso adequado:</p>
+                    <ul class="text-white-50 ps-3 mb-3">
+                        <li><strong>Administrador e Patrimônio:</strong> Gestão completa de cadastros (funcionários, veículos e usuários) e controle de vagas.</li>
+                        <li><strong>Segurança:</strong> Visualização em tempo real do status das vagas para monitoramento.</li>
+                    </ul>
+
+                    <h6 class="text-white fw-bold text-warning"><i class="fa-solid fa-car-side me-2"></i>Vagas Atendidas</h6>
+                    <p class="text-white-50 mb-3">
+                        Gerenciamento inteligente por categorias: vagas comuns (automóveis), gerência, motocicletas, PCD, bicicletas e carga/descarga.
+                    </p>
+
+                    <h6 class="fw-bold text-warning"><i class="fa-solid fa-shield-halved me-2"></i>Privacidade e LGPD</h6>
+                    <p class="text-white-50 mb-0">
+                        Em conformidade com a <strong>LGPD (Lei nº 13.709/2018)</strong>:
+                    </p>
+                    <ul class="text-white-50 ps-3 mb-0">
+                        <li>Tratamento seguro e restrito dos dados dos funcionários e veículos cadastrados.</li>
+                        <li>Senhas armazenadas com criptografia (hash) e conexões seguras.</li>
+                        <li>Uso estritamente interno e voltado para a segurança e controle operacional.</li>
+                    </ul>
+                </div>
+
+                <div class="modal-footer border-secondary justify-content-between">
+                    <small class="text-white-50">Versão 1.0 — Conformidade LGPD</small>
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Fechar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+        <!-- ===================== MODAL "TERMOS E PRIVACIDADE PARKSCHOOL" ===================== -->
+    <div class="modal fade" id="modalTermos" tabindex="-1" aria-labelledby="modalTermosLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+            <div class="modal-header border-secondary">
+            <h5 class="text-white modal-title fw-bold" id="modalTermosLabel">
+             <i class="fa-solid fa-file-contract me-2 text-warning"></i>Política de Privacidade e Termos de Uso
+            </h5>
+         <button type="button" class="btn-close btn-close-white d-none" id="btnFecharTermos" aria-label="Close"></button>
+         </div>
+
+            <div class="modal-body fs-6 lh-base" id="termosScrollBody" style="max-height: 60vh; overflow-y: auto;">
+
+                <p class="text-white-50">
+                    Aplicativo de Gestão de Vagas de Estacionamento — Parkschool<br>
+                    <small>Versão 1.0 — Conformidade LGPD</small>
+                </p>
+                <p class="text-white-50">
+                    A presente Política de Privacidade estabelece as diretrizes sobre a recolha, uso, armazenamento, tratamento e proteção dos dados pessoais dos utilizadores do aplicativo de gestão de vagas do estacionamento corporativo, em conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD).
+                </p>
+
+                <hr class="border-secondary my-3">
+
+                <h6 class="text-white fw-bold text-warning">Nota Importante sobre Papéis Jurídicos (LGPD)</h6>
+                <p class="text-white-50 mb-3">
+                    A Empresa atua como Controladora dos dados de seus funcionários e colaboradores. Quando o Aplicativo for hospedado ou processado por fornecedores externos de tecnologia (nuvem, OCR de placas, câmeras inteligentes), esses fornecedores atuarão como Operadores, tratando os dados estritamente sob instrução da Empresa.
+                </p>
+
+                <h6 class="text-white fw-bold text-warning"><i class="fa-solid fa-database me-2"></i>1. Dados Recolhidos</h6>
+                <p class="text-white-50 mb-2">A arquitetura do sistema recolhe diferentes categorias de dados, conforme o perfil de acesso (Administrador, Patrimônio ou Segurança) e o cadastro de funcionários e veículos:</p>
+
+                <p class="text-white mb-1 fw-semibold">1.1 Dados de Registo e Credenciais</p>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li><strong>Username:</strong> identificação do usuário para autenticação</li>
+                    <li><strong>Senha:</strong> armazenada de forma criptografada (hash)</li>
+                    <li><strong>Tipo de usuário:</strong> define o perfil (Administrador, Patrimônio ou Segurança)</li>
+                </ul>
+
+                <p class="text-white mb-1 fw-semibold">1.2 Dados dos Funcionários</p>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li><strong>Nome:</strong> identificação do titular vinculado à vaga/veículo</li>
+                    <li><strong>Telefone:</strong> contato em situações operacionais</li>
+                    <li><strong>Identificação/matrícula:</strong> vínculo com o cadastro interno</li>
+                </ul>
+
+                <p class="text-white mb-1 fw-semibold">1.3 Dados do Veículo</p>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li><strong>Tipo, modelo, cor e ano:</strong> identificação e conferência visual</li>
+                    <li><strong>Placa:</strong> identificação única e controle de entrada/saída</li>
+                </ul>
+
+                <p class="text-white mb-1 fw-semibold">1.4 Dados Gerados pelo Sistema</p>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li>Status das vagas em tempo real (comum, gerência, moto, PCD, bicicleta e carga/descarga)</li>
+                    <li>Registos de entrada e saída (futuro, com sensores/câmeras)</li>
+                    <li>Métricas internas de ocupação</li>
+                </ul>
+
+                <h6 class="text-white fw-bold text-warning"><i class="fa-solid fa-bullseye me-2"></i>2. Finalidade do Tratamento</h6>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li>Operacionalização do Aplicativo, com acesso segregado por perfil</li>
+                    <li>Gestão de vagas, associando veículo, funcionário e vaga</li>
+                    <li>Segurança patrimonial, com visualização em tempo real da ocupação</li>
+                    <li>Automação futura de entrada/saída via sensores ou câmeras</li>
+                    <li>Transparência interna via display/contador na entrada, sem exposição de dados pessoais</li>
+                </ul>
+
+                <h6 class="text-white fw-bold text-warning"><i class="fa-solid fa-camera me-2"></i>3. Sensores, Câmeras e Automação</h6>
+                <p class="text-white-50 mb-2">Está prevista a integração futura com sensores e/ou câmeras (OCR/ANPR). A Empresa garante:</p>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li>Finalidade restrita à identificação de entrada/saída</li>
+                    <li>Sem uso das imagens/placas para treinar modelos de terceiros</li>
+                    <li>Sinalização visual de videomonitoramento nas áreas cobertas</li>
+                    <li>Esta Política será revisada assim que a funcionalidade entrar em operação</li>
+                </ul>
+
+                <h6 class="text-white fw-bold text-warning"><i class="fa-solid fa-share-nodes me-2"></i>4. Partilha e Armazenamento</h6>
+                <p class="text-white-50 mb-2">Os dados não são compartilhados com terceiros externos, exceto:</p>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li>Fornecedores de infraestrutura de TI/nuvem, sob confidencialidade e conformidade com a LGPD</li>
+                    <li>Fornecedores de sensores/câmeras, quando implementados</li>
+                    <li>Autoridades competentes, mediante obrigação legal</li>
+                </ul>
+
+                <h6 class="text-white fw-bold text-warning"><i class="fa-solid fa-lock me-2"></i>5. Segurança das Informações</h6>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li>Senhas armazenadas de forma criptografada (hash)</li>
+                    <li>Controle de acesso segregado por perfil</li>
+                    <li>Restrições rigorosas de acesso à base de dados</li>
+                    <li>Comunicação criptografada (HTTPS/SSL), quando aplicável</li>
+                </ul>
+
+                <h6 class="text-white fw-bold text-warning"><i class="fa-solid fa-user-shield me-2"></i>6. Direitos dos Titulares</h6>
+                <p class="text-white-50 mb-2">O titular dos dados pode solicitar, junto ao Encarregado de Dados:</p>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li>Confirmação da existência de tratamento e acesso aos dados</li>
+                    <li>Correção de dados incompletos, inexatos ou desatualizados</li>
+                    <li>Anonimização, bloqueio ou eliminação de dados desnecessários</li>
+                    <li>Informação sobre entidades com quem os dados foram compartilhados</li>
+                    <li>Revogação de consentimento, quando aplicável</li>
+                </ul>
+
+                <h6 class="text-white fw-bold text-warning"><i class="fa-solid fa-clock-rotate-left me-2"></i>7. Retenção de Dados</h6>
+                <p class="text-white-50 mb-3">
+                    Os dados são armazenados enquanto o vínculo do funcionário com a Empresa estiver ativo, podendo ser retidos por período adicional para auditoria e cumprimento legal. Após o desligamento, poderão ser eliminados ou anonimizados.
+                </p>
+
+                <h6 class="text-white fw-bold text-warning"><i class="fa-solid fa-rotate me-2"></i>8. Atualizações da Política</h6>
+                <p class="text-white-50 mb-3">
+                    Esta Política poderá ser revista sempre que houver mudanças na arquitetura do sistema, novos sensores/câmeras, ou na legislação aplicável.
+                </p>
+
+                <hr class="border-secondary my-4">
+
+                <h5 class="text-white fw-bold text-center mb-3">TERMOS DE USO</h5>
+
+                <h6 class="text-white fw-bold text-warning">1. Objeto</h6>
+                <p class="text-white-50 mb-3">
+                    Estes Termos regulam o acesso e uso do Aplicativo, destinado ao controle das vagas do estacionamento, de uso interno e restrito aos perfis de Administrador, Patrimônio e Segurança.
+                </p>
+
+                <h6 class="text-white fw-bold text-warning">2. Aceitação dos Termos</h6>
+                <p class="text-white-50 mb-3">
+                    Ao receber suas credenciais de acesso e realizar login, o usuário declara ter lido, compreendido e concordado integralmente com estes Termos e com a Política de Privacidade.
+                </p>
+
+                <h6 class="text-white fw-bold text-warning">3. Perfis de Acesso e Permissões</h6>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li><strong>Administrador / Patrimônio:</strong> acesso total — cadastro de funcionários, veículos e usuários; visualização completa das vagas</li>
+                    <li><strong>Segurança:</strong> acesso limitado — apenas visualização do status das vagas, sem cadastro/edição</li>
+                    <li><strong>Demais colaboradores:</strong> sem acesso ao Aplicativo; apenas o display/contador físico na entrada</li>
+                </ul>
+
+                <h6 class="text-white fw-bold text-warning">4. Tipos de Vaga Controlados</h6>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li>Vagas comuns para automóveis</li>
+                    <li>Vagas destinadas à Gerência</li>
+                    <li>Vagas exclusivas para motocicletas</li>
+                    <li>Vagas exclusivas para condutores PCD</li>
+                    <li>Vagas para bicicletas</li>
+                    <li>Vaga de carga e descarga</li>
+                </ul>
+
+                <h6 class="text-white fw-bold text-warning">5. Cadastro e Responsabilidades do Usuário</h6>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li>Inserir dados corretos e atualizados de funcionários e veículos</li>
+                    <li>Manter sigilo sobre a senha, sem compartilhá-la com terceiros</li>
+                    <li>Responsabilizar-se por atividades feitas com suas credenciais</li>
+                    <li>Comunicar imediatamente qualquer suspeita de acesso não autorizado</li>
+                </ul>
+
+                <h6 class="text-white fw-bold text-warning">6. Uso Adequado do Aplicativo</h6>
+                <p class="text-white-50 mb-2">É vedado ao usuário:</p>
+                <ul class="text-white-50 ps-3 mb-3">
+                    <li>Utilizar o Aplicativo para finalidade diversa da gestão do estacionamento</li>
+                    <li>Acessar funcionalidades ou dados não autorizados ao seu perfil</li>
+                    <li>Burlar mecanismos de segurança ou realizar engenharia reversa</li>
+                    <li>Divulgar dados pessoais obtidos pelo sistema sem autorização</li>
+                </ul>
+
+                <h6 class="text-white fw-bold text-warning">7. Integração Futura com Sensores e Câmeras</h6>
+                <p class="text-white-50 mb-3">
+                    O usuário reconhece que o Aplicativo poderá futuramente integrar-se a sensores e/ou câmeras para captura automática de entrada e saída, sujeito a atualização destes Termos.
+                </p>
+
+                <h6 class="text-white fw-bold text-warning">8. Propriedade Intelectual</h6>
+                <p class="text-white-50 mb-3">
+                    O Aplicativo, seu código-fonte, layout e demais elementos são de propriedade da Empresa, sendo vedada a reprodução ou modificação não autorizada.
+                </p>
+
+                <h6 class="text-white fw-bold text-warning">9. Disponibilidade do Serviço</h6>
+                <p class="text-white-50 mb-3">
+                    A Empresa envidará esforços para manter o Aplicativo disponível, mas não garante operação ininterrupta, podendo haver interrupções para manutenção.
+                </p>
+
+                <h6 class="text-white fw-bold text-warning">10. Limitação de Responsabilidade</h6>
+                <p class="text-white-50 mb-3">
+                    A Empresa não se responsabiliza por danos decorrentes de uso inadequado, compartilhamento indevido de credenciais, ou falhas técnicas alheias ao seu controle razoável.
+                </p>
+
+                <h6 class="text-white fw-bold text-warning">11. Vigência e Alterações</h6>
+                <p class="text-white-50 mb-3">
+                    Estes Termos vigoram por prazo indeterminado, podendo ser alterados a qualquer momento, especialmente para novas funcionalidades ou exigências legais.
+                </p>
+
+                <h6 class="text-white fw-bold text-warning">12. Foro</h6>
+                <p class="text-white-50 mb-0">
+                    Fica eleito o foro da comarca da sede da Empresa para dirimir quaisquer controvérsias oriundas destes Termos.
+                </p>
+
+            </div>
+                            <div class="modal-footer border-secondary justify-content-between">
+                    <small class="text-white-50">Versão 1.0 — Conformidade LGPD</small>
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Fechar</button>
+                </div>
+        </div>
+    </div>
+</div>
+
+    <!-- ===================== MAIN ===================== -->
+    <main>
+
+        <!-- BANNER HERO / CARROSSEL -->
+        <section class="container-fluid p-0 position-relative" style="height: 60vh; min-height: 400px;">
+
+            <div id="carouselExampleSlidesOnly" class="carousel slide h-100" data-bs-ride="carousel" data-bs-pause="false" data-bs-interval="4000">
+                <div class="carousel-inner h-100">
+                    <div class="carousel-item active h-100">
+                        <img src="../assets/img/pexels-anna-klymenko-2154232859-38264204.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Vaga de estacionamento">
+                    </div>
+                    <div class="carousel-item h-100">
+                        <img src="../assets/img/pexels-egorghetto-19362131.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Vaga de estacionamento">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camada de texto sobre a imagem -->
+            <div class="text-layer position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center p-4 text-white text-center pe-none" style="background: rgba(0,0,0,0.45);">
+                <h1 class="display-5 fw-bold mb-3">Estacionamento Parkschool</h1>
+                <p class="monitore-text fs-5 mb-0" style="max-width: 700px;">
+                    Monitore vagas em tempo real, gerencie reservas e acompanhe o histórico de acessos em um único lugar.
+                </p>
+            </div>
+
+        </section>
+
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer-parkschool py-5">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-3 col-6">
+                    <h5 class="fw-bold mb-3 footer-title">Principal</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Início</a></li>
+                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#modalSobre">Sobre</a></li>
+                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#modalTermos">Termos e Privacidade</a></li>
+                    </ul>
+                </div>
+<div class="col-lg-3 col-md-12 mb-4 mb-lg-0 d-flex align-items-start justify-content-end ms-lg-auto">
+    <a href="#" class="d-flex align-items-center text-white text-decoration-none">
+        <img src="../assets/logo_pkg/06_monocromatica_dourada/06_monocromatica_dourada_medio_1000.webp" width="55" height="55" alt="Logo Parkschool" class="me-2">
+    </a>
+</div>
+
+
+            </div>
+
+            <hr class="footer-divider my-4 opacity-25">
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center pt-2 gap-3">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge-pill-custom">
+                        <i class="fa-solid fa-square-parking me-1"></i> Parkschool
+                    </span>
+                    <span class="badge-pill-custom">
+                        Desenvolvido para o Senac
+                    </span>
+                </div>
+
+                <div class="text-white-50 small">
+                    &copy; 2026 Estacionamento Parkschool. Todos os direitos reservados.
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/index.js"></script>
