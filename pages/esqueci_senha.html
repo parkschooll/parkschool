@@ -25,32 +25,19 @@
                     <i class="fa-solid fa-key fs-4"></i>
                 </div>
                 <h2 class="fw-bold mb-2 text-center text-primary-custom fs-4">Esqueci minha senha</h2>
-                <p class="ds-text-secondary text-center mb-4" style="font-size: 14px;">Escolha como prefere receber o código para recuperar o acesso.</p>
-
-                <div class="d-flex bg-light p-1 rounded mb-4">
-                    <button class="btn flex-grow-1 tab-btn fw-medium" id="tab-email" type="button">E-mail</button>
-                    <button class="btn flex-grow-1 tab-btn fw-medium text-secondary" id="tab-phone" type="button">Telefone</button>
-                </div>
+                <p class="ds-text-secondary text-center mb-4" style="font-size: 14px;">Informe seu e-mail cadastrado para solicitar a recuperação de conta.</p>
 
                 <form id="request-form">
                     <div class="mb-4 form-field" id="field-email">
                         <label for="email" class="form-label fw-medium" style="font-size: 13px;">E-mail cadastrado</label>
                         <div class="input-group ds-input-group">
                             <span class="input-group-text border-end-0"><i class="fa-regular fa-envelope"></i></span>
-                            <input type="email" class="form-control border-start-0 ps-0" id="email" placeholder="nome@senac.br">
-                        </div>
-                    </div>
-
-                    <div class="mb-4 form-field d-none" id="field-phone">
-                        <label for="phone" class="form-label fw-medium" style="font-size: 13px;">Telefone cadastrado</label>
-                        <div class="input-group ds-input-group">
-                            <span class="input-group-text border-end-0"><i class="fa-solid fa-phone"></i></span>
-                            <input type="tel" class="form-control border-start-0 ps-0" id="phone" placeholder="(00) 00000-0000" inputmode="numeric">
+                            <input type="email" class="form-control border-start-0 ps-0" id="email" placeholder="nome@senac.br" required>
                         </div>
                     </div>
 
                     <button class="btn ds-btn-primary w-100 py-2 fw-semibold d-flex justify-content-center align-items-center gap-2" id="submit-btn" type="submit" disabled>
-                        <span id="submit-label">Enviar código de recuperação</span>
+                        <span id="submit-label">Solicitar recuperação</span>
                         <span class="spinner-border spinner-border-sm d-none" id="submit-spinner" role="status" aria-hidden="true"></span>
                     </button>
                 </form>
@@ -60,30 +47,22 @@
                 </a>
             </div>
 
-            <div id="step-sent" class="d-none">
-                <div class="icon-circle mb-3 mx-auto text-success d-flex align-items-center justify-content-center rounded-circle" style="width: 56px; height: 56px; background-color: #ECFDF5; flex-shrink: 0;">
-                    <i class="fa-solid fa-check fs-4"></i>
-                </div>
-                <h2 class="fw-bold mb-2 text-center text-primary-custom fs-4">Código enviado</h2>
-                <p class="ds-text-secondary text-center mb-4" style="font-size: 14px;">Enviamos um código de verificação para <strong id="destination" class="text-dark"></strong>.</p>
-
-                <div class="mb-4">
-                    <label for="code" class="form-label fw-medium text-center d-block" style="font-size: 13px;">Código de verificação</label>
-                    <input type="text" id="code" class="form-control code-input text-center fs-3 py-2" placeholder="000000" maxlength="6" inputmode="numeric">
-                </div>
-
-                <button class="btn ds-btn-primary w-100 py-2 fw-semibold mb-3" type="button">Confirmar código</button>
-                <button class="btn btn-link text-decoration-none ds-text-primary w-100 mb-2 fw-medium" type="button" style="font-size: 13px;">Reenviar código</button>
-                <button class="btn btn-link text-decoration-none ds-text-secondary w-100 d-flex justify-content-center align-items-center gap-2 fw-medium hover-primary" type="button" id="btn-back-method" style="font-size: 13px;">
-                    <i class="fa-solid fa-arrow-left"></i> Escolher outro método
-                </button>
-            </div>
-
         </div>
     </main>
 
+    <!-- Toast de Notificação -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="recoveryToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body fw-medium">
+                    Registrado. Contate o administrador para recuperar sua conta.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     
     <script src="../js/esqueciSenha.js"></script>
 </body>
