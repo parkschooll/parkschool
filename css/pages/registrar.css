@@ -1,8 +1,9 @@
-/* ==========================================
-   1. ESTRUTURA E LAYOUT
-   ========================================== */
+/* =========================================
+   REGISTRO STYLES
+   ========================================= */
+
 .form-container {
-    background-color: var(--bg-surface, #ffffff);
+    background-color: var(--bg-surface);
 }
 
 .registro-wrapper {
@@ -10,101 +11,58 @@
     width: 100%;
 }
 
-/* Fundo com Imagem e Overlay do Hero */
 .hero-bg {
     background: linear-gradient(135deg, rgba(29, 57, 125, 0.85), rgba(28, 73, 102, 0.9)),
-                url('../assets/img/pexels-anna-klymenko-2154232859-38264204.jpg') center/cover no-repeat;
+                url('../../assets/img/pexels-anna-klymenko-2154232859-38264204.jpg') center/cover no-repeat;
 }
 
 .text-layer {
-    z-index: 10;
+    z-index: var(--z-index-dropdown);
 }
 
-/* ==========================================
-   2. ELEMENTOS VISUAIS DO HERO
-   ========================================== */
 .badge-tag {
-    color: var(--color-gray-200, #E2E8F0);
+    color: var(--color-gray-200);
     letter-spacing: 2px;
     background-color: rgba(255, 255, 255, 0.1);
-    padding: var(--spacing-2, 8px) var(--spacing-4, 16px);
-    border-radius: var(--radius-pill, 9999px);
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--radius-pill);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    font-size: var(--font-size-xs, 12px);
+    font-size: var(--font-size-xs);
 }
 
-.hero-description {
-    color: var(--color-gray-200, #E2E8F0);
-    max-width: 85%;
+.hero-description, .hero-features {
+    color: var(--color-gray-200);
 }
 
 .hero-features {
-    color: var(--color-gray-200, #E2E8F0);
-    font-size: var(--font-size-sm, 14px);
+    font-size: var(--font-size-sm);
 }
 
 .feature-icon {
     width: 24px;
     height: 24px;
     background-color: rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-circle, 50%);
+    border-radius: var(--radius-circle);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 11px;
-    color: var(--color-white, #ffffff);
+    color: var(--color-white);
 }
 
-/* ==========================================
-   3. TIPOGRAFIA E COMPONENTES DE FORMULÁRIO
-   ========================================== */
 .ds-text-secondary {
-    color: var(--text-secondary, #64748B);
+    color: var(--text-secondary);
 }
 
 .ds-text-primary {
-    color: var(--color-primary, #1D397D);
-    transition: color var(--transition-fast, 150ms);
+    color: var(--color-primary);
+    transition: color var(--transition-fast);
 }
 
 .ds-text-primary:hover {
-    color: var(--color-primary-hover, #264CA6);
+    color: var(--color-primary-hover);
 }
 
-/* Inputs, Selects e Adornamentos */
-.ds-input-group .input-group-text,
-.ds-input-group .btn-toggle-password {
-    background-color: transparent;
-    color: var(--text-secondary, #64748B);
-    border-color: var(--border-color, #E2E8F0);
-}
-
-.ds-input-group .form-control,
-.ds-input-group .form-select {
-    border-color: var(--border-color, #E2E8F0);
-    font-size: var(--font-size-sm, 14px);
-    color: var(--text-primary, #0F172A);
-}
-
-.ds-input-group .form-select {
-    cursor: pointer;
-}
-
-.ds-input-group .form-control:focus,
-.ds-input-group .form-select:focus {
-    box-shadow: none;
-    border-color: var(--color-primary, #1D397D);
-}
-
-/* Destaque quando o grupo está em foco */
-.ds-input-group:focus-within .input-group-text,
-.ds-input-group:focus-within .form-control,
-.ds-input-group:focus-within .form-select,
-.ds-input-group:focus-within .btn-toggle-password {
-    border-color: var(--color-primary, #1D397D);
-}
-
-/* Ajuste nos botões de mostrar/ocultar senha */
 .btn-toggle-password {
     border-left: none !important;
 }
@@ -113,27 +71,8 @@
     box-shadow: none;
 }
 
-/* Botão Primário */
-.ds-btn-primary {
-    background-color: var(--color-primary, #1D397D);
-    color: var(--color-white, #ffffff);
-    border: none;
-    border-radius: var(--radius-md, 8px);
-    transition: background-color var(--transition-fast, 150ms);
-}
-
-.ds-btn-primary:hover {
-    background-color: var(--color-primary-hover, #264CA6);
-    color: var(--color-white, #ffffff);
-}
-
-.ds-btn-primary:active {
-    background-color: var(--color-primary-active, #142757);
-}
-
-/* Estados de validação customizados */
 .ds-input-group.is-invalid .form-control,
 .ds-input-group.is-invalid .input-group-text,
 .ds-input-group.is-invalid .btn-toggle-password {
-    border-color: var(--color-danger, #EF4444) !important;
+    border-color: var(--color-danger) !important;
 }
