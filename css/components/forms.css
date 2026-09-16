@@ -1,0 +1,80 @@
+/* =========================================
+   FORM COMPONENTS (Bootstrap 5 Overrides & Customs)
+   ========================================= */
+
+/* Labels */
+.form-label {
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-1);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Inputs, Selects e Textareas do Bootstrap */
+.form-control, 
+.form-select {
+    border-color: var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: var(--bg-surface);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* Foco nos inputs: Sobrescreve o "Glow" nativo do Bootstrap */
+.form-control:focus, 
+.form-select:focus {
+    border-color: var(--color-primary);
+    /* Sombra primária suave com 25% de opacidade (rgba correspondente ao #1D397D) */
+    box-shadow: 0 0 0 0.25rem rgba(29, 57, 125, 0.15); 
+    outline: 0;
+}
+
+.form-control::placeholder {
+    color: var(--color-gray-400);
+}
+
+/* Customização do Input Group (Ícone colado no input) */
+.ds-input-group {
+    display: flex;
+}
+
+.ds-input-group .input-group-text {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.ds-input-group .form-control {
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* Quando o input tem botão de senha, o input não pode ter border-radius na direita */
+.ds-input-group .form-control.border-end-0 {
+    border-radius: 0; 
+}
+
+/* Efeito de foco ativando todo o grupo (Ícone + Input) */
+.ds-input-group:focus-within .input-group-text,
+.ds-input-group:focus-within .form-control,
+.ds-input-group:focus-within .btn-toggle-password {
+    border-color: var(--color-primary);
+}
+
+.ds-input-group:focus-within .input-group-text {
+    color: var(--color-primary);
+}
+
+/* Checkbox e Radios customizados do Bootstrap */
+.form-check-input:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.form-check-input:focus {
+    border-color: var(--color-primary-hover);
+    box-shadow: 0 0 0 0.25rem rgba(29, 57, 125, 0.25);
+}
