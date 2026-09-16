@@ -90,7 +90,7 @@ main {
 main > section.container-fluid {
   position: relative;
   flex: 1 1 auto;
-  height: auto !important;
+  height: 1 auto !important;
   min-height: 0 !important;
   overflow: hidden;
 }
