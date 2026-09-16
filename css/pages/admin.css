@@ -1,250 +1,252 @@
-/* =========================
- NAVBAR SUPERIOR
- ========================= */
-
-.navbar {
- width: 100%;
- margin: 0 !important;
- padding: 0 !important;
+:root{
+  --azul-escuro:#1D397D;      /* títulos e botões principais */
+  --azul-turquesa:#1C4966;    /* fundo das colunas / barra lateral */
+  --azul-acinzentado:#64748B; /* texto secundário */
+  --cinza-botao:#B5B5B5;      /* botões alternados */
+  --cinza-claro:#e2dfdf;      /* fundo de cards e formulários */
+  --branco:#ffffff;
+  --livre:#3F8F5B;
+  --ocupada:#B5502F;
+  --linha:#d3cfcf;
+  --sidebar-w:232px;
 }
 
-/* =========================
- LAYOUT
- ========================= */
+body{
+  font-family:'Inter', sans-serif;
+  background:var(--branco);
+  color:var(--azul-escuro);
+  margin:0;
+}
+.font-display{ font-family:'Space Grotesk', sans-serif; }
 
-.dashboard {
- display: flex;
- min-height: calc(100vh - 60px);
+/* --------- barra lateral fixa --------- */
+#sidebar{
+  width:var(--sidebar-w);
+  height:100vh;
+  background:var(--azul-turquesa);
+  flex-shrink:0;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:10;
+}
+#sidebar .nav-link{
+  color:#C7D6DD;
+  font-size:.875rem;
+  border-radius:.375rem;
+  padding:.625rem .75rem;
+  display:flex;
+  align-items:center;
+  gap:.65rem;
+  cursor:pointer;
+}
+#sidebar .nav-link.active{
+  background:var(--azul-escuro);
+  color:#fff;
+}
+#sidebar .nav-link:hover{ color:#fff; }
+#btn-sair{
+  background:var(--cinza-botao);
+  color:var(--azul-escuro);
+  font-weight:500;
+  font-size:.875rem;
+  border:none;
+  border-radius:.375rem;
+  padding:.625rem .75rem;
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+#btn-sair:hover{ filter:brightness(1.08); }
+
+/* conteúdo deslocado para não ficar embaixo da barra fixa */
+#conteudo{
+  margin-left:var(--sidebar-w);
+  min-height:100vh;
+  overflow-y:auto;
 }
 
-/* =========================
- MENU LATERAL
- ========================= */
+/* --------- stat cards --------- */
+.stat-card{
+  background:var(--cinza-claro);
+  border-radius:.375rem;
+  padding:.85rem 1rem;
+}
+.stat-card .valor{ font-size:1.4rem; color:var(--azul-escuro); }
 
-.menu {
- position: relative;
- width: 220px;
- min-width: 220px;
- min-height: calc(100vh - 60px);
- background-color: #1C4966;
- color: white;
- padding: 25px 15px;
+/* --------- vagas --------- */
+.vaga-card{
+  width:68px;
+  height:64px;
+  border-radius:.375rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border:1.5px solid;
+  background:var(--branco);
+  font-family:'Space Grotesk', sans-serif;
+  line-height:1.1;
+  cursor:default;
+}
+.vaga-card .icone-vaga{
+  font-size:15px;
+  margin-bottom:2px;
+}
+.vaga-card .status{
+  font-family:'Inter', sans-serif;
+  font-size:10px;
+  margin-top:2px;
+}
+.vaga-card.ocupada{
+  background:var(--azul-escuro);
+  border-color:var(--azul-escuro) !important;
+  color:#fff;
+}
+.vaga-card.ocupada .status{ color:#E2C169; }
+.vaga-card.livre .status{ color:var(--livre); }
+
+/* --------- botões genéricos --------- */
+.btn-primario{
+  background:var(--azul-escuro);
+  color:#fff;
+  border:none;
+  border-radius:.375rem;
+  font-size:.875rem;
+  padding:.55rem 1rem;
+}
+.btn-primario:hover{ background:#17305F; color:#fff; }
+.btn-secundario{
+  background:var(--cinza-botao);
+  color:var(--azul-escuro);
+  border:none;
+  border-radius:.375rem;
+  font-size:.875rem;
+  padding:.55rem 1rem;
+  font-weight:500;
+}
+.btn-secundario:hover{ filter:brightness(1.05); color:var(--azul-escuro); }
+
+/* --------- funcionários --------- */
+.filtro-btn{
+  font-size:.75rem;
+  border-radius:50rem;
+  padding:.3rem .8rem;
+  border:1px solid var(--linha);
+  background:var(--branco);
+  color:var(--azul-acinzentado);
+}
+.filtro-btn.active{
+  background:var(--azul-escuro);
+  color:#fff;
+  border-color:var(--azul-escuro);
+}
+.lista-func{
+  background:var(--cinza-claro);
+  border:1px solid var(--linha);
+  border-radius:.375rem;
+  max-width:640px;
+}
+.func-item{
+  padding:.75rem 1rem;
+  border-top:1px solid #cfcccc;
+}
+.func-item:first-child{ border-top:none; }
+.badge-status{
+  font-size:.75rem;
+  padding:.3rem .6rem;
+  border-radius:50rem;
+  font-weight:500;
+}
+.badge-ativo{ background:#DCEEE1; color:var(--livre); }
+.badge-inativo{ background:#F2DDD4; color:var(--ocupada); }
+
+#busca-input::placeholder{ color:var(--azul-acinzentado); }
+
+/* --------- veículos --------- */
+.card-form{
+  background:var(--cinza-claro);
+  border-radius:.5rem;
+  padding:1.25rem 1.25rem 1.5rem;
+  max-width:640px;
+  position:relative;
+}
+.card-form + .card-form{ margin-top:1rem; }
+.card-form label{
+  font-size:.78rem;
+  color:var(--azul-acinzentado);
+  font-weight:500;
+  margin-bottom:.25rem;
+}
+.card-form .form-control,
+.card-form .form-select{
+  font-size:.875rem;
+  border:1px solid #c7c3c3;
+  background:var(--branco);
+}
+.card-form .form-control:focus,
+.card-form .form-select:focus{
+  border-color:var(--azul-escuro);
+  box-shadow:0 0 0 .2rem rgba(29,57,125,.12);
+}
+.form-check-veiculo{
+  display:flex;
+  gap:1.2rem;
+}
+.btn-remover-veiculo{
+  position:absolute;
+  top:.9rem;
+  right:.9rem;
+  background:none;
+  border:none;
+  color:var(--ocupada);
+  font-size:1rem;
+}
+.veiculo-numero{
+  font-size:.72rem;
+  text-transform:none;
+  color:var(--azul-acinzentado);
+  margin-bottom:.75rem;
+}
+.lista-veiculos-cadastrados{
+  max-width:640px;
+}
+.veiculo-registrado{
+  background:var(--cinza-claro);
+  border-radius:.5rem;
+  padding:.85rem 1rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:.6rem;
+}
+.veiculo-registrado .icone-veiculo{
+  width:38px;
+  height:38px;
+  border-radius:.4rem;
+  background:var(--azul-escuro);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.swatch-cor{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  display:inline-block;
+  border:1px solid #00000022;
+  margin-right:.3rem;
+  vertical-align:middle;
 }
 
-/* TÍTULO DO MENU */
-
-.menu h2 {
- text-align: center;
- font-size: 27px;
- margin-top: 0;
- margin-bottom: 30px;
- white-space: nowrap;
+#tela-saida{
+  min-height:100vh;
+  background:var(--azul-turquesa);
+  display:none;
 }
 
-/* =========================
- NAVEGAÇÃO DO MENU
- ========================= */
-
-.menu nav {
- width: 100%;
-}
-
-.menu nav .btn {
- width: 100%;
- padding: 12px 15px;
- border: none;
- border-radius: 6px;
-
- background-color: #163b53;
- color: white;
-
- text-align: left;
- font-size: 16px;
- font-weight: 500;
-
- transition: 0.2s ease;
-}
-
-/* BOTÃO AO PASSAR O MOUSE */
-
-.menu nav .btn:hover {
- background-color: #285f80;
- color: white;
-}
-
-/* BOTÃO SELECIONADO */
-
-.menu nav .btn.active {
- background-color: #0d6efd;
- color: white;
-}
-
-/* =========================
- BOTÃO SAIR
- ========================= */
-
-#btnSair {
- position: absolute;
-
- left: 15px;
- bottom: 20px;
-
- width: calc(100% - 30px);
-
- padding: 10px 15px;
-
- border: none;
- border-radius: 6px;
-
- font-size: 16px;
- font-weight: bold;
-
- text-align: center;
-
- transition: 0.2s ease;
-}
-
-#btnSair:hover {
- background-color: #bb2d3b;
-}
-
-.conteudo {
- flex: 1;
- min-width: 0;
- padding: 30px;
-}
-
-.titulo {
- color: #1D397D;
- font-weight: bold;
- margin-bottom: 25px;
-}
-
-.formulario {
- width: 100%;
- background-color: #e2dfdf;
-
- border-radius: 12px;
-
- padding: 25px;
-
- box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-}
-
-.titulo-formulario {
- color: #1D397D;
- font-weight: bold;
- margin-bottom: 25px;
-}
-
-.titulo-secao {
- border-bottom: 2px solid #e9ecef;
-
- padding-bottom: 10px;
-
- margin-top: 10px;
- margin-bottom: 20px;
-
- color: #1D397D;
-
- font-size: 22px;
-}
-
-.form-label {
- font-weight: 600;
-}
-
-.form-control,
-.form-select {
- min-height: 42px;
-}
-
-.btn-cadastrar {
- padding: 10px 28px;
- font-weight: bold;
-}
-
-.vaga-card {
- width: 110px;
- height: 135px;
- background-color: white;
- border-radius: 8px;
- padding: 7px;
- text-align: center;
- box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-
-/* Transforma o card em um container flex vertical */
- display: flex;
- flex-direction: column;
- justify-content: space-between; /* Empurra o topo para cima e o número para a base */
- align-items: center; /* Centraliza tudo horizontalmente */
-}
-
-.vaga-titulo {
- background-color: #ffc107;
- color: #111;
- font-weight: bold;
- font-size: 14px;
- padding: 3px;
- border-radius: 7px;
-}
-
-.vaga-icone {
- font-size: 35px;
- color: #198754;
- margin: 10px 0 5px;
-}
-
-.vaga-numero {
- font-weight: bold;
- font-size: 14px;
- color: #222;
- width: 100%;
- margin-top: auto; /* Garante a fixação no fundo */
-}
-.container-dos-cards {
- display: flex;
- flex-wrap: wrap;
- gap: 15px; 
-}
-
-@media (max-width: 768px) {
-
- .dashboard {
- flex-direction: column;
- }
-
- .menu {
- width: 100%;
- min-width: 100%;
- min-height: auto;
- padding: 20px 15px;
- }
-
- .menu h2 {
- text-align: left;
- margin-bottom: 20px;
- }
-
- .menu nav {
- width: 100%;
- }
-
- .menu nav .btn {
- width: 100%;
- }
-
- #btnSair {
- position: static;
- width: 100%;
- margin-top: 20px;
- }
-
- .conteudo {
- padding: 20px;
- }
-
- .formulario {
- padding: 20px;
- }
-}
+[data-tela]{ display:none; }
+[data-tela].ativa{ display:block; }
