@@ -1,0 +1,38 @@
+/* =========================================
+   ICON COMPONENTS
+   ========================================= */
+
+/* Contêiner circular de destaque (ex: Esqueci a senha, modais) */
+.icon-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-circle);
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+}
+
+/* Tamanhos padronizados */
+.icon-circle-md {
+    width: 48px;
+    height: 48px;
+    font-size: var(--font-size-xl);
+}
+
+.icon-circle-lg {
+    width: 56px;
+    height: 56px;
+    font-size: var(--font-size-2xl);
+}
+
+/* Cores de fundo (baseadas na paleta) */
+.icon-circle-primary {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.icon-circle-success {
+    background-color: var(--color-success-hover); /* Fundo verdinho claro ajustável */
+    color: var(--color-success);
+    opacity: 0.15; /* Simula um ECFDF5 no Bootstrap usando a própria cor do sistema */
+}
