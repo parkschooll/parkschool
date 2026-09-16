@@ -1,10 +1,8 @@
-// ============ dados ============
-
 const CATEGORIAS = {
-  administracao: { label: "Administração", cor: "#1D397D", icone: "bi-diagram-3" },
-  pcd:           { label: "PCD",             cor: "#1C4966", icone: "bi-universal-access" },
-  carga:         { label: "Carga e descarga", cor: "#B5502F", icone: "bi-truck" },
-  comum:         { label: "Vagas comuns",    cor: "#64748B", icone: "bi-car-front" }
+  administracao: { label: "Administração", cor: "var(--color-primary)", icone: "bi-diagram-3" },
+  pcd:           { label: "PCD",             cor: "var(--color-secondary)", icone: "bi-universal-access" },
+  carga:         { label: "Carga e descarga", cor: "var(--color-warning)", icone: "bi-truck" },
+  comum:         { label: "Vagas comuns",    cor: "var(--color-tertiary)", icone: "bi-car-front" }
 };
 
 function gerarVagasIniciais(){
@@ -20,15 +18,14 @@ function gerarVagasIniciais(){
 let vagas = gerarVagasIniciais();
 
 let funcionarios = [
-  
+  // Exemplo de dados iniciais, caso precise testar:
+  // { id: 1001, nome: "João Silva", cargo: "Funcionário", telefone: "(11) 99999-9999", email: "joao@email.com", pcd: "nao", status: "ativo" }
 ];
 
 let filtroStatusAtual = "todos";
 
 // veículos já cadastrados (exemplo inicial)
-let veiculosCadastrados = [
-  
-];
+let veiculosCadastrados = [];
 let proximoIdVeiculo = 3;
 let contadorFormsVeiculo = 0; // ids dos formulários abertos
 
@@ -43,11 +40,13 @@ function mudarTela(nome){
 
 function sair(){
   document.getElementById("app").style.display = "none";
-  document.getElementById("tela-saida").style.display = "flex";
+  document.getElementById("tela-saida").classList.remove("d-none");
+  document.getElementById("tela-saida").classList.add("d-flex");
 }
 
 function entrarNovamente(){
-  document.getElementById("tela-saida").style.display = "none";
+  document.getElementById("tela-saida").classList.remove("d-flex");
+  document.getElementById("tela-saida").classList.add("d-none");
   document.getElementById("app").style.display = "flex";
 }
 
@@ -60,27 +59,28 @@ function renderizarVagas(){
 
   const grupos = ["administracao", "pcd", "carga", "comum"];
   const container = document.getElementById("grupos-vagas");
+  
   container.innerHTML = grupos.map(chave => {
     const info = CATEGORIAS[chave];
     const doGrupo = vagas.filter(v => v.categoria === chave);
     const cartoes = doGrupo.map(v => {
       const livre = v.status === "livre";
       return `
-        <div class="vaga-card ${livre ? 'livre':'ocupada'}"
+        <div class="vaga-card ${livre ? 'livre':'ocupada'} bg-surface shadow-sm"
              style="${livre ? `border-color:${info.cor}; color:${info.cor};` : ''}"
              title="${livre ? 'Vaga livre' : 'Vaga ocupada'}">
-          <i class="bi ${info.icone} icone-vaga" style="${livre ? '' : 'color:#fff;'}"></i>
-          <span>${v.numero}</span>
-          <span class="status">${livre ? 'livre' : 'ocupada'}</span>
+          <i class="bi ${info.icone} icone-vaga" style="${livre ? '' : 'color: var(--color-white);'}"></i>
+          <span class="fw-bold">${v.numero}</span>
+          <span class="status text-uppercase" style="font-size: 0.65rem;">${livre ? 'livre' : 'ocupada'}</span>
         </div>`;
     }).join("");
 
     return `
       <section class="mb-4">
         <div class="d-flex align-items-center gap-2 mb-2">
-          <i class="bi ${info.icone}" style="color:${info.cor};"></i>
-          <h2 class="font-display mb-0" style="font-size:.9rem;">${info.label}</h2>
-          <span style="font-size:.75rem; color:var(--azul-acinzentado);">${doGrupo.length} ${doGrupo.length === 1 ? 'vaga' : 'vagas'}</span>
+          <i class="bi ${info.icone} fs-5" style="color:${info.cor};"></i>
+          <h2 class="font-display mb-0 fw-semibold" style="font-size:1.05rem; color: var(--text-primary);">${info.label}</h2>
+          <span class="badge text-bg-light border text-secondary ms-2">${doGrupo.length} ${doGrupo.length === 1 ? 'vaga' : 'vagas'}</span>
         </div>
         <div class="d-flex flex-wrap gap-2">${cartoes}</div>
       </section>`;
@@ -119,23 +119,26 @@ function renderizarFuncionarios(){
   const lista = document.getElementById("lista-funcionarios");
 
   if (filtrados.length === 0){
-    lista.innerHTML = `<p class="text-center py-4 mb-0" style="color:var(--azul-acinzentado); font-size:.875rem;">Nenhum funcionário encontrado para essa busca.</p>`;
+    lista.innerHTML = `<p class="text-center py-4 mb-0" style="color:var(--text-secondary); font-size:.875rem;">Nenhum funcionário encontrado para essa busca.</p>`;
     return;
   }
 
   lista.innerHTML = filtrados.map(f => `
-    <div class="func-item d-flex align-items-center justify-content-between">
+    <div class="func-item d-flex align-items-center justify-content-between p-3 mb-2 bg-surface shadow-sm rounded" style="border: 1px solid var(--border-color);">
       <div>
-        <p class="mb-0" style="font-size:.875rem; color:var(--azul-escuro);">${f.nome} ${f.pcd === 'sim' ? '<span class="badge bg-info text-dark" style="font-size:0.65rem;">PCD</span>' : ''}</p>
-        <p class="mb-0" style="font-size:.75rem; color:var(--azul-acinzentado);">${f.email} · ${f.telefone}</p>
+        <p class="mb-1 fw-medium" style="font-size:.9rem; color:var(--text-primary);">
+          ${f.nome} 
+          ${f.pcd === 'sim' ? '<span class="badge text-bg-info ms-1" style="font-size:0.65rem;">PCD</span>' : ''}
+        </p>
+        <p class="mb-0" style="font-size:.75rem; color:var(--text-secondary);"><i class="bi bi-envelope me-1"></i>${f.email} &nbsp;·&nbsp; <i class="bi bi-telephone me-1"></i>${f.telefone}</p>
       </div>
       <div class="d-flex align-items-center gap-3">
-        <span class="badge-status ${f.status === 'ativo' ? 'badge-ativo' : 'badge-inativo'}">
+        <span class="badge ${f.status === 'ativo' ? 'text-bg-success' : 'text-bg-danger'} px-2 py-1">
           ${f.status === 'ativo' ? 'Ativo' : 'Inativo'}
         </span>
-        <button class="btn-primario d-inline-flex align-items-center gap-1" style="padding:.35rem .7rem; font-size:.75rem;" onclick="alternarFuncionario(${f.id})">
+        <button class="btn ds-btn-outline btn-sm d-inline-flex align-items-center gap-1" onclick="alternarFuncionario(${f.id})">
           <i class="bi ${f.status === 'ativo' ? 'bi-person-dash' : 'bi-person-check'}"></i>
-          ${f.status === 'ativo' ? 'Marcar inativo' : 'Marcar ativo'}
+          ${f.status === 'ativo' ? 'Desativar' : 'Ativar'}
         </button>
       </div>
     </div>
@@ -187,34 +190,33 @@ function preencherSelectFuncionarios(){
 
 function criarFormVeiculoHTML(idForm, numero){
   return `
-    <div class="card-form" data-form-veiculo="${idForm}">
-      ${numero > 1 ? `<button type="button" class="btn-remover-veiculo" title="Remover este veículo" onclick="removerFormVeiculo(${idForm})"><i class="bi bi-x-lg"></i></button>` : ""}
-      <p class="veiculo-numero mb-3">Veículo ${numero}</p>
+    <div class="card-form bg-surface p-4 shadow-sm rounded mb-4 position-relative" style="border: 1px solid var(--border-color);" data-form-veiculo="${idForm}">
+      ${numero > 1 ? `<button type="button" class="btn btn-sm btn-outline-danger position-absolute top-0 end-0 m-3" title="Remover este veículo" onclick="removerFormVeiculo(${idForm})"><i class="bi bi-trash3"></i></button>` : ""}
+      
+      <p class="veiculo-numero fw-bold mb-3" style="color: var(--color-primary);">Veículo ${numero}</p>
 
       <div class="row g-3">
         <div class="col-md-7">
-          <label>Modelo</label>
+          <label class="form-label">Modelo</label>
           <input type="text" class="form-control campo-modelo" placeholder="Ex.: Onix, Fazer 250">
         </div>
         <div class="col-md-5">
-          <label>Tipo</label>
-          <div class="form-check-veiculo pt-2">
-            <div class="form-check">
-              <input class="form-check-input campo-tipo" type="radio" name="tipo-${idForm}" id="tipo-carro-${idForm}" value="carro" checked>
-              <label class="form-check-label" for="tipo-carro-${idForm}" style="font-size:.875rem; color:var(--azul-escuro);">Carro</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input campo-tipo" type="radio" name="tipo-${idForm}" id="tipo-moto-${idForm}" value="moto">
-              <label class="form-check-label" for="tipo-moto-${idForm}" style="font-size:.875rem; color:var(--azul-escuro);">Moto</label>
-            </div>
+          <label class="form-label d-block">Tipo</label>
+          <div class="form-check form-check-inline mt-2">
+            <input class="form-check-input campo-tipo" type="radio" name="tipo-${idForm}" id="tipo-carro-${idForm}" value="carro" checked>
+            <label class="form-check-label text-dark" for="tipo-carro-${idForm}">Carro</label>
+          </div>
+          <div class="form-check form-check-inline mt-2">
+            <input class="form-check-input campo-tipo" type="radio" name="tipo-${idForm}" id="tipo-moto-${idForm}" value="moto">
+            <label class="form-check-label text-dark" for="tipo-moto-${idForm}">Moto</label>
           </div>
         </div>
         <div class="col-md-6">
-          <label>Placa</label>
+          <label class="form-label">Placa</label>
           <input type="text" class="form-control campo-placa" placeholder="ABC1D23" style="text-transform:uppercase;" maxlength="8">
         </div>
         <div class="col-md-6">
-          <label>Cor do veículo</label>
+          <label class="form-label">Cor do veículo</label>
           <input type="text" class="form-control campo-cor" placeholder="Ex.: Prata">
         </div>
       </div>
@@ -259,7 +261,8 @@ function salvarVeiculos(){
     const tipo = form.querySelector(".campo-tipo:checked").value;
 
     if (!modelo || !placa || !cor){
-      form.style.outline = "1.5px solid var(--ocupada)";
+      // Utiliza a cor de warning/danger baseada no CSS variables
+      form.style.outline = "1.5px solid var(--color-danger)";
       form.style.outlineOffset = "2px";
       continue;
     }
@@ -283,7 +286,7 @@ function renderizarVeiculosCadastrados(){
   if (!container) return;
 
   if (veiculosCadastrados.length === 0){
-    container.innerHTML = `<p style="color:var(--azul-acinzentado); font-size:.875rem;">Nenhum veículo cadastrado ainda.</p>`;
+    container.innerHTML = `<p style="color:var(--text-secondary); font-size:.875rem;">Nenhum veículo cadastrado ainda.</p>`;
     return;
   }
 
@@ -291,17 +294,22 @@ function renderizarVeiculosCadastrados(){
     const dono = funcionarios.find(f => f.id === v.funcionarioId);
     const icone = v.tipo === "moto" ? "bi-bicycle" : "bi-car-front-fill";
     return `
-      <div class="veiculo-registrado">
+      <div class="veiculo-registrado d-flex justify-content-between align-items-center p-3 mb-3 bg-surface shadow-sm rounded" style="border: 1px solid var(--border-color);">
         <div class="d-flex align-items-center gap-3">
-          <div class="icone-veiculo"><i class="bi ${icone}"></i></div>
+          <div class="icon-circle icon-circle-md icon-circle-primary">
+            <i class="bi ${icone}"></i>
+          </div>
           <div>
-            <p class="mb-0" style="font-size:.875rem; color:var(--azul-escuro);">${v.modelo} · <span class="text-capitalize">${v.tipo}</span></p>
-            <p class="mb-0" style="font-size:.75rem; color:var(--azul-acinzentado);">${dono ? dono.nome : "Funcionário não encontrado"}</p>
+            <p class="mb-0 fw-medium" style="font-size:.9rem; color:var(--text-primary);">${v.modelo} <span class="badge text-bg-light border text-secondary ms-1 text-capitalize fw-normal">${v.tipo}</span></p>
+            <p class="mb-0 mt-1" style="font-size:.75rem; color:var(--text-secondary);"><i class="bi bi-person me-1"></i>${dono ? dono.nome : "Funcionário não encontrado"}</p>
           </div>
         </div>
         <div class="text-end">
-          <p class="mb-0" style="font-size:.8rem; font-family:'Space Grotesk', sans-serif; color:var(--azul-escuro);">${v.placa}</p>
-          <p class="mb-0" style="font-size:.75rem; color:var(--azul-acinzentado);"><span class="swatch-cor" style="background:${v.cor};"></span>${v.cor}</p>
+          <p class="mb-0 fw-bold" style="font-size:.95rem; font-family: var(--font-family-base); color:var(--text-primary);">${v.placa}</p>
+          <p class="mb-0 d-flex align-items-center justify-content-end gap-1 mt-1" style="font-size:.75rem; color:var(--text-secondary);">
+            <span class="rounded-circle shadow-sm" style="width:12px; height:12px; background:${v.cor}; border: 1px solid var(--border-color);"></span>
+            <span class="text-capitalize">${v.cor}</span>
+          </p>
         </div>
       </div>`;
   }).join("");

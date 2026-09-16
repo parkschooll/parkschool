@@ -1,6 +1,6 @@
-* {
-    box-sizing: border-box;
-}
+/* =========================================
+   CADASTRO DE VISITANTES STYLES
+   ========================================= */
 
 html,
 body {
@@ -9,25 +9,36 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background-color: var(--bg-body);
+    font-family: var(--font-family-base);
 }
 
-
-
 .navbar-visitante {
-    background-color: #1D397D;
+    background-color: var(--color-primary);
+}
 
+.titulo-secao {
+    color: var(--color-primary);
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
 }
 
 .btn-primary {
-    background-color: var(--color-primary, #1D397D) !important;
-   border: #1D397D;
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    border-radius: var(--radius-md);
 }
 
 .btn-gray {
-    background-color: #64748B !important;
-   border: #1D397D;
+    background-color: var(--color-tertiary) !important;
+    border-color: var(--color-tertiary) !important;
+    border-radius: var(--radius-md);
 }
 
-.back-blue{
-    background-color: #1D397D;
+.back-blue {
+    background-color: var(--color-primary);
 }

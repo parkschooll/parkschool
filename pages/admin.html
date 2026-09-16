@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Painel administrativo</title>
 
+<!-- Bootstrap e Fontes -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Estilo Principal (que importa variables.css, buttons.css, forms.css, etc.) -->
 <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -17,28 +20,28 @@
   <!-- ============ barra lateral (fixa) ============ -->
   <aside id="sidebar" class="d-flex flex-column justify-content-between p-3 py-4">
     <div>
-      <div class="mb-4 px-1">
-        <p class="font-display text-white mb-0" style="font-size:1.1rem; line-height:1.25;">Painel<br>administrativo</p>
-        <p class="mb-0" style="font-size:.72rem; color:#9FB4C0;">Unidade · controle de acesso</p>
+      <div class="mb-4 px-2">
+        <p class="font-display text-white mb-0" style="font-size:1.15rem; line-height:1.25;">Painel<br>administrativo</p>
+        <p class="mb-0 mt-1" style="font-size:.75rem; color: var(--color-gray-400);">Unidade · controle de acesso</p>
       </div>
       <nav class="nav flex-column gap-1">
         <a class="nav-link active" data-nav="vagas" onclick="mudarTela('vagas')">
-          <i class="bi bi-grid-3x3-gap"></i> Vagas
+          <i class="bi bi-grid-3x3-gap me-2"></i> Vagas
         </a>
         <a class="nav-link" data-nav="funcionarios" onclick="mudarTela('funcionarios')">
-          <i class="bi bi-people"></i> Funcionários
+          <i class="bi bi-people me-2"></i> Funcionários
         </a>
         <a class="nav-link" data-nav="novo-funcionario" onclick="mudarTela('novo-funcionario')">
-          <i class="bi bi-person-plus"></i> Novo funcionário
+          <i class="bi bi-person-plus me-2"></i> Novo funcionário
         </a>
         <a class="nav-link" data-nav="veiculos" onclick="mudarTela('veiculos')">
-          <i class="bi bi-car-front"></i> Veículos
+          <i class="bi bi-car-front me-2"></i> Veículos
         </a>
       </nav>
     </div>
 
     <button id="btn-sair" onclick="sair()">
-      <i class="bi bi-box-arrow-left"></i> Sair da administração
+      <i class="bi bi-box-arrow-left me-2"></i> Sair da administração
     </button>
   </aside>
 
@@ -47,22 +50,22 @@
 
     <!-- ---------- tela: vagas ---------- -->
     <section data-tela="vagas" class="ativa">
-      <h1 class="font-display mb-1" style="font-size:1.6rem;">Vagas de estacionamento</h1>
-      <p class="mb-4" style="max-width:520px; color:var(--azul-acinzentado);">
+      <h1 class="font-display mb-1" style="font-size:1.6rem; color: var(--text-primary);">Vagas de estacionamento</h1>
+      <p class="mb-4" style="max-width:520px; color: var(--text-secondary);">
         42 vagas ao todo nesta unidade. Esta tela é somente para consulta — o status de cada vaga é atualizado pelo sistema, sem reserva manual.
       </p>
 
       <div class="row g-3 mb-5" style="max-width:360px;">
         <div class="col-6">
-          <div class="stat-card" style="border-left:3px solid var(--azul-escuro);">
-            <p class="mb-1" style="font-size:.75rem; color:var(--azul-acinzentado);">Total de vagas</p>
-            <p class="font-display valor mb-0" id="stat-total">42</p>
+          <div class="stat-card p-3 bg-surface shadow-sm rounded" style="border-left: 3px solid var(--color-primary);">
+            <p class="mb-1" style="font-size:.75rem; color: var(--text-secondary);">Total de vagas</p>
+            <p class="font-display valor mb-0 fs-4 fw-bold text-dark" id="stat-total">42</p>
           </div>
         </div>
         <div class="col-6">
-          <div class="stat-card" style="border-left:3px solid var(--livre);">
-            <p class="mb-1" style="font-size:.75rem; color:var(--azul-acinzentado);">Livres agora</p>
-            <p class="font-display valor mb-0" id="stat-livres">0</p>
+          <div class="stat-card p-3 bg-surface shadow-sm rounded" style="border-left: 3px solid var(--color-success);">
+            <p class="mb-1" style="font-size:.75rem; color: var(--text-secondary);">Livres agora</p>
+            <p class="font-display valor mb-0 fs-4 fw-bold text-dark" id="stat-livres">0</p>
           </div>
         </div>
       </div>
@@ -72,19 +75,24 @@
 
     <!-- ---------- tela: funcionários ---------- -->
     <section data-tela="funcionarios">
-      <h1 class="font-display mb-1" style="font-size:1.6rem;">Funcionários</h1>
-      <p class="mb-4" style="max-width:520px; color:var(--azul-acinzentado);">
+      <h1 class="font-display mb-1" style="font-size:1.6rem; color: var(--text-primary);">Funcionários</h1>
+      <p class="mb-4" style="max-width:520px; color: var(--text-secondary);">
         Pesquise um funcionário e marque-o como ativo ou inativo quando ele sair ou voltar à unidade.
       </p>
 
-      <div class="d-flex mb-3" style="max-width:520px;">
-        <div class="d-flex align-items-center gap-2 px-3 py-2 rounded flex-grow-1" style="background:var(--branco); border:1px solid var(--linha);">
-          <i class="bi bi-search" style="color:var(--azul-acinzentado);"></i>
-          <input id="busca-input" type="text" class="border-0 flex-grow-1" style="outline:none; font-size:.875rem;" placeholder="Buscar por nome" oninput="renderizarFuncionarios()">
+      <!-- Nova estrutura de Input Group do forms.css -->
+      <div class="d-flex mb-4" style="max-width:520px;">
+        <div class="input-group ds-input-group w-100 shadow-sm">
+          <span class="input-group-text border-end-0 bg-surface">
+            <i class="bi bi-search"></i>
+          </span>
+          <input id="busca-input" type="text" class="form-control border-start-0 ps-0" placeholder="Buscar por nome..." oninput="renderizarFuncionarios()">
         </div>
       </div>
 
       <div class="d-flex gap-2 mb-4">
+        <!-- Mantido .filtro-btn original (caso tenha comportamento específico no admin.css), 
+             mas você também pode usar os novos badges/botões outline futuramente -->
         <button class="filtro-btn active" data-filtro="todos" onclick="definirFiltro('todos')">Todos (<span id="cont-todos">0</span>)</button>
         <button class="filtro-btn" data-filtro="ativo" onclick="definirFiltro('ativo')">Ativos (<span id="cont-ativos">0</span>)</button>
         <button class="filtro-btn" data-filtro="inativo" onclick="definirFiltro('inativo')">Inativos (<span id="cont-inativos">0</span>)</button>
@@ -95,46 +103,45 @@
 
     <!-- ---------- tela: novo funcionário ---------- -->
     <section data-tela="novo-funcionario">
-      <h1 class="font-display mb-1" style="font-size:1.6rem;">Cadastrar funcionário</h1>
-      <p class="mb-4" style="max-width:560px; color:var(--azul-acinzentado);">
+      <h1 class="font-display mb-1" style="font-size:1.6rem; color: var(--text-primary);">Cadastrar funcionário</h1>
+      <p class="mb-4" style="max-width:560px; color: var(--text-secondary);">
         Preencha os dados abaixo para cadastrar manualmente um novo funcionário no sistema.
       </p>
 
-      <form class="card-form" onsubmit="cadastrarFuncionarioAdmin(event)" style="max-width:640px;">
+      <form class="card-form bg-surface p-4 shadow-sm rounded" onsubmit="cadastrarFuncionarioAdmin(event)" style="max-width:640px; border: 1px solid var(--border-color);">
         <div class="row g-3">
           <div class="col-md-12">
-            <label>Nome completo</label>
+            <label class="form-label" for="novo-func-nome">Nome completo</label>
             <input type="text" id="novo-func-nome" class="form-control" placeholder="Ex.: Maria Oliveira" required>
           </div>
           <div class="col-md-6">
-            <label>Telefone</label>
+            <label class="form-label" for="novo-func-telefone">Telefone</label>
             <input type="text" id="novo-func-telefone" class="form-control" placeholder="(00) 00000-0000" required>
           </div>
           <div class="col-md-6">
-            <label>E-mail</label>
+            <label class="form-label" for="novo-func-email">E-mail</label>
             <input type="email" id="novo-func-email" class="form-control" placeholder="email@empresa.com" required>
           </div>
           <div class="col-md-6">
-            <label>ID do funcionário</label>
+            <label class="form-label" for="novo-func-id">ID do funcionário</label>
             <input type="text" id="novo-func-id" class="form-control" placeholder="Ex.: 1050" required>
           </div>
           <div class="col-md-6">
-            <label>Deficiência física</label>
-            <div class="form-check-veiculo pt-2">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="novo-func-pcd" id="pcd-sim" value="sim">
-                <label class="form-check-label" for="pcd-sim" style="font-size:.875rem; color:var(--azul-escuro);">Sim</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="novo-func-pcd" id="pcd-nao" value="nao" checked>
-                <label class="form-check-label" for="pcd-nao" style="font-size:.875rem; color:var(--azul-escuro);">Não</label>
-              </div>
+            <label class="form-label d-block">Deficiência física (PCD)</label>
+            <div class="form-check form-check-inline mt-2">
+              <input class="form-check-input" type="radio" name="novo-func-pcd" id="pcd-sim" value="sim">
+              <label class="form-check-label text-dark" for="pcd-sim">Sim</label>
+            </div>
+            <div class="form-check form-check-inline mt-2">
+              <input class="form-check-input" type="radio" name="novo-func-pcd" id="pcd-nao" value="nao" checked>
+              <label class="form-check-label text-dark" for="pcd-nao">Não</label>
             </div>
           </div>
         </div>
 
-        <div class="mt-4">
-          <button type="submit" class="btn-primario d-inline-flex align-items-center gap-2">
+        <div class="mt-4 pt-2">
+          <!-- Botão Primário Padronizado (buttons.css) -->
+          <button type="submit" class="btn ds-btn-primary d-inline-flex align-items-center gap-2">
             <i class="bi bi-check2"></i> Salvar funcionário
           </button>
         </div>
@@ -143,28 +150,31 @@
 
     <!-- ---------- tela: veículos ---------- -->
     <section data-tela="veiculos">
-      <h1 class="font-display mb-1" style="font-size:1.6rem;">Cadastro de veículos</h1>
-      <p class="mb-4" style="max-width:560px; color:var(--azul-acinzentado);">
+      <h1 class="font-display mb-1" style="font-size:1.6rem; color: var(--text-primary);">Cadastro de veículos</h1>
+      <p class="mb-4" style="max-width:560px; color: var(--text-secondary);">
         Escolha o funcionário e cadastre o veículo. Se ele tiver mais de um, adicione quantos forem necessários antes de salvar.
       </p>
 
-      <div class="mb-3" style="max-width:640px;">
-        <label class="d-block mb-1" style="font-size:.78rem; color:var(--azul-acinzentado); font-weight:500;">Funcionário</label>
-        <select id="select-funcionario" class="form-select" style="font-size:.875rem; border:1px solid #c7c3c3;"></select>
+      <div class="mb-4" style="max-width:640px;">
+        <label class="form-label" for="select-funcionario">Selecionar Funcionário</label>
+        <!-- Select Padronizado (forms.css) -->
+        <select id="select-funcionario" class="form-select shadow-sm"></select>
       </div>
 
       <div id="lista-forms-veiculo"></div>
 
-      <div class="d-flex gap-2 mt-3 mb-5" style="max-width:640px;">
-        <button type="button" class="btn-secundario d-inline-flex align-items-center gap-2" onclick="adicionarFormVeiculo()">
+      <div class="d-flex gap-2 mt-4 mb-5" style="max-width:640px;">
+        <!-- Botão Outline Secundário (buttons.css) -->
+        <button type="button" class="btn ds-btn-outline d-inline-flex align-items-center gap-2 flex-grow-1 justify-content-center" onclick="adicionarFormVeiculo()">
           <i class="bi bi-plus-lg"></i> Adicionar outro veículo
         </button>
-        <button type="button" class="btn-primario d-inline-flex align-items-center gap-2" onclick="salvarVeiculos()">
+        <!-- Botão Primário (buttons.css) -->
+        <button type="button" class="btn ds-btn-primary d-inline-flex align-items-center gap-2 flex-grow-1 justify-content-center" onclick="salvarVeiculos()">
           <i class="bi bi-check2"></i> Cadastrar veículo(s)
         </button>
       </div>
 
-      <h2 class="font-display mb-3" style="font-size:1.05rem;">Veículos cadastrados</h2>
+      <h2 class="font-display mb-3" style="font-size:1.15rem; color: var(--text-primary);">Veículos cadastrados recentemente</h2>
       <div class="lista-veiculos-cadastrados" id="lista-veiculos-cadastrados"></div>
     </section>
 
@@ -172,14 +182,17 @@
 </div>
 
 <!-- ============ tela: saída ============ -->
-<div id="tela-saida" class="d-flex align-items-center justify-content-center">
+<div id="tela-saida" class="d-none bg-body vh-100 w-100 flex-column align-items-center justify-content-center position-fixed top-0 start-0 z-3">
   <div class="text-center" style="max-width:340px;">
-    <div class="mx-auto mb-4 d-flex align-items-center justify-content-center rounded-circle" style="width:64px; height:64px; background:var(--azul-escuro);">
-      <i class="bi bi-box-arrow-left" style="font-size:1.4rem; color:#E2C169;"></i>
+    <!-- Ícone Círculo Padronizado (icons.css) -->
+    <div class="icon-circle icon-circle-lg icon-circle-primary mx-auto mb-4">
+      <i class="bi bi-box-arrow-left fs-3"></i>
     </div>
-    <h1 class="font-display text-white" style="font-size:1.4rem;">Você saiu do painel</h1>
-    <p class="mb-4" style="color:#B9CBD3; font-size:.875rem;">O acesso à administração foi encerrado nesta sessão.</p>
-    <button class="btn-secundario d-inline-flex align-items-center gap-2" onclick="entrarNovamente()">
+    
+    <h1 class="font-display text-dark fw-bold mb-2" style="font-size:1.4rem;">Você saiu do painel</h1>
+    <p class="mb-4 text-muted" style="font-size:.875rem;">O acesso à administração foi encerrado nesta sessão.</p>
+    
+    <button class="btn ds-btn-outline w-100 d-inline-flex align-items-center justify-content-center gap-2" onclick="entrarNovamente()">
       <i class="bi bi-arrow-left-circle"></i> Entrar novamente
     </button>
   </div>
