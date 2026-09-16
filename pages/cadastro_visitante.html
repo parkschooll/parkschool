@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cadastro de Visitantes</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../css/styles.css">
+    
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg w-100 m-0 p-0 navbar-visitante">
+
+        <div class="container-fluid justify-content-center">
+
+            <span class="navbar-brand fw-bold text-white fs-3 p-3">
+                Cadastro Visitante
+            </span>
+
+        </div>
+
+    </nav>
+
+
+
+
+    <!-- ÁREA PRINCIPAL -->
+    <div class="container-fluid">
+
+        <div class="row justify-content-center mt-5">
+
+
+            <!-- CONTEÚDO -->
+            <div class="col-10 col-md-8 col-lg-6 ">
+
+
+
+                <!-- FORMULÁRIO DO VISITANTE -->
+                <form id="formCadastro" class="row g-3">
+
+                    <!-- DADOS DO VISITANTE -->
+                    <div class="col-12">
+                        <h4 class="titulo-secao">
+                            Dados do Visitante
+                        </h4>
+                    </div>
+
+
+                    <!-- NOME -->
+                    <div class="col-md-8">
+
+                        <label for="nome_visitante" class="form-label">
+                            Nome completo
+                        </label>
+
+                        <input type="text" class="form-control" id="nome_visitante" name="nome_visitante"
+                            placeholder="Digite o nome completo" required>
+
+                    </div>
+
+
+                    <!-- TELEFONE -->
+                    <div class="col-md-4">
+
+                        <label for="telefone_visitante" class="form-label">
+                            Telefone
+                        </label>
+
+                        <input type="tel" class="form-control" id="telefone_visitante" name="telefone_visitante"
+                            placeholder="(12) 99999-9999" required>
+
+                    </div>
+
+
+                    <!-- EVENTO -->
+                    <div class="col-12">
+
+                        <label for="evento_visitante" class="form-label">
+                            Evento
+                        </label>
+
+                        <input type="text" class="form-control" id="evento_visitante" name="evento_visitante"
+                            placeholder="Ex: Palestra..." required>
+
+                    </div>
+
+
+                    <!-- DADOS DO VEÍCULO -->
+                    <div class="col-12 mt-4">
+
+                        <h4 class="titulo-secao">
+                            Dados do Veículo
+                        </h4>
+
+                    </div>
+
+
+                    <!-- MODELO -->
+                    <div class="col-12">
+
+                        <label for="modeloVeiculo_visitante" class="form-label fw-semibold">
+                            Modelo do carro
+                        </label>
+
+                        <input type="text" class="form-control" id="modeloVeiculo_visitante" name="modeloVeiculo"
+                            placeholder="Ex: Gol, Onix, Civic, Yamaha" required>
+
+                    </div>
+
+
+                    <!-- TIPO -->
+                    <div class="col-md-6">
+
+                        <label for="tipoVeiculo_visitante" class="form-label fw-semibold">
+                            Tipo de veículo
+                        </label>
+
+                        <select class="form-select" id="tipoVeiculo_visitante" name="tipoVeiculo" required>
+
+                            <option value="">
+                                Selecione o tipo de veículo
+                            </option>
+
+                            <option value="carro">
+                                Carro
+                            </option>
+
+                            <option value="moto">
+                                Moto
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ANO -->
+                    <div class="col-md-6">
+
+                        <label for="anoVeiculo_visitante" class="form-label fw-semibold">
+                            Ano do veículo
+                        </label>
+
+                        <input type="number" class="form-control" id="anoVeiculo_visitante" name="anoVeiculo"
+                            placeholder="2020" min="1900" max="2100" required>
+
+                    </div>
+
+
+                    <!-- COR -->
+                    <div class="col-md-6">
+
+                        <label for="corVeiculo_visitante" class="form-label fw-semibold">
+                            Cor do veículo
+                        </label>
+
+                        <input type="text" class="form-control" id="corVeiculo_visitante" name="corVeiculo"
+                            placeholder="Ex: Vermelho, Azul, Prata" required>
+
+                    </div>
+
+
+                    <!-- PLACA -->
+                    <div class="col-md-6">
+
+                        <label for="placaVeiculo_visitante" class="form-label fw-semibold">
+                            Placa
+                        </label>
+
+                        <input type="text" class="form-control" id="placaVeiculo_visitante" name="placaVeiculo"
+                            placeholder="ABC-1234 ou ABC1D23" maxlength="8" required>
+
+                    </div>
+
+
+                    <!-- RESERVA VAGA -->
+                    <div class="col-12 mt-4">
+
+                        <h4 class="titulo-secao">
+                            Reserva da vaga
+                        </h4>
+
+                    </div>
+
+
+                    <!-- VAGA-->
+                    <div class="col-12">
+
+                        <label for="vaga" class="form-label fw-semibold">
+                            Nº da vaga
+                        </label>
+
+                        <input type="text" class="form-control" id="n_vaga" name="vaga" placeholder="Ex: 1, 2, 3...."
+                            required>
+
+                    </div>
+
+
+                    <!-- TIPO -->
+                    <div class="col-md-6">
+
+                        <label for="tipo_vaga" class="form-label fw-semibold">
+                            Tipo de veículo
+                        </label>
+
+                        <select class="form-select" id="tipo_vaga" name="tipo_vaga" required>
+
+                            <option value="">
+                                Selecione o tipo de veículo
+                            </option>
+
+                            <option value="carro">
+                                Carro
+                            </option>
+
+                            <option value="moto">
+                                Moto
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DATA -->
+                    <div class="col-md-6">
+
+                        <label for="data_vaga" class="form-label fw-semibold">
+                            Data da reserva
+                        </label>
+
+                        <input 
+                        type="date" 
+                        class="form-control" 
+                        id="data_vaga" 
+                        name="data_vaga" 
+                        required>
+
+                    </div>
+
+
+                    <!-- HORÁRIO ENTRADA -->
+                    <div class="col-md-6">
+
+                        <label for="hora_entrada" class="form-label fw-semibold">
+                            Horário de entrada
+                        </label>
+
+                        <input 
+                        type="time" 
+                        class="form-control" 
+                        id="hora_entrada" 
+                        name="hora_entrada"
+                        placeholder="Ex: 14:00" 
+                        required>
+
+                    </div>
+
+                    <!-- HORÁRIO SAÍDA -->
+                    <div class="col-md-6">
+
+                        <label for="hora_saida" 
+                        class="form-label fw-semibold">
+                            Horário de saída
+                        </label>
+
+                        <input 
+                          type="time"
+                        class="form-control" 
+                        id="hora_saida" 
+                        name="hora_saida"
+                        placeholder="Ex: 16:00" 
+                        required>
+
+                    </div>
+
+
+
+
+
+                    <!-- BOTÕES -->
+                    <div class="col-12 mt-4 mb-5">
+
+                        <button type="submit" class="btn btn-primary btn-primary me-2"
+                            id="btnCadastrarVeiculo_visitante">
+                            Cadastrar
+                        </button>
+
+                        <button type="reset" class="btn btn-primary btn-gray ms-1" id="btnLimparVeiculo_visitante">
+                            Limpar
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    </main>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYJYJYzcLA8Nl-+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+
+        <script src="../js/cadastro_visitante.js"></script>
+
+</body>
+
+</html>
