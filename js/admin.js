@@ -1,108 +1,316 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const btnInicio = document.getElementById('btnInicio');
-    const btnCadastro = document.getElementById('btnCadastro');
-    const btnFuncionarios = document.getElementById('btnFuncionarios');
-    const conteudoVagas = document.getElementById('conteudoVagas');
-    const conteudoCadastro = document.getElementById('conteudoCadastro');
-    const conteudoFuncionarios = document.getElementById('conteudoFuncionarios');
-    const todosBotoes = [btnInicio, btnCadastro, btnFuncionarios];
-    const formCadastro = document.getElementById('formCadastro');
-    const tabelaCorpo = document.getElementById('tabelaCorpo');
-    const buscaFuncionario = document.getElementById('buscaFuncionario');
-    const filtroStatus = document.getElementById('filtroStatus');
-    const totalCadastrados = document.getElementById('totalCadastrados');
-    const chaveFuncionarios = 'schollpark-funcionarios';
-    let funcionarios = JSON.parse(localStorage.getItem(chaveFuncionarios) || '[]');
+// ============ dados ============
 
-    function esconderTodosConteudos() {
+const CATEGORIAS = {
+  administracao: { label: "Administração", cor: "#1D397D", icone: "bi-diagram-3" },
+  pcd:           { label: "PCD",             cor: "#1C4966", icone: "bi-universal-access" },
+  carga:         { label: "Carga e descarga", cor: "#B5502F", icone: "bi-truck" },
+  comum:         { label: "Vagas comuns",    cor: "#64748B", icone: "bi-car-front" }
+};
 
-        conteudoVagas.classList.add('d-none');
-        conteudoCadastro.classList.add('d-none');
-        conteudoFuncionarios.classList.add('d-none');
+function gerarVagasIniciais(){
+  const lista = [];
+  for (let i = 1; i <= 3; i++) lista.push({ id:`adm-${i}`, categoria:"administracao", numero:i, status:"livre" });
+  for (let i = 1; i <= 3; i++) lista.push({ id:`pcd-${i}`, categoria:"pcd", numero:i, status:"livre" });
+  lista.push({ id:"cd-1", categoria:"carga", numero:1, status:"livre" });
+  const totalComuns = 42 - 3 - 3 - 1; // 35
+  for (let i = 1; i <= totalComuns; i++) lista.push({ id:`com-${i}`, categoria:"comum", numero:i, status:"livre" });
+  return lista;
+}
 
-        todosBotoes.forEach(btn => btn.classList.remove('active'));
+let vagas = gerarVagasIniciais();
+
+let funcionarios = [
+  
+];
+
+let filtroStatusAtual = "todos";
+
+// veículos já cadastrados (exemplo inicial)
+let veiculosCadastrados = [
+  
+];
+let proximoIdVeiculo = 3;
+let contadorFormsVeiculo = 0; // ids dos formulários abertos
+
+// ============ navegação ============
+
+function mudarTela(nome){
+  document.querySelectorAll("[data-tela]").forEach(el => el.classList.remove("ativa"));
+  document.querySelector(`[data-tela="${nome}"]`).classList.add("ativa");
+  document.querySelectorAll("#sidebar .nav-link").forEach(el => el.classList.remove("active"));
+  document.querySelector(`[data-nav="${nome}"]`).classList.add("active");
+}
+
+function sair(){
+  document.getElementById("app").style.display = "none";
+  document.getElementById("tela-saida").style.display = "flex";
+}
+
+function entrarNovamente(){
+  document.getElementById("tela-saida").style.display = "none";
+  document.getElementById("app").style.display = "flex";
+}
+
+// ============ vagas (somente visualização) ============
+
+function renderizarVagas(){
+  const livres = vagas.filter(v => v.status === "livre").length;
+  document.getElementById("stat-total").textContent = vagas.length;
+  document.getElementById("stat-livres").textContent = livres;
+
+  const grupos = ["administracao", "pcd", "carga", "comum"];
+  const container = document.getElementById("grupos-vagas");
+  container.innerHTML = grupos.map(chave => {
+    const info = CATEGORIAS[chave];
+    const doGrupo = vagas.filter(v => v.categoria === chave);
+    const cartoes = doGrupo.map(v => {
+      const livre = v.status === "livre";
+      return `
+        <div class="vaga-card ${livre ? 'livre':'ocupada'}"
+             style="${livre ? `border-color:${info.cor}; color:${info.cor};` : ''}"
+             title="${livre ? 'Vaga livre' : 'Vaga ocupada'}">
+          <i class="bi ${info.icone} icone-vaga" style="${livre ? '' : 'color:#fff;'}"></i>
+          <span>${v.numero}</span>
+          <span class="status">${livre ? 'livre' : 'ocupada'}</span>
+        </div>`;
+    }).join("");
+
+    return `
+      <section class="mb-4">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <i class="bi ${info.icone}" style="color:${info.cor};"></i>
+          <h2 class="font-display mb-0" style="font-size:.9rem;">${info.label}</h2>
+          <span style="font-size:.75rem; color:var(--azul-acinzentado);">${doGrupo.length} ${doGrupo.length === 1 ? 'vaga' : 'vagas'}</span>
+        </div>
+        <div class="d-flex flex-wrap gap-2">${cartoes}</div>
+      </section>`;
+  }).join("");
+}
+
+// ============ funcionários ============
+
+function definirFiltro(status){
+  filtroStatusAtual = status;
+  document.querySelectorAll(".filtro-btn").forEach(b => b.classList.remove("active"));
+  document.querySelector(`[data-filtro="${status}"]`).classList.add("active");
+  renderizarFuncionarios();
+}
+
+function alternarFuncionario(id){
+  const f = funcionarios.find(x => x.id === id);
+  f.status = f.status === "ativo" ? "inativo" : "ativo";
+  renderizarFuncionarios();
+}
+
+function renderizarFuncionarios(){
+  const busca = document.getElementById("busca-input").value.toLowerCase();
+
+  const ativos = funcionarios.filter(f => f.status === "ativo").length;
+  document.getElementById("cont-todos").textContent = funcionarios.length;
+  document.getElementById("cont-ativos").textContent = ativos;
+  document.getElementById("cont-inativos").textContent = funcionarios.length - ativos;
+
+  const filtrados = funcionarios.filter(f => {
+    const bateBusca = f.nome.toLowerCase().includes(busca);
+    const bateStatus = filtroStatusAtual === "todos" ? true : f.status === filtroStatusAtual;
+    return bateBusca && bateStatus;
+  });
+
+  const lista = document.getElementById("lista-funcionarios");
+
+  if (filtrados.length === 0){
+    lista.innerHTML = `<p class="text-center py-4 mb-0" style="color:var(--azul-acinzentado); font-size:.875rem;">Nenhum funcionário encontrado para essa busca.</p>`;
+    return;
+  }
+
+  lista.innerHTML = filtrados.map(f => `
+    <div class="func-item d-flex align-items-center justify-content-between">
+      <div>
+        <p class="mb-0" style="font-size:.875rem; color:var(--azul-escuro);">${f.nome} ${f.pcd === 'sim' ? '<span class="badge bg-info text-dark" style="font-size:0.65rem;">PCD</span>' : ''}</p>
+        <p class="mb-0" style="font-size:.75rem; color:var(--azul-acinzentado);">${f.email} · ${f.telefone}</p>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span class="badge-status ${f.status === 'ativo' ? 'badge-ativo' : 'badge-inativo'}">
+          ${f.status === 'ativo' ? 'Ativo' : 'Inativo'}
+        </span>
+        <button class="btn-primario d-inline-flex align-items-center gap-1" style="padding:.35rem .7rem; font-size:.75rem;" onclick="alternarFuncionario(${f.id})">
+          <i class="bi ${f.status === 'ativo' ? 'bi-person-dash' : 'bi-person-check'}"></i>
+          ${f.status === 'ativo' ? 'Marcar inativo' : 'Marcar ativo'}
+        </button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function cadastrarFuncionarioAdmin(event){
+  event.preventDefault();
+  
+  const nome = document.getElementById("novo-func-nome").value.trim();
+  const telefone = document.getElementById("novo-func-telefone").value.trim();
+  const email = document.getElementById("novo-func-email").value.trim();
+  const id = Number(document.getElementById("novo-func-id").value.trim());
+  const pcd = document.querySelector('input[name="novo-func-pcd"]:checked').value;
+
+  if (funcionarios.some(f => f.id === id)){
+    alert("Já existe um funcionário cadastrado com este ID.");
+    return;
+  }
+
+  funcionarios.push({
+    id,
+    nome,
+    cargo: "Funcionário",
+    telefone,
+    email,
+    pcd,
+    status: "ativo"
+  });
+
+  // Limpa o formulário
+  event.target.reset();
+  
+  // Atualiza as telas dependentes
+  renderizarFuncionarios();
+  preencherSelectFuncionarios();
+  
+  // Retorna para a tela de listagem de funcionários
+  mudarTela('funcionarios');
+}
+
+// ============ veículos ============
+
+function preencherSelectFuncionarios(){
+  const select = document.getElementById("select-funcionario");
+  if (!select) return;
+  select.innerHTML = funcionarios.map(f => `<option value="${f.id}">${f.nome} (ID: ${f.id})</option>`).join("");
+}
+
+function criarFormVeiculoHTML(idForm, numero){
+  return `
+    <div class="card-form" data-form-veiculo="${idForm}">
+      ${numero > 1 ? `<button type="button" class="btn-remover-veiculo" title="Remover este veículo" onclick="removerFormVeiculo(${idForm})"><i class="bi bi-x-lg"></i></button>` : ""}
+      <p class="veiculo-numero mb-3">Veículo ${numero}</p>
+
+      <div class="row g-3">
+        <div class="col-md-7">
+          <label>Modelo</label>
+          <input type="text" class="form-control campo-modelo" placeholder="Ex.: Onix, Fazer 250">
+        </div>
+        <div class="col-md-5">
+          <label>Tipo</label>
+          <div class="form-check-veiculo pt-2">
+            <div class="form-check">
+              <input class="form-check-input campo-tipo" type="radio" name="tipo-${idForm}" id="tipo-carro-${idForm}" value="carro" checked>
+              <label class="form-check-label" for="tipo-carro-${idForm}" style="font-size:.875rem; color:var(--azul-escuro);">Carro</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input campo-tipo" type="radio" name="tipo-${idForm}" id="tipo-moto-${idForm}" value="moto">
+              <label class="form-check-label" for="tipo-moto-${idForm}" style="font-size:.875rem; color:var(--azul-escuro);">Moto</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label>Placa</label>
+          <input type="text" class="form-control campo-placa" placeholder="ABC1D23" style="text-transform:uppercase;" maxlength="8">
+        </div>
+        <div class="col-md-6">
+          <label>Cor do veículo</label>
+          <input type="text" class="form-control campo-cor" placeholder="Ex.: Prata">
+        </div>
+      </div>
+    </div>`;
+}
+
+function adicionarFormVeiculo(){
+  contadorFormsVeiculo++;
+  const container = document.getElementById("lista-forms-veiculo");
+  const numero = container.children.length + 1;
+  container.insertAdjacentHTML("beforeend", criarFormVeiculoHTML(contadorFormsVeiculo, numero));
+}
+
+function removerFormVeiculo(idForm){
+  const el = document.querySelector(`[data-form-veiculo="${idForm}"]`);
+  if (el) el.remove();
+  renumerarFormsVeiculo();
+}
+
+function renumerarFormsVeiculo(){
+  const forms = document.querySelectorAll("[data-form-veiculo]");
+  forms.forEach((form, i) => {
+    form.querySelector(".veiculo-numero").textContent = `Veículo ${i + 1}`;
+  });
+}
+
+function salvarVeiculos(){
+  const selectFunc = document.getElementById("select-funcionario");
+  if (!selectFunc || selectFunc.value === "") {
+    alert("Selecione um funcionário válido.");
+    return;
+  }
+
+  const funcionarioId = Number(selectFunc.value);
+  const forms = document.querySelectorAll("[data-form-veiculo]");
+  const novos = [];
+
+  for (const form of forms){
+    const modelo = form.querySelector(".campo-modelo").value.trim();
+    const placa = form.querySelector(".campo-placa").value.trim().toUpperCase();
+    const cor = form.querySelector(".campo-cor").value.trim();
+    const tipo = form.querySelector(".campo-tipo:checked").value;
+
+    if (!modelo || !placa || !cor){
+      form.style.outline = "1.5px solid var(--ocupada)";
+      form.style.outlineOffset = "2px";
+      continue;
     }
+    form.style.outline = "none";
+    novos.push({ id: proximoIdVeiculo++, funcionarioId, modelo, tipo, placa, cor });
+  }
 
-    btnInicio.addEventListener('click', () => {
-        esconderTodosConteudos();
-        conteudoVagas.classList.remove('d-none');
-        btnInicio.classList.add('active');
-    });
+  if (novos.length === 0) return;
 
-    btnCadastro.addEventListener('click', () => {
-        esconderTodosConteudos();
-        conteudoCadastro.classList.remove('d-none');
-        btnCadastro.classList.add('active');
-    });
+  veiculosCadastrados = veiculosCadastrados.concat(novos);
+  renderizarVeiculosCadastrados();
 
-    btnFuncionarios.addEventListener('click', () => {
-        esconderTodosConteudos();
-        conteudoFuncionarios.classList.remove('d-none');
-        btnFuncionarios.classList.add('active');
-    });
+  // reseta o formulário para um único bloco em branco
+  contadorFormsVeiculo = 0;
+  document.getElementById("lista-forms-veiculo").innerHTML = "";
+  adicionarFormVeiculo();
+}
 
-    function renderizarFuncionarios() {
-        const termo = buscaFuncionario.value.trim().toLowerCase();
-        const statusSelecionado = filtroStatus.value;
-        const filtrados = funcionarios.filter(funcionario => {
-            const correspondeBusca = [funcionario.nome, funcionario.placa, funcionario.chapa]
-                .some(valor => valor.toLowerCase().includes(termo));
-            const correspondeStatus = statusSelecionado === 'todos' || funcionario.status === statusSelecionado;
-            return correspondeBusca && correspondeStatus;
-        });
+function renderizarVeiculosCadastrados(){
+  const container = document.getElementById("lista-veiculos-cadastrados");
+  if (!container) return;
 
-        totalCadastrados.textContent = `Total: ${funcionarios.length} Cadastrado${funcionarios.length === 1 ? '' : 's'}`;
-        tabelaCorpo.innerHTML = filtrados.length ? filtrados.map(funcionario => `
- <tr class="${funcionario.status === 'inativo' ? 'funcionario-inativo' : ''}">
- <td>${escaparHtml(funcionario.chapa)}</td>
- <td>${escaparHtml(funcionario.nome)}</td>
- <td>${escaparHtml(funcionario.cargo)}</td>
- <td>${escaparHtml(funcionario.telefone)}</td>
- <td>${escaparHtml(funcionario.tipoVeiculo)} - ${escaparHtml(funcionario.modelo)}</td>
- <td>${escaparHtml(funcionario.placa)}</td>
- <td><span class="badge ${funcionario.status === 'ativo' ? 'bg-success' : 'bg-secondary'}">${funcionario.status === 'ativo' ? 'Ativo' : 'Inativo'}</span></td>
- <td class="acoes-funcionario">
- <button type="button" class="btn btn-sm btn-outline-danger btn-status" data-id="${funcionario.id}" data-status="inativo" ${funcionario.status === 'inativo' ? 'disabled' : ''}>Desativar</button>
- <button type="button" class="btn btn-sm btn-outline-success btn-status" data-id="${funcionario.id}" data-status="ativo" ${funcionario.status === 'ativo' ? 'disabled' : ''}>Ativar</button>
- </td>
- </tr>
- `).join('') : '<tr><td colspan="8" class="text-center text-muted py-4">Nenhum funcionário encontrado.</td></tr>';
-    }
-    formCadastro.addEventListener('submit', evento => {
-        evento.preventDefault();
-        const funcionario = {
-            id: Date.now().toString(),
-            nome: document.getElementById('nome').value.trim(),
-            telefone: document.getElementById('telefone').value.trim(),
-            cargo: document.getElementById('cargo').value,
-            chapa: document.getElementById('chapa').value.trim(),
-            tipoVeiculo: document.getElementById('tipoVeiculo').value,
-            modelo: document.getElementById('modelo').value.trim(),
-            cor: document.getElementById('cor').value.trim(),
-            ano: document.getElementById('ano').value,
-            placa: document.getElementById('placa').value.trim().toUpperCase(),
-            status: 'ativo'
-        };
+  if (veiculosCadastrados.length === 0){
+    container.innerHTML = `<p style="color:var(--azul-acinzentado); font-size:.875rem;">Nenhum veículo cadastrado ainda.</p>`;
+    return;
+  }
 
-        funcionarios.push(funcionario);
-        localStorage.setItem(chaveFuncionarios, JSON.stringify(funcionarios));
-        formCadastro.reset();
-        btnFuncionarios.click();
-    });
+  container.innerHTML = veiculosCadastrados.map(v => {
+    const dono = funcionarios.find(f => f.id === v.funcionarioId);
+    const icone = v.tipo === "moto" ? "bi-bicycle" : "bi-car-front-fill";
+    return `
+      <div class="veiculo-registrado">
+        <div class="d-flex align-items-center gap-3">
+          <div class="icone-veiculo"><i class="bi ${icone}"></i></div>
+          <div>
+            <p class="mb-0" style="font-size:.875rem; color:var(--azul-escuro);">${v.modelo} · <span class="text-capitalize">${v.tipo}</span></p>
+            <p class="mb-0" style="font-size:.75rem; color:var(--azul-acinzentado);">${dono ? dono.nome : "Funcionário não encontrado"}</p>
+          </div>
+        </div>
+        <div class="text-end">
+          <p class="mb-0" style="font-size:.8rem; font-family:'Space Grotesk', sans-serif; color:var(--azul-escuro);">${v.placa}</p>
+          <p class="mb-0" style="font-size:.75rem; color:var(--azul-acinzentado);"><span class="swatch-cor" style="background:${v.cor};"></span>${v.cor}</p>
+        </div>
+      </div>`;
+  }).join("");
+}
 
-    tabelaCorpo.addEventListener('click', evento => {
-        const botao = evento.target.closest('.btn-status');
-        if (!botao) return;
+// ============ inicialização ============
 
-        const funcionario = funcionarios.find(item => item.id === botao.dataset.id);
-        if (!funcionario) return;
-        funcionario.status = botao.dataset.status;
-        localStorage.setItem(chaveFuncionarios, JSON.stringify(funcionarios));
-        renderizarFuncionarios();
-    });
-
-    buscaFuncionario.addEventListener('input', renderizarFuncionarios);
-    filtroStatus.addEventListener('change', renderizarFuncionarios);
-    renderizarFuncionarios();
-
-});
+renderizarVagas();
+renderizarFuncionarios();
+preencherSelectFuncionarios();
+adicionarFormVeiculo();
+renderizarVeiculosCadastrados();

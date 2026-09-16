@@ -1,11 +1,12 @@
+/* Estilos principais: base */
 @import "variables.css";
 @import "reset.css";
-@import "login.css";
-@import "esqueci-senha.css";
-@import "inicio.css";
-@import "admin.css";
-@import "tela-seguranca.css";
-@import "tela_termos.css";
-@import "cadastro_visitante.css";
-@import "reserva_vaga.css";
 
+/* páginas: pages */
+@import "pages/login.css";
+@import "pages/esqueci-senha.css";
+@import "pages/admin.css";
+@import "pages/tela-seguranca.css";
+@import "pages/tela_termos.css";
+@import "pages/cadastro_visitante.css";
+@import "pages/registrar.css";
