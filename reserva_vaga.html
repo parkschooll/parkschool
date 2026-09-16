@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Reserva de Vaga</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+
+    <!-- CSS próprio -->
+    <link rel="stylesheet" href="../css/styles.css">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg w-100 m-0 p-0 navbar-visitante">
+
+        <div class="container-fluid justify-content-center">
+
+            <span class="navbar-brand fw-bold text-white fs-3 p-3">
+                Reserva de vaga
+            </span>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ÁREA PRINCIPAL -->
+    <div class="container-fluid">
+
+        <div class="row justify-content-center mt-5">
+
+            <!-- CONTEÚDO -->
+            <div class="col-10 col-md-8 col-lg-6">
+
+                <!-- FORMULÁRIO -->
+                <form id="formReserva" class="row g-3">
+
+                    <!-- TÍTULO -->
+                    <div class="col-12 mt-4">
+
+                        <h4 class="titulo-secao">
+                            Reserva de vaga
+                        </h4>
+
+                    </div>
+
+
+                    <!-- VAGA -->
+                    <div class="col-md-6">
+
+                        <label
+                            for="n_vaga"
+                            class="form-label fw-semibold">
+                            Nº da vaga
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="n_vaga"
+                            name="vaga"
+                            placeholder="Ex: 1, 2, 3..."
+                            required>
+
+                    </div>
+
+
+                    <!-- PLACA -->
+                    <div class="col-md-6">
+
+                        <label
+                            for="placaVeiculo_visitante"
+                            class="form-label fw-semibold">
+                            Placa do veículo
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="placaVeiculo_visitante"
+                            name="placaVeiculo"
+                            placeholder="ABC-1234 ou ABC1D23"
+                            maxlength="8"
+                            required>
+
+                    </div>
+
+
+                    <!-- TIPO DA VAGA -->
+                    <div class="col-md-6">
+
+                        <label
+                            for="tipo_vaga"
+                            class="form-label fw-semibold">
+                            Tipo de vaga
+                        </label>
+
+                        <select
+                            class="form-select"
+                            id="tipo_vaga"
+                            name="tipo_vaga"
+                            required>
+
+                            <option value="">
+                                Selecione o tipo de vaga
+                            </option>
+
+                            <option value="carro">
+                                Carro
+                            </option>
+
+                            <option value="pcd">
+                                Carro PCD
+                            </option>
+
+                            <option value="moto">
+                                Moto
+                            </option>
+
+                            <option value="carga">
+                                Carga
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- MOTIVO -->
+                    <div class="col-md-6">
+
+                        <label
+                            for="motivo_vaga"
+                            class="form-label fw-semibold">
+                            Motivo da reserva
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="motivo_vaga"
+                            name="motivo_vaga"
+                            placeholder="Ex: Manutenção, evento, reforma..."
+                            required>
+
+                    </div>
+
+
+                    <!-- DATA -->
+                    <div class="col-md-6">
+
+                        <label
+                            for="data_vaga"
+                            class="form-label fw-semibold">
+                            Data da reserva
+                        </label>
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            id="data_vaga"
+                            name="data_vaga"
+                            required>
+
+                    </div>
+
+
+                    <!-- HORÁRIO DE ENTRADA -->
+                    <div class="col-md-6">
+
+                        <label
+                            for="hora_entrada"
+                            class="form-label fw-semibold">
+                            Horário de entrada
+                        </label>
+
+                        <input
+                            type="time"
+                            class="form-control"
+                            id="hora_entrada"
+                            name="hora_entrada"
+                            required>
+
+                    </div>
+
+
+                    <!-- HORÁRIO DE SAÍDA -->
+                    <div class="col-md-6">
+
+                        <label
+                            for="hora_saida"
+                            class="form-label fw-semibold">
+                            Horário de saída
+                        </label>
+
+                        <input
+                            type="time"
+                            class="form-control"
+                            id="hora_saida"
+                            name="hora_saida"
+                            required>
+
+                    </div>
+
+
+                    <!-- BOTÕES -->
+                    <div class="col-12 mt-4 mb-5">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary me-2"
+                            id="btnCadastrar_reserva">
+
+                            Cadastrar
+
+                        </button>
+
+
+                        <button
+                            type="reset"
+                            class="btn btn-secondary"
+                            id="btnLimpar_reserva">
+
+                            Limpar
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYJYJYzcLA8Nl-+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous">
+    </script>
+
+
+    <!-- JavaScript da reserva -->
+    <script src="../js/reserva.js"></script>
+
+</body>
+
+</html>
