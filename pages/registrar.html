@@ -118,9 +118,12 @@
 
                         <!-- Aceite de Termos -->
                         <div class="form-check mb-4">
+                            <!-- O id e name foram mantidos como "termos" para não quebrar validações existentes -->
                             <input type="checkbox" class="form-check-input" id="termos" required>
                             <label class="form-check-label ds-text-secondary small" for="termos">
-                                Eu li e concordo com os <a href="#" class="ds-text-primary fw-medium text-decoration-none">Termos de Uso</a> e <a href="#" class="ds-text-primary fw-medium text-decoration-none">Políticas de Privacidade</a>.
+                                Eu li e concordo com os 
+                                <!-- MODIFICAÇÃO: Link alterado para abrir o Modal -->
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalTermos" class="ds-text-primary fw-medium text-decoration-none">Termos de Uso e Políticas de Privacidade</a>
                             </label>
                         </div>
 
@@ -143,8 +146,105 @@
         </div>
     </div>
 
+
+    <!-- ===================================================== -->
+    <!-- MODAL DOS TERMOS INSERIDO AQUI -->
+    <!-- ===================================================== -->
+    <div class="modal fade" id="modalTermos" tabindex="-1" aria-labelledby="modalTermosLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <!-- Cabeçalho do modal -->
+                <div class="modal-header">
+                    <div>
+                        <h1 class="modal-title fs-4 fw-bold" id="modalTermosLabel">
+                            Termos de Uso e Privacidade
+                        </h1>
+                        <h6 class="fw-bold mt-1 mb-0">
+                            Aplicativo de Gestão de Vagas do Estacionamento
+                        </h6>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+
+                <!-- Corpo do modal -->
+                <div class="modal-body">
+                    <p class="text-muted small">Última atualização: 11 de setembro de 2026</p>
+                    <p>Ao usar este aplicativo, você concorda com os termos abaixo.</p>
+                    <hr>
+
+                    <!-- 1 -->
+                    <section class="mb-4">
+                        <h2 class="h5 fw-bold">1. Para que serve o app</h2>
+                        <p>Este aplicativo controla a ocupação das vagas do estacionamento (carros, motos, bicicletas, gerência, PCD e carga/descarga), permitindo que Administradores, Patrimônio e Segurança gerenciem e visualizem as vagas em tempo real.</p>
+                    </section>
+
+                    <!-- 2 -->
+                    <section class="mb-4">
+                        <h2 class="h5 fw-bold">2. Quem pode acessar</h2>
+                        <p><strong>Administrador e Patrimônio:</strong> podem cadastrar funcionários, veículos e usuários, e visualizar todas as vagas.</p>
+                        <p><strong>Segurança:</strong> pode apenas visualizar o status das vagas, sem editar ou cadastrar.</p>
+                        <p><strong>Demais colaboradores:</strong> não acessam o app; veem apenas a quantidade de vagas livres/ocupadas no display na entrada.</p>
+                    </section>
+
+                    <!-- 3 -->
+                    <section class="mb-4">
+                        <h2 class="h5 fw-bold">3. Dados que coletamos</h2>
+                        <p><strong>Dados do funcionário:</strong> nome, telefone e identificação/matrícula.</p>
+                        <p><strong>Dados do veículo:</strong> tipo, modelo, cor, ano e placa.</p>
+                        <p><strong>Dados de acesso:</strong> username, senha (criptografada) e tipo de usuário.</p>
+                    </section>
+
+                    <!-- 4 -->
+                    <section class="mb-4">
+                        <h2 class="h5 fw-bold">4. Por que coletamos esses dados</h2>
+                        <p>Apenas para gerenciar o cadastro de vagas, identificar veículos e permitir o controle de acesso ao estacionamento. Não usamos seus dados para outras finalidades nem os vendemos a terceiros.</p>
+                    </section>
+
+                    <!-- 5 -->
+                    <section class="mb-4">
+                        <h2 class="h5 fw-bold">5. Sensores e câmeras</h2>
+                        <p>O app poderá futuramente usar sensores ou câmeras para identificar automaticamente a entrada e saída de veículos e atualizar as vagas. Isso será feito apenas para esse fim, com aviso visual nas áreas monitoradas.</p>
+                    </section>
+
+                    <!-- 6 -->
+                    <section class="mb-4">
+                        <h2 class="h5 fw-bold">6. Segurança</h2>
+                        <p>Suas informações são armazenadas com acesso restrito por perfil de usuário, e sua senha é sempre criptografada.</p>
+                    </section>
+
+                    <!-- 7 -->
+                    <section class="mb-4">
+                        <h2 class="h5 fw-bold">7. Seus direitos</h2>
+                        <p>Você pode solicitar a qualquer momento a atualização, correção ou exclusão dos seus dados, falando com o Administrador ou Patrimônio responsável.</p>
+                    </section>
+
+                    <!-- 8 -->
+                    <section class="mb-4">
+                        <h2 class="h5 fw-bold">8. Responsabilidade do usuário</h2>
+                        <p>Mantenha sua senha em sigilo e utilize o app apenas para as finalidades relacionadas à gestão do estacionamento.</p>
+                    </section>
+
+                    <!-- 9 -->
+                    <section class="mb-3">
+                        <h2 class="h5 fw-bold">9. Alterações dos termos</h2>
+                        <p>Estes termos poderão ser atualizados periodicamente. Recomendamos que o usuário consulte esta página regularmente.</p>
+                    </section>
+                </div>
+
+                <!-- Rodapé do modal -->
+                <div class="modal-footer justify-content-end">
+                    <button type="button" class="btn btn-secondary py-1" data-bs-dismiss="modal">Fechar</button>
+                    <!-- MODIFICAÇÃO: Botão alterado para id "btn_aceitar_modal" -->
+                    <button type="button" class="ds-btn-primary py-1 px-4 fw-semibold" id="btn_aceitar_modal">Aceitar e continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- O script abaixo lida com toda a lógica da página, incluindo o modal -->
     <script src="../js/registrar.js"></script>
 </body>
 
