@@ -5,6 +5,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordFeedback = document.getElementById('passwordMismatchFeedback');
     const toggleButtons = document.querySelectorAll('.btn-toggle-password');
 
+    // --- LÓGICA DO MODAL DE TERMOS ---
+    const btnAceitarModal = document.getElementById("btn_aceitar_modal");
+    const checkboxTermosPrincipal = document.getElementById("termos");
+
+    if(btnAceitarModal && checkboxTermosPrincipal) {
+        btnAceitarModal.addEventListener("click", function() {
+            // Marca o checkbox na página principal
+            checkboxTermosPrincipal.checked = true;
+            
+            // Tenta obter a instância do modal pelo Bootstrap e fechá-lo
+            const modalElement = document.getElementById("modalTermos");
+            const modalInstance = bootstrap.Modal.getInstance(modalElement);
+            
+            if(modalInstance) {
+                modalInstance.hide();
+            }
+        });
+    }
+
     // 1. Alternar Visibilidade da Senha
     toggleButtons.forEach(button => {
         button.addEventListener('click', () => {
