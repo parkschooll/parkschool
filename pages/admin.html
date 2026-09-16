@@ -28,6 +28,9 @@
         <a class="nav-link" data-nav="funcionarios" onclick="mudarTela('funcionarios')">
           <i class="bi bi-people"></i> Funcionários
         </a>
+        <a class="nav-link" data-nav="novo-funcionario" onclick="mudarTela('novo-funcionario')">
+          <i class="bi bi-person-plus"></i> Novo funcionário
+        </a>
         <a class="nav-link" data-nav="veiculos" onclick="mudarTela('veiculos')">
           <i class="bi bi-car-front"></i> Veículos
         </a>
@@ -88,6 +91,54 @@
       </div>
 
       <div class="lista-func" id="lista-funcionarios"></div>
+    </section>
+
+    <!-- ---------- tela: novo funcionário ---------- -->
+    <section data-tela="novo-funcionario">
+      <h1 class="font-display mb-1" style="font-size:1.6rem;">Cadastrar funcionário</h1>
+      <p class="mb-4" style="max-width:560px; color:var(--azul-acinzentado);">
+        Preencha os dados abaixo para cadastrar manualmente um novo funcionário no sistema.
+      </p>
+
+      <form class="card-form" onsubmit="cadastrarFuncionarioAdmin(event)" style="max-width:640px;">
+        <div class="row g-3">
+          <div class="col-md-12">
+            <label>Nome completo</label>
+            <input type="text" id="novo-func-nome" class="form-control" placeholder="Ex.: Maria Oliveira" required>
+          </div>
+          <div class="col-md-6">
+            <label>Telefone</label>
+            <input type="text" id="novo-func-telefone" class="form-control" placeholder="(00) 00000-0000" required>
+          </div>
+          <div class="col-md-6">
+            <label>E-mail</label>
+            <input type="email" id="novo-func-email" class="form-control" placeholder="email@empresa.com" required>
+          </div>
+          <div class="col-md-6">
+            <label>ID do funcionário</label>
+            <input type="text" id="novo-func-id" class="form-control" placeholder="Ex.: 1050" required>
+          </div>
+          <div class="col-md-6">
+            <label>Deficiência física</label>
+            <div class="form-check-veiculo pt-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="novo-func-pcd" id="pcd-sim" value="sim">
+                <label class="form-check-label" for="pcd-sim" style="font-size:.875rem; color:var(--azul-escuro);">Sim</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="novo-func-pcd" id="pcd-nao" value="nao" checked>
+                <label class="form-check-label" for="pcd-nao" style="font-size:.875rem; color:var(--azul-escuro);">Não</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <button type="submit" class="btn-primario d-inline-flex align-items-center gap-2">
+            <i class="bi bi-check2"></i> Salvar funcionário
+          </button>
+        </div>
+      </form>
     </section>
 
     <!-- ---------- tela: veículos ---------- -->

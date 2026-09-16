@@ -2,9 +2,9 @@
 
 const CATEGORIAS = {
   administracao: { label: "Administração", cor: "#1D397D", icone: "bi-diagram-3" },
-  pcd:           { label: "PCD",            cor: "#1C4966", icone: "bi-universal-access" },
+  pcd:           { label: "PCD",             cor: "#1C4966", icone: "bi-universal-access" },
   carga:         { label: "Carga e descarga", cor: "#B5502F", icone: "bi-truck" },
-  comum:         { label: "Vagas comuns",   cor: "#64748B", icone: "bi-car-front" }
+  comum:         { label: "Vagas comuns",    cor: "#64748B", icone: "bi-car-front" }
 };
 
 function gerarVagasIniciais(){
@@ -20,7 +20,7 @@ function gerarVagasIniciais(){
 let vagas = gerarVagasIniciais();
 
 let funcionarios = [
- 
+  
 ];
 
 let filtroStatusAtual = "todos";
@@ -126,8 +126,8 @@ function renderizarFuncionarios(){
   lista.innerHTML = filtrados.map(f => `
     <div class="func-item d-flex align-items-center justify-content-between">
       <div>
-        <p class="mb-0" style="font-size:.875rem; color:var(--azul-escuro);">${f.nome}</p>
-        <p class="mb-0" style="font-size:.75rem; color:var(--azul-acinzentado);">${f.cargo}</p>
+        <p class="mb-0" style="font-size:.875rem; color:var(--azul-escuro);">${f.nome} ${f.pcd === 'sim' ? '<span class="badge bg-info text-dark" style="font-size:0.65rem;">PCD</span>' : ''}</p>
+        <p class="mb-0" style="font-size:.75rem; color:var(--azul-acinzentado);">${f.email} · ${f.telefone}</p>
       </div>
       <div class="d-flex align-items-center gap-3">
         <span class="badge-status ${f.status === 'ativo' ? 'badge-ativo' : 'badge-inativo'}">
@@ -142,11 +142,47 @@ function renderizarFuncionarios(){
   `).join("");
 }
 
+function cadastrarFuncionarioAdmin(event){
+  event.preventDefault();
+  
+  const nome = document.getElementById("novo-func-nome").value.trim();
+  const telefone = document.getElementById("novo-func-telefone").value.trim();
+  const email = document.getElementById("novo-func-email").value.trim();
+  const id = Number(document.getElementById("novo-func-id").value.trim());
+  const pcd = document.querySelector('input[name="novo-func-pcd"]:checked').value;
+
+  if (funcionarios.some(f => f.id === id)){
+    alert("Já existe um funcionário cadastrado com este ID.");
+    return;
+  }
+
+  funcionarios.push({
+    id,
+    nome,
+    cargo: "Funcionário",
+    telefone,
+    email,
+    pcd,
+    status: "ativo"
+  });
+
+  // Limpa o formulário
+  event.target.reset();
+  
+  // Atualiza as telas dependentes
+  renderizarFuncionarios();
+  preencherSelectFuncionarios();
+  
+  // Retorna para a tela de listagem de funcionários
+  mudarTela('funcionarios');
+}
+
 // ============ veículos ============
 
 function preencherSelectFuncionarios(){
   const select = document.getElementById("select-funcionario");
-  select.innerHTML = funcionarios.map(f => `<option value="${f.id}">${f.nome}</option>`).join("");
+  if (!select) return;
+  select.innerHTML = funcionarios.map(f => `<option value="${f.id}">${f.nome} (ID: ${f.id})</option>`).join("");
 }
 
 function criarFormVeiculoHTML(idForm, numero){
@@ -206,7 +242,13 @@ function renumerarFormsVeiculo(){
 }
 
 function salvarVeiculos(){
-  const funcionarioId = Number(document.getElementById("select-funcionario").value);
+  const selectFunc = document.getElementById("select-funcionario");
+  if (!selectFunc || selectFunc.value === "") {
+    alert("Selecione um funcionário válido.");
+    return;
+  }
+
+  const funcionarioId = Number(selectFunc.value);
   const forms = document.querySelectorAll("[data-form-veiculo]");
   const novos = [];
 
@@ -238,6 +280,7 @@ function salvarVeiculos(){
 
 function renderizarVeiculosCadastrados(){
   const container = document.getElementById("lista-veiculos-cadastrados");
+  if (!container) return;
 
   if (veiculosCadastrados.length === 0){
     container.innerHTML = `<p style="color:var(--azul-acinzentado); font-size:.875rem;">Nenhum veículo cadastrado ainda.</p>`;
