@@ -6,8 +6,13 @@
 
 html,
 body {
-    height: 100%;
-    overflow: hidden;
     margin: 0;
     padding: 0;
+}
+
+/* Use esta classe só nas páginas com layout de tela cheia fixa
+   (ex.: login.html, registrar.html) */
+.layout-fullscreen {
+    height: 100%;
+    overflow: hidden;
 }
