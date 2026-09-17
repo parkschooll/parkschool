@@ -1,0 +1,143 @@
+/* =========================================
+   SOBRE STYLES
+   ========================================= */
+
+.sobre-page {
+    background-color: var(--bg-body);
+}
+
+/* ---- Hero da página ---- */
+.sobre-hero {
+    background: linear-gradient(135deg, rgba(29, 57, 125, 0.95), rgba(28, 73, 102, 0.95));
+}
+
+.sobre-hero-lead {
+    color: var(--color-gray-200);
+    font-size: var(--font-size-lg);
+    max-width: 640px;
+}
+
+/* ---- Cabeçalhos de seção ---- */
+.section-eyebrow {
+    display: inline-block;
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--spacing-2);
+}
+
+.section-title {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    font-size: var(--font-size-2xl);
+}
+
+.sobre-section-alt {
+    background-color: var(--bg-surface);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ---- Listas com ícone ---- */
+.sobre-lista {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-4) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.sobre-lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.sobre-lista li i {
+    color: var(--color-warning);
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.sobre-lista-check li i {
+    color: var(--color-success);
+}
+
+/* ---- Cards de perfil ---- */
+.perfil-card,
+.tech-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-5);
+    height: 100%;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.perfil-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.perfil-card .feature-title,
+.tech-card .feature-title {
+    color: var(--text-primary);
+}
+
+.perfil-card .feature-text,
+.tech-card .feature-text {
+    color: var(--text-secondary);
+}
+
+.tech-card ul {
+    margin-top: 0;
+}
+
+/* ---- Tipos de vaga ---- */
+.tipo-vaga-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-4) var(--spacing-2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.tipo-vaga-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.tipo-vaga-card i {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+}
+
+.tipo-vaga-card span {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+}
+
+/* ---- Equipe ---- */
+.membro-card {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ---- CTA final ---- */
+.cta-sobre {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+}

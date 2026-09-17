@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - ParkSchool</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos globais e da página -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/pages/sobre.css">
+</head>
+
+<body class="sobre-page d-flex flex-column min-vh-100">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-home px-3 px-lg-4 py-3">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center gap-2 text-white fw-bold" href="home.html">
+                <i class="fa-solid fa-square-parking fs-3"></i>
+                <span>ParkSchool</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navSobre"
+                aria-controls="navSobre" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navSobre">
+                <ul class="navbar-nav align-items-lg-center gap-lg-2">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-home active" href="sobre.html">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-home" href="registrar.html">Cadastro</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn ds-btn-primary btn-nav-login px-4" href="login.html">
+                            <i class="fa-solid fa-right-to-bracket me-2"></i>Entrar
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO DA PÁGINA -->
+    <header class="sobre-hero py-5">
+        <div class="container py-4 text-center">
+            <h1 class="display-6 fw-bold text-white mb-3">Sobre o projeto</h1>
+            <p class="sobre-hero-lead mx-auto mb-0">
+                Sistema web para gestão e automação do controle de vagas do estacionamento corporativo,
+                substituindo o processo manual hoje realizado em papel.
+            </p>
+        </div>
+    </header>
+
+    <main class="flex-grow-1">
+
+        <!-- INTRODUÇÃO / PROBLEMA -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row gy-4 gy-lg-0 align-items-start">
+
+                    <div class="col-lg-6">
+                        <span class="section-eyebrow">O problema</span>
+                        <h2 class="section-title mb-3">Um controle hoje feito manualmente</h2>
+                        <p class="ds-text-secondary">
+                            O estacionamento atende funcionários, visitantes e prestadores de serviço, mas
+                            seu controle ainda é feito à mão: identificação visual por crachá, abertura
+                            manual do portão, anotações em papel e contagem manual das vagas livres e
+                            ocupadas.
+                        </p>
+                        <ul class="sobre-lista">
+                            <li><i class="fa-solid fa-circle-exclamation"></i>Identificação sem validação
+                                automatizada</li>
+                            <li><i class="fa-solid fa-circle-exclamation"></i>Registros em papel, sujeitos a
+                                erros e perda de dados</li>
+                            <li><i class="fa-solid fa-circle-exclamation"></i>Contagem manual de vagas,
+                                sujeita a falhas</li>
+                            <li><i class="fa-solid fa-circle-exclamation"></i>Ausência de um mecanismo de
+                                reserva de vagas</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <span class="section-eyebrow">A solução</span>
+                        <h2 class="section-title mb-3">Automação de ponta a ponta</h2>
+                        <p class="ds-text-secondary">
+                            A aplicação digitaliza esse fluxo: cada funcionário faz seu próprio cadastro e o
+                            do veículo, a Segurança passa a contar com um painel único com sinalização por
+                            cores (verde/vermelho) e Administradores e Patrimônio podem reservar vagas por
+                            período determinado, com notificação automática à equipe de Segurança.
+                        </p>
+                        <ul class="sobre-lista sobre-lista-check">
+                            <li><i class="fa-solid fa-circle-check"></i>Autocadastro de funcionário e
+                                veículo</li>
+                            <li><i class="fa-solid fa-circle-check"></i>Painel de vagas em tempo real</li>
+                            <li><i class="fa-solid fa-circle-check"></i>Ativação/desativação manual de vagas
+                            </li>
+                            <li><i class="fa-solid fa-circle-check"></i>Reserva de vagas com notificação
+                                automática</li>
+                            <li><i class="fa-solid fa-circle-check"></i>Arquitetura preparada para sensores e
+                                câmeras no futuro</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PERFIS DE USUÁRIO -->
+        <section class="py-5 sobre-section-alt">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="section-eyebrow">Perfis de acesso</span>
+                    <h2 class="section-title">Cada perfil vê o que precisa</h2>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="perfil-card h-100">
+                            <div class="icon-circle icon-circle-md icon-circle-primary mb-3">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <h3 class="feature-title">Administrador</h3>
+                            <p class="feature-text">Acesso total ao sistema: gerenciamento de usuários,
+                                cadastro de visitantes e reserva de vagas.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="perfil-card h-100">
+                            <div class="icon-circle icon-circle-md icon-circle-primary mb-3">
+                                <i class="fa-solid fa-boxes-stacked"></i>
+                            </div>
+                            <h3 class="feature-title">Patrimônio</h3>
+                            <p class="feature-text">Cadastro de visitantes e prestadores de serviço, com
+                                reserva de vagas por período determinado.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="perfil-card h-100">
+                            <div class="icon-circle icon-circle-md icon-circle-primary mb-3">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                            <h3 class="feature-title">Segurança</h3>
+                            <p class="feature-text">Painel de vagas com sinalização por cores,
+                                ativação/desativação manual e notificações de reservas.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="perfil-card h-100">
+                            <div class="icon-circle icon-circle-md icon-circle-primary mb-3">
+                                <i class="fa-solid fa-id-card"></i>
+                            </div>
+                            <h3 class="feature-title">Funcionário</h3>
+                            <p class="feature-text">Autocadastro pessoal e cadastro do próprio veículo para
+                                liberar o acesso ao estacionamento.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIPOS DE VAGA -->
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="section-eyebrow">Tipos de vaga</span>
+                    <h2 class="section-title">Feito para a realidade do estacionamento</h2>
+                </div>
+
+                <div class="row g-3 justify-content-center">
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="tipo-vaga-card">
+                            <i class="fa-solid fa-car"></i>
+                            <span>Comuns</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="tipo-vaga-card">
+                            <i class="fa-solid fa-building"></i>
+                            <span>Gerência</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="tipo-vaga-card">
+                            <i class="fa-solid fa-motorcycle"></i>
+                            <span>Motocicletas</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="tipo-vaga-card">
+                            <i class="fa-solid fa-wheelchair"></i>
+                            <span>PCD</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="tipo-vaga-card">
+                            <i class="fa-solid fa-bicycle"></i>
+                            <span>Bicicletas</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="tipo-vaga-card">
+                            <i class="fa-solid fa-truck"></i>
+                            <span>Carga/Descarga</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECNOLOGIAS -->
+        <section class="py-5 sobre-section-alt">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="section-eyebrow">Tecnologias</span>
+                    <h2 class="section-title">O que já está em uso e o que vem a seguir</h2>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="tech-card h-100">
+                            <h3 class="feature-title mb-3">
+                                <i class="fa-solid fa-check-double me-2 ds-text-primary"></i>Em uso hoje
+                                (front-end)
+                            </h3>
+                            <ul class="sobre-lista sobre-lista-check">
+                                <li><i class="fa-solid fa-circle-check"></i>HTML5 e CSS3 — estruturação e
+                                    estilização das páginas</li>
+                                <li><i class="fa-solid fa-circle-check"></i>Bootstrap 5 — componentes visuais
+                                    responsivos</li>
+                                <li><i class="fa-solid fa-circle-check"></i>JavaScript — validação de
+                                    formulários e interatividade</li>
+                                <li><i class="fa-solid fa-circle-check"></i>Font Awesome — ícones da
+                                    interface</li>
+                                <li><i class="fa-solid fa-circle-check"></i>Git e GitHub — versionamento do
+                                    código</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="tech-card h-100">
+                            <h3 class="feature-title mb-3">
+                                <i class="fa-regular fa-clock me-2 ds-text-primary"></i>Planejado para as
+                                próximas etapas
+                            </h3>
+                            <ul class="sobre-lista">
+                                <li><i class="fa-solid fa-hourglass-half"></i>Node.js com Express — API REST
+                                    para as regras de negócio</li>
+                                <li><i class="fa-solid fa-hourglass-half"></i>MySQL / PostgreSQL —
+                                    armazenamento de funcionários, veículos, vagas e reservas</li>
+                                <li><i class="fa-solid fa-hourglass-half"></i>Integração futura com sensores
+                                    e/ou câmeras de reconhecimento de placas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EQUIPE -->
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="section-eyebrow">Equipe</span>
+                    <h2 class="section-title">Projeto Integrador</h2>
+                    <p class="ds-text-secondary">Técnico em Informática · SENAC Pindamonhangaba</p>
+                </div>
+
+                <div class="row g-3 justify-content-center">
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="membro-card">
+                            <div class="icon-circle icon-circle-md icon-circle-primary mx-auto mb-2">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span>Alice</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="membro-card">
+                            <div class="icon-circle icon-circle-md icon-circle-primary mx-auto mb-2">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span>Felipe</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="membro-card">
+                            <div class="icon-circle icon-circle-md icon-circle-primary mx-auto mb-2">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span>Nathan</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="membro-card">
+                            <div class="icon-circle icon-circle-md icon-circle-primary mx-auto mb-2">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span>Richard</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="membro-card">
+                            <div class="icon-circle icon-circle-md icon-circle-primary mx-auto mb-2">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span>Thiago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA FINAL -->
+        <section class="cta-sobre py-5">
+            <div class="container text-center">
+                <h2 class="fw-bold text-white mb-3">Pronto para experimentar o ParkSchool?</h2>
+                <p class="sobre-hero-lead mx-auto mb-4">
+                    Faça login se você já possui uma conta ou crie seu cadastro para começar a usar o
+                    sistema.
+                </p>
+                <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                    <a href="login.html" class="btn ds-btn-primary btn-lg px-4 fw-semibold">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i>Fazer login
+                    </a>
+                    <a href="registrar.html" class="btn btn-secundario btn-lg px-4 fw-semibold btn-hero-outline">
+                        <i class="fa-regular fa-square-plus me-2"></i>Criar cadastro
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-home py-4">
+        <div class="container">
+            <div class="row gy-3 align-items-center">
+                <div class="col-md-4 d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-square-parking text-white fs-5"></i>
+                    <span class="text-white fw-semibold">ParkSchool</span>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <ul class="list-inline mb-0 footer-links">
+                        <li class="list-inline-item"><a href="login.html">Login</a></li>
+                        <li class="list-inline-item"><a href="registrar.html">Cadastro</a></li>
+                        <li class="list-inline-item"><a href="sobre.html">Sobre</a></li>
+                        <li class="list-inline-item"><a href="tela_termos.html">Termos</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 text-md-end footer-copy">
+                    &copy; 2026 ParkSchool. Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
