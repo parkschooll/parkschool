@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Vigilante | ParkSchool</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <link rel="stylesheet" href="../css/styles.css">
+  
+</head>
+
+<body class="vigilante-page">
+
+  <!-- CABEÇALHO -->
+  <nav class="navbar navbar-seguranca px-3 px-lg-4">
+    <div class="container-fluid">
+
+      <div class="brand-lockup">
+        <span class="brand-mark">
+          <i class="fa-solid fa-square-parking"></i>
+        </span>
+
+        <div>
+          <strong>ParkSchool</strong>
+          <small>Controle de estacionamento</small>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <div class="operator-chip">
+          <i class="fa-solid fa-user-shield"></i>
+
+          <span>
+            <b>Vigilante</b>
+            <small>Turno ativo</small>
+          </span>
+        </div>
+
+        <button class="icon-btn" id="btnSair" title="Sair">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container-fluid px-3 px-lg-4 py-4">
+
+    <!-- TÍTULO -->
+    <div class="page-heading">
+      <div>
+        <span class="eyebrow">PAINEL OPERACIONAL</span>
+
+        <h1>
+          Olá, vigilante
+          <span>👋</span>
+        </h1>
+
+        <p>
+          Gerencie a ocupação das vagas e acompanhe as visitas em tempo real.
+        </p>
+      </div>
+
+      <div class="live-status">
+        <span></span>
+        Atualizado agora
+      </div>
+    </div>
+
+    <!-- INDICADORES -->
+    <section class="metrics-row">
+
+      <div class="metric-card">
+        <div class="metric-icon blue">
+          <i class="fa-solid fa-square-parking"></i>
+        </div>
+
+        <div>
+          <small>Vagas totais</small>
+          <strong id="totalVagas">42</strong>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon green">
+          <i class="fa-solid fa-check"></i>
+        </div>
+
+        <div>
+          <small>Disponíveis</small>
+          <strong id="vagasDisponiveis">36</strong>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon red">
+          <i class="fa-solid fa-car"></i>
+        </div>
+
+        <div>
+          <small>Ocupadas</small>
+          <strong id="vagasOcupadas">6</strong>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon amber">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+
+        <div>
+          <small>Visitas pendentes</small>
+          <strong id="visitasPendentes">2</strong>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PAINEL PRINCIPAL -->
+    <div class="dashboard-grid">
+
+      <!-- MAPA DE VAGAS -->
+      <section class="panel vacancies-panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h2>Mapa de vagas</h2>
+            <p>
+              Clique em uma vaga para ocupar ou desocupar
+            </p>
+          </div>
+
+          <div class="legend">
+            <span>
+              <i class="dot available"></i>
+              Disponível
+            </span>
+
+            <span>
+              <i class="dot occupied"></i>
+              Ocupada
+            </span>
+
+            <span>
+              <i class="dot reserved"></i>
+              Reservada
+            </span>
+          </div>
+
+        </div>
+
+        <!-- FILTROS -->
+        <div class="filter-bar">
+
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+              id="buscaVaga"
+              type="text"
+              placeholder="Buscar por número...">
+          </div>
+
+          <select id="filtroTipo">
+            <option value="todos">
+              Todos os tipos
+            </option>
+
+            <option value="Funcionários">
+              Funcionários
+            </option>
+
+            <option value="PCD">
+              PCD
+            </option>
+
+            <option value="Visitantes">
+              Visitantes
+            </option>
+
+            <option value="Diretoria">
+              Diretoria
+            </option>
+          </select>
+
+        </div>
+
+        <!-- VAGAS GERADAS PELO JAVASCRIPT -->
+        <div
+          id="containerVagas"
+          class="vagas-grid">
+        </div>
+
+      </section>
+
+      <!-- COLUNA LATERAL -->
+      <aside class="side-column">
+
+        <!-- CENTRAL DE VISITANTES -->
+        <section class="panel notification-panel">
+
+          <div class="panel-header compact">
+
+            <div>
+              <h2>Central de visitantes</h2>
+
+              <p>
+                Solicitações aguardando sua ação
+              </p>
+            </div>
+
+            <span
+              class="notification-count"
+              id="badgeNotificacoes">
+              2
+            </span>
+
+          </div>
+
+          <div
+            id="listaNotificacoes"
+            class="notification-list">
+          </div>
+
+          <button
+            class="outline-btn w-100"
+            id="btnNovaVisita">
+
+            <i class="fa-solid fa-user-plus"></i>
+            Registrar visitante
+
+          </button>
+
+        </section>
+
+        <!-- ACESSO RÁPIDO -->
+        <section class="panel quick-panel">
+
+          <div class="panel-header compact">
+
+            <div>
+              <h2>Acesso rápido</h2>
+
+              <p>
+                Rotinas mais utilizadas
+              </p>
+            </div>
+
+          </div>
+
+          <button
+            class="quick-action"
+            id="btnLiberar">
+
+            <i class="fa-solid fa-unlock"></i>
+
+            <span>
+              <b>Liberar uma vaga</b>
+              <small>
+                Marque uma vaga como disponível
+              </small>
+            </span>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+          </button>
+
+          <button
+            class="quick-action"
+            id="btnVerReservas">
+
+            <i class="fa-solid fa-calendar-check"></i>
+
+            <span>
+              <b>Ver reservas de hoje</b>
+              <small>
+                Acompanhe todas as reservas
+              </small>
+            </span>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+          </button>
+
+        </section>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL DE CADASTRO DE VISITANTE -->
+  <div
+    class="modal-backdrop-custom"
+    id="modalVisitante"
+    aria-hidden="true">
+
+    <div class="visitor-modal">
+
+      <button
+        class="close-modal"
+        id="fecharModal">
+
+        <i class="fa-solid fa-xmark"></i>
+
+      </button>
+
+      <span class="modal-icon">
+        <i class="fa-solid fa-user-plus"></i>
+      </span>
+
+      <h2>Registrar visitante</h2>
+
+      <p>
+        Cadastre a visita e reserve uma vaga disponível.
+      </p>
+
+      <form id="formVisitante">
+
+        <label>
+          Nome do visitante
+
+          <input
+            id="nomeVisitante"
+            type="text"
+            required
+            placeholder="Ex.: Mariana Souza">
+        </label>
+
+        <label>
+          Motivo da visita
+
+          <input
+            id="motivoVisita"
+            type="text"
+            required
+            placeholder="Ex.: Reunião com a coordenação">
+        </label>
+
+        <div class="form-two">
+
+          <label>
+            Placa
+
+            <input
+              id="placaVisitante"
+              type="text"
+              required
+              placeholder="ABC-1D23"
+              maxlength="8">
+          </label>
+
+          <label>
+            Vaga
+
+            <select
+              id="vagaVisitante"
+              required>
+            </select>
+          </label>
+
+        </div>
+
+        <div class="form-two">
+
+          <label>
+            Entrada
+
+            <input
+              type="time"
+              id="horaEntrada"
+              value="08:00"
+              required>
+          </label>
+
+          <label>
+            Saída
+
+            <input
+              type="time"
+              id="horaSaida"
+              value="12:00"
+              required>
+          </label>
+
+        </div>
+
+        <button
+          class="primary-btn w-100"
+          type="submit">
+
+          Confirmar e reservar vaga
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <!-- MENSAGEM DE CONFIRMAÇÃO -->
+  <div
+    class="toast-custom"
+    id="toast">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span></span>
+
+  </div>
+
+  <!-- JAVASCRIPT DA TELA -->
+  <script src="../js/telaSeguranca.js"></script>
+
+</body>
+
+</html>
