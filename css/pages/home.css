@@ -1,0 +1,142 @@
+/* =========================================
+   HOME STYLES
+   ========================================= */
+
+.col-sm-6 a {
+    text-decoration: none;
+}
+
+.home-page {
+    background-color: var(--bg-body);
+}
+
+/* ---- Navbar ---- */
+.navbar-home {
+    background-color: var(--color-primary);
+}
+
+.nav-link-home {
+    color: var(--color-gray-200) !important;
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-fast);
+}
+
+.nav-link-home:hover {
+    color: var(--color-white) !important;
+}
+
+.btn-nav-login {
+    padding-top: var(--spacing-2);
+    padding-bottom: var(--spacing-2);
+}
+
+/* ---- Hero ---- */
+.hero-home {
+    background: linear-gradient(135deg, rgba(29, 57, 125, 0.92), rgba(28, 73, 102, 0.92)),
+        url('../../assets/img/pexels-egorghetto-19362131.jpg') center/cover no-repeat;
+}
+
+.hero-lead {
+    color: var(--color-gray-200);
+    font-size: var(--font-size-lg);
+    max-width: 520px;
+}
+
+.btn-hero-outline {
+    background-color: transparent;
+    color: var(--color-white);
+    border: var(--border-width-thin) solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-hero-outline:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: var(--color-white);
+    border-color: var(--color-white);
+}
+
+/* ---- Cards de recursos (dentro do hero) ---- */
+.feature-card {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-4);
+    backdrop-filter: blur(2px);
+    transition: transform var(--transition-fast), background-color var(--transition-fast);
+    text-decoration: none;
+}
+
+.feature-card:hover {
+    transform: translateY(-3px);
+    background-color: rgba(255, 255, 255, 0.14);
+}
+
+.feature-card .icon-circle {
+    background-color: rgba(255, 255, 255, 0.16);
+    color: var(--color-white);
+}
+
+.feature-title {
+    color: var(--color-white);
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-1);
+}
+
+.feature-text {
+    color: var(--color-gray-200);
+    font-size: var(--font-size-sm);
+    margin-bottom: 0;
+}
+
+/* ---- Seção Sobre ---- */
+.sobre-home {
+    background-color: var(--bg-surface);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    scroll-margin-top: var(--spacing-16);
+}
+
+.sobre-card {
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-6);
+}
+
+.sobre-card .feature-title {
+    color: var(--text-primary);
+}
+
+.sobre-card .feature-text {
+    color: var(--text-secondary);
+}
+
+/* ---- Footer ---- */
+.footer-home {
+    background-color: var(--color-secondary);
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-4);
+}
+
+.footer-links a {
+    color: var(--color-gray-200);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+    color: var(--color-white);
+}
+
+.footer-copy {
+    color: var(--color-gray-300);
+    font-size: var(--font-size-xs);
+}

@@ -11,25 +11,25 @@
   background: linear-gradient(180deg, #f4f8ff 0%, #eef4fb 100%);
   color: #172b4d;
   min-height: 100vh;
-  overflow: hidden;
 }
 
-html, body {
-  height: 100%;
+/* Trava o scroll apenas na tela do vigilante (layout de dashboard fixo em 100vh).
+   Escopado em body.vigilante-page para não afetar as demais páginas do site. */
+body.vigilante-page {
+  height: 100vh;
   max-height: 100vh;
   overflow: hidden;
   overscroll-behavior: none;
 }
 
-main.container-fluid {
+.vigilante-page main.container-fluid {
   height: calc(100vh - 72px);
   overflow: hidden;
 }
 
-.vigilante-page,
-.dashboard-grid,
-.panel,
-.side-column {
+.vigilante-page .dashboard-grid,
+.vigilante-page .panel,
+.vigilante-page .side-column {
   overflow: hidden;
 }
 

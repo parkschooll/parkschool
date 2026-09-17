@@ -12,6 +12,8 @@
 @import "pages/registrar.css";
 @import "pages/tela-vigilante.css";
 @import "pages/reserva_vaga.css";
+@import "pages/home.css";
+@import "pages/sobre.css";
 
 /* componentes: components */
 @import "components/buttons.css";
