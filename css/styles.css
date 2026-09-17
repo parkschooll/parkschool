@@ -11,6 +11,7 @@
 @import "pages/tela_termos.css";
 @import "pages/cadastro_visitante.css";
 @import "pages/registrar.css";
+@import "pages/reserva_vaga.css";
 
 /* componentes: components */
 @import "components/buttons.css";
