@@ -1,39 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const containerVagas = document.getElementById('containerVagas');
+  const total = 42;
+  const tipos = ['Diretoria','PCD','Visitantes','Funcionários'];
+  const vagas = Array.from({ length: total }, (_, i) => ({
+    numero: i + 1,
+    tipo: i < 4 ? 'Diretoria' : i < 7 ? 'PCD' : i < 10 ? 'Visitantes' : 'Funcionários',
+    status: [2, 7, 12, 18, 27, 35].includes(i + 1) ? 'occupied' : 'available',
+    placa: [2, 7, 12, 18, 27, 35].includes(i + 1) ? ['JHG-4A21','QWE-9B80','MNV-1C42','ABC-1D23','RTA-7F11','KLM-3E20'][[2,7,12,18,27,35].indexOf(i+1)] : ''
+  }));
+  const notificacoes = [
+    { id: 1, nome: 'Mariana Souza', motivo: 'Reunião com a coordenação', horario: '08:30', placa: 'ABC-1D23', status: 'pending' },
+    { id: 2, nome: 'Rafael Oliveira', motivo: 'Entrega de materiais', horario: '09:15', placa: 'KLM-3E20', status: 'pending' }
+  ];
+  const container = document.getElementById('containerVagas');
+  const toast = document.getElementById('toast');
+  const modal = document.getElementById('modalVisitante');
+  const tipoIcon = { Diretoria: 'fa-building', PCD: 'fa-wheelchair', Visitantes: 'fa-user', Funcionários: 'fa-car' };
 
-    // Configuração exata das 42 vagas mapeando setor, ícone e quantidade
-    const distribuicaoVagas = [
-        { tipo: 'Diretoria', icone: 'fa-car', qtd: 4 },
-        { tipo: 'PCD', icone: 'fa-wheelchair', qtd: 3 },
-        { tipo: 'Descarga', icone: 'fa-truck', qtd: 1 },
-        { tipo: 'Funcionários', icone: 'fa-car', qtd: 20 },
-        { tipo: 'Funcionários', icone: 'fa-motorcycle', qtd: 14 }
-    ];
-
-    let numeroVagaAtual = 1;
-
-    distribuicaoVagas.forEach(bloco => {
-        for (let i = 0; i < bloco.qtd; i++) {
-            const vagaCard = document.createElement('div');
-            vagaCard.className = 'vaga-card';
-            
-            const numeroFormatado = numeroVagaAtual.toString().padStart(2, '0');
-
-            vagaCard.innerHTML = `
-                <div class="vaga-titulo w-100">${bloco.tipo}</div>
-                <i class="fa-solid ${bloco.icone} my-auto fs-3"></i>
-                <div class="vaga-numero">Vaga ${numeroFormatado}</div>
-            `;
-
-            vagaCard.addEventListener('click', () => {
-                const titulo = vagaCard.querySelector('.vaga-titulo');
-                if (titulo) {
-                    titulo.classList.toggle('bg-vermelho');
-                }
-            });
-
-            containerVagas.appendChild(vagaCard);
-            numeroVagaAtual++;
-        }
-    });
+  const showToast = (message) => { toast.querySelector('span').textContent = message; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2800); };
+  const updateMetrics = () => { const occupied = vagas.filter(v => v.status === 'occupied' || v.status === 'reserved').length; document.getElementById('vagasOcupadas').textContent = occupied; document.getElementById('vagasDisponiveis').textContent = total - occupied; document.getElementById('visitasPendentes').textContent = notificacoes.filter(n => n.status === 'pending').length; document.getElementById('badgeNotificacoes').textContent = notificacoes.filter(n => n.status === 'pending').length; };
+  const label = status => status === 'occupied' ? 'Ocupada' : status === 'reserved' ? 'Reservada' : 'Disponível';
+  const renderVagas = () => { const busca = document.getElementById('buscaVaga').value.trim(); const filtro = document.getElementById('filtroTipo').value; container.innerHTML = ''; vagas.filter(v => (!busca || String(v.numero).includes(busca)) && (filtro === 'todos' || v.tipo === filtro)).forEach(v => { const card = document.createElement('button'); card.className = `vaga-card ${v.status}`; card.title = v.status === 'reserved' ? 'Clique para liberar a vaga do visitante' : ''; card.innerHTML = `<div class="vaga-card-top"><span class="vaga-type">${v.tipo}</span><i class="fa-solid ${tipoIcon[v.tipo]}"></i></div><strong>${String(v.numero).padStart(2,'0')}</strong><span class="vaga-status"><i class="fa-solid ${v.status === 'available' ? 'fa-check' : v.status === 'reserved' ? 'fa-calendar-check' : 'fa-car'}"></i>${v.status === 'reserved' ? 'Liberar reserva' : label(v.status)}</span>${v.placa ? `<small>${v.placa}</small>` : ''}`; card.addEventListener('click', () => { if (v.status === 'available') { v.status = 'occupied'; v.placa = 'MANUAL'; showToast(`Vaga ${String(v.numero).padStart(2,'0')} ocupada.`); } else if (v.status === 'occupied' || v.status === 'reserved') { const eraReservada = v.status === 'reserved'; v.status = 'available'; v.placa = ''; showToast(eraReservada ? `Reserva da vaga ${String(v.numero).padStart(2,'0')} liberada.` : `Vaga ${String(v.numero).padStart(2,'0')} liberada.`); } renderVagas(); updateMetrics(); }); container.appendChild(card); }); };
+  const renderNotificacoes = () => { const list = document.getElementById('listaNotificacoes'); const pendentes = notificacoes.filter(n => n.status === 'pending'); list.innerHTML = pendentes.length ? pendentes.map(n => `<div class="notification-item"><div class="notification-avatar">${n.nome.split(' ').map(x=>x[0]).slice(0,2).join('')}</div><div class="notification-content"><div><b>${n.nome}</b><span class="time">${n.horario}</span></div><p>${n.motivo}</p><small><i class="fa-solid fa-car"></i> ${n.placa}</small><div class="notification-actions"><button class="accept-btn" data-id="${n.id}"><i class="fa-solid fa-check"></i> Reservar vaga</button><button class="deny-btn" data-id="${n.id}">Recusar</button></div></div></div>`).join('') : '<div class="empty-state"><i class="fa-solid fa-check-double"></i><p>Tudo certo! Nenhuma visita pendente.</p></div>'; list.querySelectorAll('.accept-btn').forEach(btn => btn.addEventListener('click', () => { const n = notificacoes.find(x => x.id == btn.dataset.id); const vaga = vagas.find(v => v.tipo === 'Visitantes' && v.status === 'available'); if (!vaga) return showToast('Não há vagas de visitante disponíveis.'); vaga.status = 'reserved'; vaga.placa = n.placa; n.status = 'approved'; showToast(`Vaga ${String(vaga.numero).padStart(2,'0')} reservada para ${n.nome}.`); renderVagas(); renderNotificacoes(); updateMetrics(); })); list.querySelectorAll('.deny-btn').forEach(btn => btn.addEventListener('click', () => { const n = notificacoes.find(x => x.id == btn.dataset.id); n.status = 'denied'; showToast('Solicitação de visita recusada.'); renderNotificacoes(); updateMetrics(); })); };
+  const openModal = () => { const select = document.getElementById('vagaVisitante'); select.innerHTML = vagas.filter(v => v.status === 'available').map(v => `<option value="${v.numero}">Vaga ${String(v.numero).padStart(2,'0')} — ${v.tipo}</option>`).join(''); modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); };
+  document.getElementById('btnNovaVisita').addEventListener('click', openModal); document.getElementById('fecharModal').addEventListener('click', () => modal.classList.remove('open')); modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+  document.getElementById('formVisitante').addEventListener('submit', e => { e.preventDefault(); const vaga = vagas.find(v => v.numero == document.getElementById('vagaVisitante').value); const nome = document.getElementById('nomeVisitante').value.trim(); vaga.status = 'reserved'; vaga.placa = document.getElementById('placaVisitante').value.toUpperCase(); notificacoes.push({ id: Date.now(), nome, motivo: document.getElementById('motivoVisita').value, horario: document.getElementById('horaEntrada').value, placa: vaga.placa, status: 'approved' }); modal.classList.remove('open'); e.target.reset(); showToast(`Visitante registrado e vaga ${String(vaga.numero).padStart(2,'0')} reservada.`); renderVagas(); updateMetrics(); });
+  document.getElementById('buscaVaga').addEventListener('input', renderVagas); document.getElementById('filtroTipo').addEventListener('change', renderVagas); document.getElementById('btnLiberar').addEventListener('click', () => { const vaga = vagas.find(v => v.status === 'occupied'); if (vaga) { vaga.status = 'available'; vaga.placa = ''; renderVagas(); updateMetrics(); showToast(`Vaga ${String(vaga.numero).padStart(2,'0')} liberada.`); } }); document.getElementById('btnVerReservas').addEventListener('click', () => { document.getElementById('filtroTipo').value = 'Visitantes'; renderVagas(); showToast('Exibindo as vagas de visitantes.'); }); document.getElementById('btnSair').addEventListener('click', () => showToast('Sessão encerrada apenas nesta demonstração.'));
+  renderVagas(); renderNotificacoes(); updateMetrics();
 });
