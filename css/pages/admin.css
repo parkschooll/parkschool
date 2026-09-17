@@ -14,7 +14,7 @@ body {
   color: var(--color-primary, #1D397D); 
   margin: 0;
 }
-.font-display { font-family: var(--font-family-heading, 'Space Grotesk', sans-serif); }
+.font-display { font-family: var(--font-family-heading); }
 
 /* --------- barra lateral fixa --------- */
 #sidebar {
@@ -84,7 +84,7 @@ body {
   justify-content: center;
   border: 1.5px solid; /* Herda automaticamente o #1D397D do body */
   background: var(--color-white, #ffffff);
-  font-family: var(--font-family-heading, 'Space Grotesk', sans-serif);
+  font-family: var(--font-family-base);
   line-height: 1.1;
   cursor: default;
 }
