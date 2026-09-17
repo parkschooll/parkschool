@@ -1,0 +1,43 @@
+/* =========================================
+   TOAST NOTIFICATIONS (Bootstrap 5 Overrides)
+   ========================================= */
+
+.toast-container {
+    z-index: var(--z-index-tooltip);
+}
+
+/* Estrutura base do Toast nativo */
+.toast {
+    background-color: var(--bg-surface);
+    border: none;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    font-family: var(--font-family-base);
+}
+
+.toast-body {
+    padding: var(--spacing-3) var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+}
+
+/* Variações de cor semânticas (sobrescrevendo o text-bg-* do Bootstrap) */
+.toast.text-bg-success {
+    background-color: var(--color-success) !important;
+    color: var(--color-white) !important;
+}
+
+.toast.text-bg-danger {
+    background-color: var(--color-danger) !important;
+    color: var(--color-white) !important;
+}
+
+.toast.text-bg-warning {
+    background-color: var(--color-warning) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Ajusta a cor do botão de fechar quando está num fundo escuro */
+.toast .btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}

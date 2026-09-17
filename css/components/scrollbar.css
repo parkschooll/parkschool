@@ -1,0 +1,31 @@
+/* =========================================
+   SCROLLBAR COMPONENTS
+   ========================================= */
+
+/* Aplica para toda a página e contêineres com overflow (tabelas, listas) */
+::-webkit-scrollbar {
+    width: var(--spacing-2); /* 8px */
+    height: var(--spacing-2);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-body);
+    border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-radius: var(--radius-pill);
+    /* Cria um espaço invisível ao redor do thumb para deixá-lo mais fino visualmente */
+    border: 2px solid var(--bg-body); 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-tertiary);
+}
+
+/* Firefox fallback */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gray-300) var(--bg-body);
+}

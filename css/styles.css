@@ -1,6 +1,7 @@
 /* Estilos principais: base */
-@import "variables.css";
-@import "reset.css";
+@import "base/variables.css";
+@import "base/reset.css";
+@import "base/typography.css";
 
 /* páginas: pages */
 @import "pages/login.css";
@@ -11,3 +12,10 @@
 @import "pages/cadastro_visitante.css";
 @import "pages/registrar.css";
 @import "pages/reserva_vaga.css";
+
+/* componentes: components */
+@import "components/buttons.css";
+@import "components/forms.css";
+@import "components/icons.css";
+@import "components/scrollbar.css";
+@import "components/toast.css";
