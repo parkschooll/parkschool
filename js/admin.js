@@ -7,26 +7,34 @@ const CATEGORIAS = {
 
 function gerarVagasIniciais(){
   const lista = [];
-  for (let i = 1; i <= 3; i++) lista.push({ id:`adm-${i}`, categoria:"administracao", numero:i, status:"livre" });
-  for (let i = 1; i <= 3; i++) lista.push({ id:`pcd-${i}`, categoria:"pcd", numero:i, status:"livre" });
-  lista.push({ id:"cd-1", categoria:"carga", numero:1, status:"livre" });
-  const totalComuns = 42 - 3 - 3 - 1; // 35
-  for (let i = 1; i <= totalComuns; i++) lista.push({ id:`com-${i}`, categoria:"comum", numero:i, status:"livre" });
+
+  for (let i = 1; i <= 3; i++) {
+    lista.push({ id: `adm-${i}`, categoria: 'administracao', numero: i, status: 'livre' });
+  }
+
+  for (let i = 1; i <= 3; i++) {
+    lista.push({ id: `pcd-${i}`, categoria: 'pcd', numero: i, status: 'livre' });
+  }
+
+  lista.push({ id: 'cd-1', categoria: 'carga', numero: 1, status: 'livre' });
+
+  const totalComuns = 42 - 3 - 3 - 1;
+  for (let i = 1; i <= totalComuns; i++) {
+    lista.push({ id: `com-${i}`, categoria: 'comum', numero: i, status: 'livre' });
+  }
+
   return lista;
 }
 
 let vagas = gerarVagasIniciais();
 
-let funcionarios = [
-  // Exemplo de dados iniciais, caso precise testar:
-  // { id: 1001, nome: "João Silva", cargo: "Funcionário", telefone: "(11) 99999-9999", email: "joao@email.com", pcd: "nao", status: "ativo" }
-];
+let funcionarios = JSON.parse(localStorage.getItem("park_funcionarios") || "[]");
 
 let filtroStatusAtual = "todos";
 
 // veículos já cadastrados (exemplo inicial)
-let veiculosCadastrados = [];
-let proximoIdVeiculo = 3;
+let veiculosCadastrados = JSON.parse(localStorage.getItem("park_veiculos") || "[]");
+let proximoIdVeiculo = Math.max(1, ...veiculosCadastrados.map(v => Number(v.id) || 0), 3);
 let contadorFormsVeiculo = 0; // ids dos formulários abertos
 
 // ============ navegação ============
@@ -59,32 +67,34 @@ function renderizarVagas(){
 
   const grupos = ["administracao", "pcd", "carga", "comum"];
   const container = document.getElementById("grupos-vagas");
-  
+
+  if (!container) return;
+
   container.innerHTML = grupos.map(chave => {
     const info = CATEGORIAS[chave];
     const doGrupo = vagas.filter(v => v.categoria === chave);
     const cartoes = doGrupo.map(v => {
-      const livre = v.status === "livre";
+      const livre = v.status === 'livre';
       return `
-        <div class="vaga-card ${livre ? 'livre':'ocupada'} bg-surface shadow-sm"
+        <div class="vaga-card ${livre ? 'livre' : 'ocupada'} bg-surface shadow-sm"
              style="${livre ? `border-color:${info.cor}; color:${info.cor};` : ''}"
              title="${livre ? 'Vaga livre' : 'Vaga ocupada'}">
           <i class="bi ${info.icone} icone-vaga" style="${livre ? '' : 'color: var(--color-white);'}"></i>
           <span class="fw-bold">${v.numero}</span>
           <span class="status text-uppercase" style="font-size: 0.65rem;">${livre ? 'livre' : 'ocupada'}</span>
         </div>`;
-    }).join("");
+    }).join('');
 
     return `
-      <section class="mb-4">
+      <section class="vagas-grupo">
         <div class="d-flex align-items-center gap-2 mb-2">
           <i class="bi ${info.icone} fs-5" style="color:${info.cor};"></i>
           <h2 class="font-display mb-0 fw-semibold" style="font-size:1.05rem; color: var(--text-primary);">${info.label}</h2>
           <span class="badge text-bg-light border text-secondary ms-2">${doGrupo.length} ${doGrupo.length === 1 ? 'vaga' : 'vagas'}</span>
         </div>
-        <div class="d-flex flex-wrap gap-2">${cartoes}</div>
+        <div class="vagas-grid">${cartoes}</div>
       </section>`;
-  }).join("");
+  }).join('');
 }
 
 // ============ funcionários ============
@@ -168,6 +178,8 @@ function cadastrarFuncionarioAdmin(event){
     pcd,
     status: "ativo"
   });
+
+  persistFuncionarios();
 
   // Limpa o formulário
   event.target.reset();
@@ -273,6 +285,7 @@ function salvarVeiculos(){
   if (novos.length === 0) return;
 
   veiculosCadastrados = veiculosCadastrados.concat(novos);
+  persistVeiculos();
   renderizarVeiculosCadastrados();
 
   // reseta o formulário para um único bloco em branco
@@ -315,10 +328,201 @@ function renderizarVeiculosCadastrados(){
   }).join("");
 }
 
-// ============ inicialização ============
+const STORAGE_KEYS = {
+  funcionarios: 'park_funcionarios',
+  solicitacoes: 'park_solicitacoes',
+  veiculos: 'park_veiculos',
+  visitas: 'park_visitas'
+};
 
-renderizarVagas();
-renderizarFuncionarios();
-preencherSelectFuncionarios();
-adicionarFormVeiculo();
-renderizarVeiculosCadastrados();
+const safeRead = (key, fallback) => {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (error) {
+    return fallback;
+  }
+};
+
+const safeWrite = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
+
+function persistFuncionarios() {
+  safeWrite(STORAGE_KEYS.funcionarios, funcionarios);
+}
+
+function persistVeiculos() {
+  safeWrite(STORAGE_KEYS.veiculos, veiculosCadastrados);
+}
+
+function normalizarCargo(perfil) {
+  if (perfil === 'operador') return 'Patrimônio';
+  if (perfil === 'supervisor') return 'Vigilante';
+  return 'Funcionário';
+}
+
+function renderizarSolicitacoes() {
+  const lista = document.getElementById('lista-solicitacoes');
+  if (!lista) return;
+
+  const solicitacoes = safeRead(STORAGE_KEYS.solicitacoes, []);
+  if (solicitacoes.length === 0) {
+    lista.innerHTML = '<p class="text-center py-4 mb-0" style="color:var(--text-secondary); font-size:.875rem;">Nenhuma solicitação pendente.</p>';
+    return;
+  }
+
+  lista.innerHTML = solicitacoes.map(item => `
+    <div class="solicitacao-item d-flex justify-content-between align-items-center gap-3 py-3" style="border-top:1px solid var(--border-color);">
+      <div>
+        <p class="mb-1 fw-medium" style="font-size:.9rem; color:var(--text-primary);">${item.nome}</p>
+        <p class="mb-1" style="font-size:.75rem; color:var(--text-secondary);">${item.email}</p>
+        <span class="badge text-bg-light border text-secondary">${normalizarCargo(item.perfil)}</span>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-sm btn-success" data-acao="aprovar" data-id="${item.id}">Aprovar</button>
+        <button class="btn btn-sm btn-outline-danger" data-acao="rejeitar" data-id="${item.id}">Recusar</button>
+      </div>
+    </div>
+  `).join('');
+
+  lista.querySelectorAll('[data-acao]').forEach(botao => {
+    botao.addEventListener('click', () => {
+      const id = botao.dataset.id;
+      const acao = botao.dataset.acao;
+      if (acao === 'aprovar') aprovarSolicitacao(id);
+      else rejeitarSolicitacao(id);
+    });
+  });
+}
+
+function aprovarSolicitacao(id) {
+  const solicitacoes = safeRead(STORAGE_KEYS.solicitacoes, []);
+  const item = solicitacoes.find(s => String(s.id) === String(id));
+  if (!item) return;
+
+  const existente = funcionarios.find(f => (f.email || '').toLowerCase() === (item.email || '').toLowerCase());
+  const novoFuncionario = {
+    id: existente ? existente.id : Date.now(),
+    nome: item.nome,
+    cargo: normalizarCargo(item.perfil),
+    telefone: item.telefone || '(11) 00000-0000',
+    email: item.email,
+    pcd: 'nao',
+    status: 'ativo'
+  };
+
+  if (!existente) funcionarios.push(novoFuncionario);
+  else Object.assign(existente, novoFuncionario);
+
+  persistFuncionarios();
+  safeWrite(STORAGE_KEYS.solicitacoes, solicitacoes.filter(s => String(s.id) !== String(id)));
+  renderizarFuncionarios();
+  preencherSelectFuncionarios();
+  renderizarSolicitacoes();
+  alert(`${item.nome} foi aprovado no sistema.`);
+}
+
+function rejeitarSolicitacao(id) {
+  const solicitacoes = safeRead(STORAGE_KEYS.solicitacoes, []);
+  safeWrite(STORAGE_KEYS.solicitacoes, solicitacoes.filter(s => String(s.id) !== String(id)));
+  renderizarSolicitacoes();
+}
+
+function preencherSelectVagasAdmin() {
+  const select = document.getElementById('visita-vaga');
+  if (!select) return;
+  select.innerHTML = vagas.map(v => `<option value="${v.numero}">Vaga ${v.numero}</option>`).join('');
+}
+
+function renderizarVisitasAdmin() {
+  const lista = document.getElementById('lista-visitas-admin');
+  if (!lista) return;
+
+  const visitas = safeRead(STORAGE_KEYS.visitas, []);
+  if (visitas.length === 0) {
+    lista.innerHTML = '<p class="text-center py-4 mb-0" style="color:var(--text-secondary); font-size:.875rem;">Nenhuma visita cadastrada.</p>';
+    return;
+  }
+
+  lista.innerHTML = visitas.map(visita => `
+    <div class="visita-item d-flex justify-content-between align-items-center gap-3 py-3" style="border-top:1px solid var(--border-color);">
+      <div>
+        <p class="mb-1 fw-medium" style="font-size:.9rem; color:var(--text-primary);">${visita.nome}</p>
+        <p class="mb-1" style="font-size:.75rem; color:var(--text-secondary);">${visita.motivo} · Vaga ${visita.vaga} · ${visita.placa}</p>
+        <span class="badge text-bg-light border text-secondary">${visita.entrada} - ${visita.saida}</span>
+      </div>
+      <span class="badge ${visita.status === 'confirmed' ? 'text-bg-success' : 'text-bg-warning'}">${visita.status === 'confirmed' ? 'Confirmada' : 'Pendente'}</span>
+    </div>
+  `).join('');
+}
+
+function cadastrarVisitaAdmin(event) {
+  event.preventDefault();
+
+  const nome = document.getElementById('visita-nome').value.trim();
+  const motivo = document.getElementById('visita-motivo').value.trim();
+  const vaga = document.getElementById('visita-vaga').value;
+  const placa = document.getElementById('visita-placa').value.trim().toUpperCase();
+  const entrada = document.getElementById('visita-entrada').value;
+  const saida = document.getElementById('visita-saida').value;
+
+  if (!nome || !motivo || !vaga || !placa || !entrada || !saida) {
+    alert('Preencha todos os dados da visita.');
+    return;
+  }
+
+  if (entrada >= saida) {
+    alert('O horário de saída deve ser maior que o horário de entrada.');
+    return;
+  }
+
+  const visitas = safeRead(STORAGE_KEYS.visitas, []);
+  visitas.push({
+    id: Date.now(),
+    nome,
+    motivo,
+    vaga: Number(vaga),
+    placa,
+    entrada,
+    saida,
+    status: 'pending',
+    data: new Date().toISOString().slice(0, 10)
+  });
+
+  safeWrite(STORAGE_KEYS.visitas, visitas);
+  renderizarVisitasAdmin();
+  event.target.reset();
+  alert('Visita cadastrada com sucesso.');
+}
+
+function inicializarAdmin() {
+  renderizarVagas();
+  renderizarFuncionarios();
+  preencherSelectFuncionarios();
+  preencherSelectVagasAdmin();
+  renderizarVeiculosCadastrados();
+  renderizarSolicitacoes();
+  renderizarVisitasAdmin();
+
+  const listaVeiculos = document.getElementById('lista-forms-veiculo');
+  if (listaVeiculos && listaVeiculos.children.length === 0) {
+    adicionarFormVeiculo();
+  }
+
+  const formNovaVisita = document.getElementById('formNovaVisitaAdmin');
+  if (formNovaVisita) formNovaVisita.addEventListener('submit', cadastrarVisitaAdmin);
+}
+
+window.mudarTela = mudarTela;
+window.sair = sair;
+window.entrarNovamente = entrarNovamente;
+window.definirFiltro = definirFiltro;
+window.alternarFuncionario = alternarFuncionario;
+window.cadastrarFuncionarioAdmin = cadastrarFuncionarioAdmin;
+window.adicionarFormVeiculo = adicionarFormVeiculo;
+window.removerFormVeiculo = removerFormVeiculo;
+window.salvarVeiculos = salvarVeiculos;
+window.inicializarAdmin = inicializarAdmin;
+
+inicializarAdmin();

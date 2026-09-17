@@ -64,7 +64,7 @@
 
         <h1>
           Olá, vigilante
-          <span>👋</span>
+          <span></span>
         </h1>
 
         <p>
@@ -234,15 +234,7 @@
             class="notification-list">
           </div>
 
-          <button
-            class="outline-btn w-100"
-            id="btnNovaVisita">
-
-            <i class="fa-solid fa-user-plus"></i>
-            Registrar visitante
-
-          </button>
-
+  
         </section>
 
         <!-- ACESSO RÁPIDO -->
@@ -260,38 +252,31 @@
 
           </div>
 
-          <button
-            class="quick-action"
-            id="btnLiberar">
-
+          <button class="quick-action" id="btnLiberar">
             <i class="fa-solid fa-unlock"></i>
-
             <span>
               <b>Liberar uma vaga</b>
-              <small>
-                Marque uma vaga como disponível
-              </small>
+              <small>Marque uma vaga como disponível</small>
             </span>
-
             <i class="fa-solid fa-chevron-right"></i>
-
           </button>
 
-          <button
-            class="quick-action"
-            id="btnVerReservas">
-
-            <i class="fa-solid fa-calendar-check"></i>
-
+          <button class="quick-action" id="btnOcupar">
+            <i class="fa-solid fa-car-side"></i>
             <span>
-              <b>Ver reservas de hoje</b>
-              <small>
-                Acompanhe todas as reservas
-              </small>
+              <b>Ocupar uma vaga</b>
+              <small>Marque uma vaga como ocupada</small>
             </span>
-
             <i class="fa-solid fa-chevron-right"></i>
+          </button>
 
+          <button class="quick-action" id="btnVerReservas">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>
+              <b>Ver vagas reservadas hoje</b>
+              <small>Acompanhe as visitas confirmadas</small>
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
           </button>
 
         </section>
@@ -301,116 +286,6 @@
     </div>
 
   </main>
-
-  <!-- MODAL DE CADASTRO DE VISITANTE -->
-  <div
-    class="modal-backdrop-custom"
-    id="modalVisitante"
-    aria-hidden="true">
-
-    <div class="visitor-modal">
-
-      <button
-        class="close-modal"
-        id="fecharModal">
-
-        <i class="fa-solid fa-xmark"></i>
-
-      </button>
-
-      <span class="modal-icon">
-        <i class="fa-solid fa-user-plus"></i>
-      </span>
-
-      <h2>Registrar visitante</h2>
-
-      <p>
-        Cadastre a visita e reserve uma vaga disponível.
-      </p>
-
-      <form id="formVisitante">
-
-        <label>
-          Nome do visitante
-
-          <input
-            id="nomeVisitante"
-            type="text"
-            required
-            placeholder="Ex.: Mariana Souza">
-        </label>
-
-        <label>
-          Motivo da visita
-
-          <input
-            id="motivoVisita"
-            type="text"
-            required
-            placeholder="Ex.: Reunião com a coordenação">
-        </label>
-
-        <div class="form-two">
-
-          <label>
-            Placa
-
-            <input
-              id="placaVisitante"
-              type="text"
-              required
-              placeholder="ABC-1D23"
-              maxlength="8">
-          </label>
-
-          <label>
-            Vaga
-
-            <select
-              id="vagaVisitante"
-              required>
-            </select>
-          </label>
-
-        </div>
-
-        <div class="form-two">
-
-          <label>
-            Entrada
-
-            <input
-              type="time"
-              id="horaEntrada"
-              value="08:00"
-              required>
-          </label>
-
-          <label>
-            Saída
-
-            <input
-              type="time"
-              id="horaSaida"
-              value="12:00"
-              required>
-          </label>
-
-        </div>
-
-        <button
-          class="primary-btn w-100"
-          type="submit">
-
-          Confirmar e reservar vaga
-
-        </button>
-
-      </form>
-
-    </div>
-
-  </div>
 
   <!-- MENSAGEM DE CONFIRMAÇÃO -->
   <div

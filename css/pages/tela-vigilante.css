@@ -8,9 +8,40 @@
 
 .vigilante-page {
   font-family: Inter, Arial, sans-serif;
-  background: #f5f7fb;
+  background: linear-gradient(180deg, #f4f8ff 0%, #eef4fb 100%);
   color: #172b4d;
-  overflow: auto;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+html, body {
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+main.container-fluid {
+  height: calc(100vh - 72px);
+  overflow: hidden;
+}
+
+.vigilante-page,
+.dashboard-grid,
+.panel,
+.side-column {
+  overflow: hidden;
+}
+
+.vacancies-panel {
+  min-width: 0;
+}
+
+.vacancies-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
 }
 
 .brand-lockup,
@@ -74,27 +105,29 @@
   display: flex;
   align-items: end;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 24px;
+  padding-top: 6px;
 }
 
 .eyebrow {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 1.5px;
   color: #4a79a8;
   font-weight: 800;
 }
 
 .page-heading h1 {
-  font-size: 28px;
-  margin: 5px 0 4px;
+  font-size: 32px;
+  margin: 6px 0 6px;
   font-weight: 800;
   color: #142d50;
+  line-height: 1.1;
 }
 
 .page-heading p {
   margin: 0;
   color: #70819a;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .live-status {
@@ -133,17 +166,19 @@
 .metric-card {
   display: flex;
   align-items: center;
-  gap: 13px;
-  padding: 17px 18px;
+  gap: 14px;
+  padding: 18px 20px;
+  min-height: 92px;
 }
 
 .metric-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
-  font-size: 17px;
+  font-size: 18px;
+  flex-shrink: 0;
 }
 
 .metric-icon.blue {
@@ -168,28 +203,35 @@
 
 .metric-card small {
   color: #7a8ba0;
-  font-size: 11px;
+  font-size: 12px;
   display: block;
 }
 
 .metric-card strong {
-  font-size: 24px;
+  font-size: 28px;
   display: block;
   color: #183355;
-  margin-top: 3px;
+  margin-top: 4px;
+  line-height: 1.1;
 }
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(310px, 0.8fr);
+  grid-template-columns: minmax(0, 1.75fr) minmax(320px, 0.8fr);
   gap: 20px;
+  height: calc(100% - 110px);
+  min-height: 0;
+}
+
+.panel {
+  overflow: hidden;
 }
 
 .panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 21px 15px;
+  padding: 18px 20px 14px;
 }
 
 .panel-header.compact {
@@ -197,14 +239,14 @@
 }
 
 .panel-header h2 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 800;
   margin: 0;
   color: #19385d;
 }
 
 .panel-header p {
-  font-size: 11px;
+  font-size: 12px;
   color: #8795a8;
   margin: 5px 0 0;
 }
@@ -280,22 +322,35 @@
 
 .vagas-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
-  padding: 0 21px 22px;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 12px 12px;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  align-content: start;
+  flex: 1;
 }
 
 .vaga-card {
   position: relative;
-  text-align: left;
+  text-align: center;
   border: 1px solid #dce8e2;
   background: #f8fdfb;
-  border-radius: 9px;
-  padding: 10px 9px 9px;
-  min-height: 102px;
+  border-radius: 10px;
+  padding: 4px 3px 3px;
+  min-height: 52px;
+  width: 100%;
+  min-width: 0;
   color: #19385d;
   transition: 0.18s;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .vaga-card:hover {
@@ -317,15 +372,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   color: #6e8196;
 }
 
 .vaga-card-top i {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .vaga-type {
-  font-size: 8px;
+  font-size: 9px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -334,14 +390,18 @@
 
 .vaga-card strong {
   display: block;
-  font-size: 22px;
-  line-height: 24px;
-  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1;
+  margin-top: 5px;
+  font-weight: 800;
 }
 
 .vaga-status {
-  display: block;
-  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 8px;
   color: #269c6d;
   margin-top: 4px;
 }
@@ -370,28 +430,54 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: 100%;
+  min-height: 0;
+}
+
+.notification-panel,
+.quick-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.notification-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #e8f1fb;
+  color: #1d5b8e;
+  font-size: 11px;
+  font-weight: 800;
 }
 
 .notification-list {
-  padding: 0 20px 11px;
+  padding: 0 20px 10px;
+  max-height: 290px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .notification-item {
   display: flex;
-  gap: 10px;
-  padding: 13px 0;
+  gap: 12px;
+  padding: 14px 0;
   border-bottom: 1px solid #edf0f4;
 }
 
 .notification-avatar {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: #e8f1fb;
   color: #3d76a8;
   display: grid;
   place-items: center;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   flex: none;
 }
@@ -406,18 +492,18 @@
 }
 
 .notification-content b {
-  font-size: 11px;
+  font-size: 12px;
   color: #203d5f;
 }
 
 .notification-content p {
-  font-size: 10px;
+  font-size: 11px;
   color: #7b8ca0;
-  margin: 3px 0;
+  margin: 4px 0;
 }
 
 .notification-content small {
-  font-size: 9px;
+  font-size: 10px;
   color: #8997a6;
 }
 
@@ -482,16 +568,19 @@
   display: flex;
   align-items: center;
   text-align: left;
-  gap: 11px;
-  padding: 13px 20px;
+  gap: 12px;
+  padding: 13px 18px;
   color: #54708e;
 }
 
 .quick-action > i:first-child {
   color: #3980b8;
   background: #eaf3fb;
-  padding: 9px;
-  border-radius: 7px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 15px;
+  min-width: 38px;
+  text-align: center;
 }
 
 .quick-action span {
@@ -504,12 +593,12 @@
 }
 
 .quick-action b {
-  font-size: 11px;
+  font-size: 12px;
   color: #315371;
 }
 
 .quick-action small {
-  font-size: 9px;
+  font-size: 10px;
   color: #93a1b1;
   margin-top: 3px;
 }
