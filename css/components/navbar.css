@@ -1,0 +1,58 @@
+/* =========================================
+   NAVBAR (Componente compartilhado - páginas públicas)
+   Usado em: home.html, sobre.html, tela_termos.html
+   ========================================= */
+
+.navbar-home {
+    background-color: rgba(29, 57, 125, 0.75);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-fixed);
+    transition: background-color var(--transition-normal);
+}
+
+.nav-link-home {
+    color: var(--color-gray-200) !important;
+    font-weight: var(--font-weight-medium);
+    position: relative;
+    padding-bottom: 4px;
+    transition: color var(--transition-normal);
+}
+
+.nav-link-home:hover {
+    color: var(--color-white) !important;
+}
+
+.nav-link-home::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--color-accent-blue, var(--color-white));
+    transition: width var(--transition-normal), transform var(--transition-normal);
+    transform: translateX(-50%);
+    border-radius: var(--radius-pill);
+}
+
+.nav-link-home:hover::after {
+    width: 80%;
+}
+
+.btn-nav-login {
+    padding-top: var(--spacing-2);
+    padding-bottom: var(--spacing-2);
+    transition: all var(--transition-normal);
+}
+
+.btn-nav-login:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}

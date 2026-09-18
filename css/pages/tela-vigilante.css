@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap' );
 
-.navbar-seguranca {
-  background: #183b63;
-  color: #fff;
-  min-height: 72px;
-}
 
 .vigilante-page {
   font-family: Inter, Arial, sans-serif;
@@ -44,62 +39,6 @@ body.vigilante-page {
   height: 100%;
 }
 
-.brand-lockup,
-.operator-chip,
-.operator-chip span {
-  display: flex;
-  align-items: center;
-}
-
-.brand-lockup {
-  gap: 10px;
-}
-
-.brand-lockup strong {
-  display: block;
-  font-size: 16px;
-}
-
-.brand-lockup small,
-.operator-chip small {
-  display: block;
-  color: #a9bfd8;
-  font-size: 10px;
-  margin-top: 2px;
-}
-
-.brand-mark {
-  display: grid;
-  place-items: center;
-  background: #2b6cb0;
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  font-size: 20px;
-}
-
-.operator-chip {
-  gap: 9px;
-  border-left: 1px solid #41617f;
-  padding-left: 18px;
-}
-
-.operator-chip i {
-  font-size: 20px;
-  color: #80b5e6;
-}
-
-.operator-chip b {
-  font-size: 12px;
-  display: block;
-}
-
-.icon-btn {
-  border: 0;
-  background: transparent;
-  color: #dce8f5;
-  font-size: 17px;
-}
 
 .page-heading {
   display: flex;

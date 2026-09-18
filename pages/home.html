@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-lg navbar-home px-3 px-lg-4 py-3">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center gap-2 text-white fw-bold" href="home.html">
-                <i class="fa-solid fa-square-parking fs-3"></i>
+                <img class="logo-home" src="../assets/logo_pkg/08_branca/08_branca_icone_200.webp" alt="">
                 <span>ParkSchool</span>
             </a>
 
@@ -51,24 +51,51 @@
     </nav>
 
     <!-- HERO -->
-    <header class="hero-home flex-grow-1 d-flex align-items-center">
-        <div class="container py-5">
+    <header class="hero-home flex-grow-1 d-flex align-items-center position-relative overflow-hidden">
+
+        <!-- CARROSSEL DE FUNDO -->
+        <div id="heroCarousel" class="carousel slide hero-carousel position-absolute top-0 start-0 w-100 h-100"
+            data-bs-ride="carousel" data-bs-pause="false" data-bs-interval="5000">
+            <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                    <img src="../assets/img/pexels-adempercem-35531257.jpg" class="d-block w-100 h-100 object-fit-cover"
+                        alt="Estacionamento">
+                </div>
+                <div class="carousel-item h-100">
+                    <img src="../assets/img/pexels-bynikolavu-20616865.jpg" class="d-block w-100 h-100 object-fit-cover"
+                        alt="Vaga de estacionamento">
+                </div>
+                <div class="carousel-item h-100">
+                    <img src="../assets/img/pexels-markusspiske-11145684.jpg"
+                        class="d-block w-100 h-100 object-fit-cover" alt="Vaga de estacionamento">
+                </div>
+            </div>
+        </div>
+
+        <!-- OVERLAY (gradiente por cima do carrossel, para o texto continuar legível) -->
+        <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+
+        <!-- FADE DE TRANSIÇÃO PARA A PRÓXIMA SEÇÃO -->
+        <div class="hero-fade position-absolute bottom-0 start-0 w-100"></div>
+
+        <!-- CONTEÚDO -->
+        <div class="container py-5 position-relative" style="z-index: 2;">
             <div class="row align-items-center gy-5">
 
                 <div class="col-lg-6">
-                    <h1 class="display-5 fw-bold text-white mb-3">
-                        Controle o estacionamento da sua unidade em um só lugar
+                    <h1 class="hero-titledisplay-5 fw-bold text-white mb-3">
+                        Gestão do estacionamento
                     </h1>
                     <p class="hero-lead mb-4">
-                        Cadastre funcionários e veículos, reserve vagas para visitantes e acompanhe a
-                        ocupação em tempo real — tudo integrado em um único painel.
+                        Escolha o perfil que melhor descreve sua função e tenha acesso às funcionalidades do sistema.
                     </p>
 
                     <div class="d-flex flex-column flex-sm-row gap-3">
                         <a href="login.html" class="btn ds-btn-primary btn-lg px-4 fw-semibold">
                             <i class="fa-solid fa-right-to-bracket me-2"></i>Fazer login
                         </a>
-                        <a href="registrar.html" class="btn btn-secundario btn-lg px-4 fw-semibold btn-hero-outline">
+                        <a href="registrar.html"
+                            class="btn btn-secundario btn-lg px-4 fw-semibold btn-hero-outline d-inline-flex align-items-center justify-content-center text-decoration-none">
                             <i class="fa-regular fa-square-plus me-2"></i>Criar cadastro
                         </a>
                     </div>
@@ -77,30 +104,26 @@
                 <div class="col-lg-6">
                     <div class="row g-3">
 
-
                         <div class="col-sm-6">
                             <a href="login.html">
                                 <div class="feature-card h-100">
-                                    <div class="icon-circle icon-circle-md icon-circle-primary mb-3">
+                                    <div class="icon-circle icon-circle-md icon-admin mb-3">
                                         <i class="fa-solid fa-user-shield"></i>
                                     </div>
                                     <h3 class="feature-title">Administração</h3>
-                                    <p class="feature-text">Gerencie funcionários, veículos, solicitações e visitas em
-                                        um
-                                        painel completo.</p>
+                                    <p class="feature-text">Gerenciamento de funcionários, veículos, solicitações e visitas.</p>
                                 </div>
                             </a>
                         </div>
 
-
                         <div class="col-sm-6">
                             <a href="login.html">
                                 <div class="feature-card h-100">
-                                    <div class="icon-circle icon-circle-md icon-circle-primary mb-3">
+                                    <div class="icon-circle icon-circle-md icon-vigil mb-3">
                                         <i class="fa-solid fa-eye"></i>
                                     </div>
                                     <h3 class="feature-title">Vigilância</h3>
-                                    <p class="feature-text">Acompanhe as vagas em tempo real e responda às solicitações
+                                    <p class="feature-text">Acompanha as vagas e responda às solicitações
                                         de
                                         visitantes.</p>
                                 </div>
@@ -109,25 +132,25 @@
 
                         <div class="col-sm-6">
                             <a href="login.html">
-                            <div class="feature-card h-100">
-                                <div class="icon-circle icon-circle-md icon-circle-primary mb-3">
-                                    <i class="fa-solid fa-id-card"></i>
+                                <div class="feature-card h-100">
+                                    <div class="icon-circle icon-circle-md icon-func mb-3">
+                                        <i class="fa-solid fa-id-card"></i>
+                                    </div>
+                                    <h3 class="feature-title">Funcionário</h3>
+                                    <p class="feature-text">Cadastro de dados e veículos para acesso ao
+                                        estacionamento.</p>
                                 </div>
-                                <h3 class="feature-title">Funcionário</h3>
-                                <p class="feature-text">Cadastre seus dados e veículos para ter acesso liberado ao
-                                    estacionamento.</p>
-                            </div>
                             </a>
                         </div>
 
                         <div class="col-sm-6">
                             <a href="login.html">
                                 <div class="feature-card h-100">
-                                    <div class="icon-circle icon-circle-md icon-circle-primary mb-3">
+                                    <div class="icon-circle icon-circle-md icon-reserva mb-3">
                                         <i class="fa-solid fa-calendar-check"></i>
                                     </div>
                                     <h3 class="feature-title">Reservas</h3>
-                                    <p class="feature-text">Reserve vagas para visitantes e eventos com data e horário
+                                    <p class="feature-text">Reserva de vagas para visitantes e eventos com data e horário
                                         definidos.</p>
                                 </div>
                             </a>
@@ -145,13 +168,13 @@
         <div class="container py-4">
             <div class="row align-items-center gy-4">
                 <div class="col-lg-7">
-                    <span class="ds-text-primary fw-semibold text-uppercase small">Sobre o projeto</span>
+                    <span class="ds-text-primary fw-semibold text-uppercase small">Sobre</span>
                     <h2 class="fw-bold mt-2 mb-3" style="color: var(--text-primary);">O que é o ParkSchool</h2>
                     <p class="ds-text-secondary mb-0">
-                        O ParkSchool é um sistema de gestão de vagas de estacionamento pensado para unidades
-                        educacionais. Funcionários realizam seu próprio autocadastro, o administrador e o
+                        O ParkSchool é um sistema de gestão de vagas de estacionamento. Funcionários realizam seu
+                        próprio autocadastro, o administrador e o
                         patrimônio cuidam de reservas e cadastros de visitantes, e a equipe de vigilância
-                        acompanha a ocupação das vagas em tempo real — tudo em um único ambiente.
+                        acompanha a ocupação das vagas em tempo real.
                     </p>
                 </div>
                 <div class="col-lg-5">
@@ -161,9 +184,9 @@
                                 <i class="fa-solid fa-shield-halved"></i>
                             </div>
                             <div>
-                                <h3 class="feature-title mb-1">Acesso por perfil</h3>
+                                <h3 class="feature-title mb-1">Níveis de acesso</h3>
                                 <p class="feature-text mb-0">Cada usuário vê apenas o que faz sentido para sua
-                                    função: administrador, vigilância ou funcionário.</p>
+                                    função: administrador, vigilância, patrimonial ou funcionário.</p>
                             </div>
                         </div>
                         <div class="d-flex align-items-start gap-3">
@@ -189,9 +212,10 @@
     <footer class="footer-home pt-4 pb-5">
         <div class="container">
             <div class="row gy-3 align-items-center">
+
                 <div class="col-md-4 d-flex align-items-center gap-2">
-                    <i class="fa-solid fa-square-parking text-white fs-5"></i>
-                    <span class="text-white fw-semibold">ParkSchool</span>
+                    <img class="logo-home" src="../assets/logo_pkg/05_monocromatica_azul/05_monocromatica_azul_icone_200.webp" alt="">
+                    <span class="fw-semibold" style="color: var(--color-primary);">ParkSchool</span>
                 </div>
 
                 <div class="col-md-4 text-center">

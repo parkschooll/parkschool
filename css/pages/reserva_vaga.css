@@ -11,13 +11,6 @@ body {
     overflow-x: hidden;
 }
 
-
-
-.navbar-visitante {
-    background-color: #1D397D;
-
-}
-
 .btn-primary {
     background-color: var(--color-primary, #1D397D) !important;
    border: #1D397D;
@@ -26,8 +19,4 @@ body {
 .btn-gray {
     background-color: #64748B !important;
    border: #1D397D;
-}
-
-.back-blue{
-    background-color: #1D397D;
 }
