@@ -115,6 +115,7 @@
 /* ---- Footer ---- */
 .footer-home {
     background-color: var(--color-secondary);
+    padding: 80px 0 !important;
 }
 
 .footer-links {

@@ -16,3 +16,18 @@ body {
     height: 100%;
     overflow: hidden;
 }
+
+/* =========================================
+   CORREÇÃO DO min-vh-100 (Bootstrap)
+   ========================================= */
+/* O Bootstrap define .min-vh-100 usando apenas 100vh, que em alguns
+   navegadores/SOs não desconta corretamente barras do sistema
+   (ex.: barra de tarefas do Windows sempre visível), fazendo o
+   conteúdo final da página (como o footer) ficar espremido no
+   limite exato da janela. "svh" (small viewport height) reflete a
+   área de fato visível e evita esse corte. Mantido como fallback:
+   navegadores sem suporte a svh continuam usando 100vh normalmente. */
+.min-vh-100 {
+    min-height: 100vh;
+    min-height: 100svh;
+}
