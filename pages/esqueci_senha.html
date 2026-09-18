@@ -15,18 +15,43 @@
 
     <!-- Estilos globais e da página -->
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/pages/esqueci-senha.css">
 </head>
 
 <body class="d-flex flex-column vh-100 main-bg">
 
-    <header class="senac-header d-flex align-items-center px-4 py-3 shadow-sm">
-        <img src="../assets/logo_pkg/06_monocromatica_dourada/06_monocromatica_dourada_medio_1000.webp" width="70"
-            height="70" class="logo-esqueci me-2" alt="Logo Senac">
-        <span class="text-white fw-semibold fs-4 ms-2">Estacionamento - Parkschool</span>
-    </header>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-home px-3 px-lg-4 py-3">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center gap-2 text-white fw-bold" href="home.html">
+                <img class="logo-home" src="../assets/logo_pkg/08_branca/08_branca_icone_200.webp" alt="">
+                <span>ParkSchool</span>
+            </a>
 
-    <main class="flex-grow-1 d-flex align-items-center justify-content-center p-3">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHome"
+                aria-controls="navHome" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navHome">
+                <ul class="navbar-nav align-items-lg-center gap-lg-2">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-home" href="sobre.html">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-home" href="registrar.html">Cadastro</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn ds-btn-primary btn-nav-login px-4" href="login.html">
+                            <i class="fa-solid fa-right-to-bracket me-2"></i>Entrar
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main
+        class="esqueci-senha-main flex-grow-1 d-flex align-items-center justify-content-center p-3 position-relative overflow-hidden">
         <div class="esqueci-senha-wrapper bg-surface shadow rounded p-4 p-md-5 w-100 mx-auto" style="max-width: 420px;">
 
             <div id="step-request">
@@ -51,7 +76,7 @@
 
                     <button
                         class="btn ds-btn-primary w-100 py-2 fw-semibold d-flex justify-content-center align-items-center gap-2"
-                        id="submit-btn" type="submit" disabled>
+                        id="submit-btn" type="submit">
                         <span id="submit-label">Solicitar recuperação</span>
                         <span class="spinner-border spinner-border-sm d-none" id="submit-spinner" role="status"
                             aria-hidden="true"></span>
