@@ -17,48 +17,41 @@
 
 <body class="vigilante-page">
 
-  <!-- CABEÇALHO -->
+  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-home px-3 px-lg-4 py-3">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center gap-2 text-white fw-bold" href="home.html">
-        <i class="fa-solid fa-square-parking fs-3"></i>
+        <img class="logo-home" src="../assets/logo_pkg/08_branca/08_branca_icone_200.webp" alt="">
         <span>ParkSchool</span>
       </a>
 
-      <div class="d-flex align-items-center gap-3 ms-auto">
-        <span class="nav-link-home d-flex align-items-center gap-2">
-          <i class="fa-solid fa-user-shield"></i> Vigilante
-        </span>
-        <button class="btn ds-btn-outline btn-nav-login px-3" id="btnSair" title="Sair">
-          <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Sair
-        </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHome"
+        aria-controls="navHome" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navHome">
+        <ul class="navbar-nav align-items-lg-center gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link nav-link-home" href="sobre.html">Sobre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-home" href="registrar.html">Cadastro</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn ds-btn-primary btn-nav-login px-4" href="login.html">
+              <i class="fa-solid fa-right-to-bracket me-2"></i>Entrar
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
 
+
+
   <!-- CONTEÚDO PRINCIPAL -->
   <main class="container-fluid px-3 px-lg-4 py-4">
-
-    <!-- TÍTULO -->
-    <div class="page-heading">
-      <div>
-        <span class="eyebrow">PAINEL OPERACIONAL</span>
-
-        <h1>
-          Olá, vigilante
-          <span></span>
-        </h1>
-
-        <p>
-          Gerencie a ocupação das vagas e acompanhe as visitas em tempo real.
-        </p>
-      </div>
-
-      <div class="live-status">
-        <span></span>
-        Atualizado agora
-      </div>
-    </div>
 
     <!-- INDICADORES -->
     <section class="metrics-row">

@@ -16,6 +16,25 @@
     background-color: var(--color-primary);
 }
 
+/* ---- Imagem de fundo com opacidade baixa ---- */
+.esqueci-senha-main::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('../../assets/img/pexels-adempercem-35531329.jpg') center/cover no-repeat;
+    opacity: 0.15;
+    z-index: 0; 
+}
+
+.esqueci-senha-wrapper {
+    position: relative;
+    z-index: 1;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-lg);
+}
+
 .esqueci-senha-wrapper {
     background-color: var(--bg-surface);
     border: 1px solid var(--border-color);
